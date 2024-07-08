@@ -1,0 +1,109 @@
+.carDetail {
+  background-color: #e5e5e5;
+  width: 70%;
+}
+
+.car-detail-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.img-container {
+  padding: 10px;
+}
+.first-image {
+  width: 90%;
+  height: 350px;
+}
+
+.rest-images {
+  width: 70px;
+  height: 70px;
+}
+.rest-images-modifed {
+  width: 70px;
+  height: 70px;
+  border: 1px solid black;
+  opacity: 0.5;
+}
+
+.imgs-container {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.car-info {
+  width: 100%;
+}
+.car-model {
+  font-size: 5.1rem;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.car-desc {
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 10px;
+}
+
+.spans {
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
+.bottom-info {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.table_component {
+  overflow: auto;
+  width: 100%;
+}
+
+.table_component table {
+  border: 1px solid #dededf;
+  height: 100%;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 1px;
+  text-align: left;
+}
+
+.table_component caption {
+  caption-side: top;
+  text-align: left;
+}
+
+.table_component th {
+  border: 1px solid #dededf;
+  background-color: #eceff1;
+  color: #000000;
+  padding: 5px;
+}
+
+.table_component td {
+  border: 1px solid #dededf;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 5px;
+}
+
+.rent-car {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+.rent-btn {
+  width: 250px;
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bolder;
+  background-color: rgb(91, 243, 88);
+}
+
+.rent-form-none {
+  display: none;
+}

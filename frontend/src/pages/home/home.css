@@ -1,0 +1,7 @@
+.home {
+  background: url("../../assets/car-rental.jpg");
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+}

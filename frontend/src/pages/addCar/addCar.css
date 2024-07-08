@@ -1,0 +1,19 @@
+.addCar {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+.addCarr-form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+  width: 70%;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

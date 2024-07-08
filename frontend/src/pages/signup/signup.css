@@ -1,0 +1,28 @@
+.signup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: url("../../assets/auth.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 90vh;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  gap: 10px;
+}
+
+.signup-form > input {
+  padding: 7px;
+  border-radius: 5px;
+  border: none;
+}
+.signup-form > label {
+  color: white;
+  margin-left: 10px;
+
+}
