@@ -1,0 +1,26 @@
+.user-img {
+  width: 70px;
+  border-radius: 50%;
+  height: 70px;
+}
+.img-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.user-container {
+  display: flex;
+  justify-content: center;
+}
+
+.user-table {
+  display: flex;
+  justify-content: center;
+  background-color: antiquewhite;
+  width: 70%;
+}
+.user-table th,
+.user-table td {
+  padding: 12px 40px;
+  text-align: left;
+}

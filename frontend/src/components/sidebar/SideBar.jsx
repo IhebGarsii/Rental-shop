@@ -7,12 +7,14 @@ function SideBar() {
       <nav className="sidebar-nav">
         <Link to="addCar">Add a Car</Link>
         <Link to="">Rented Cars</Link>
-        <Link to="">Pending Requests</Link>
+        <Link to="bookingRequests">Pending Requests</Link>
         <Link to="">Profile</Link>
         <Link to="users">Users</Link>
         <Link to="dashboard">Dashboard</Link>
       </nav>
-      <Outlet />
+      <div className="sideBar-outlet">
+        <Outlet />
+      </div>
     </div>
   );
 }

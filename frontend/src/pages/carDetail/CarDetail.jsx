@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./carDetail.css";
-import { deleteCar, getCar, bookCar } from "../../apis/carApi";
+import { deleteCar, getCar } from "../../apis/carApi";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import BookCar from "../../components/bookCar/BookCar";
 function CarDetail() {
@@ -121,6 +121,7 @@ function CarDetail() {
               </button>
               <div className={rent ? "rent-form-display" : "rent-form-none"}>
                 <BookCar key={car._id} car={car} />
+                <button onClick={() => setRent(false)}>Close</button>
               </div>
             </div>
           </div>

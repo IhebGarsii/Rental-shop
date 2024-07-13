@@ -24,6 +24,7 @@ function SignUp() {
         localStorage.setItem("token", login.token);
         localStorage.setItem("image", login.user.image);
         localStorage.setItem("idUser", login.user._id);
+        localStorage.setItem("roles", login.user.roles);
       }
 
       navigate("/home");

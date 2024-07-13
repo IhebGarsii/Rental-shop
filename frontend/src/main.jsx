@@ -14,6 +14,8 @@ import Login from "./pages/login/Login.jsx";
 import SignUp from "./pages/signup/SignUp.jsx";
 import SideBar from "./components/sidebar/SideBar.jsx";
 import Users from "./pages/dashboard/users/Users.jsx";
+import BookingList from "./pages/dashboard/requests/BookingList.jsx";
+import Footer from "./components/footer/Footer.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,10 @@ const router = createBrowserRouter([
             path: "addCar",
             element: <AddCar />,
           },
+          {
+            path: "bookingRequests",
+            element: <BookingList />,
+          },
         ],
       },
       {
@@ -57,6 +63,7 @@ const router = createBrowserRouter([
         path: "update/:id",
         element: <UpdateCar />,
       },
+      <Footer />,
     ],
   },
 ]);

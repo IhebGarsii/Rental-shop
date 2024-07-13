@@ -1,0 +1,60 @@
+.booking-component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  background-color: #393a3a;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.booking-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.booking-table th,
+.booking-table td {
+  padding: 12px 15px;
+  text-align: left;
+}
+.booking-table td {
+  color: black;
+}
+.booking-table thead th {
+  background-color: #4caf50;
+  color: white;
+}
+
+.booking-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.booking-table tbody tr{
+    background-color: #e2e2e2;
+}
+.booking-table tbody tr:hover {
+  background-color: #d5d0d0;
+}
+
+.action-button {
+  padding: 10px 15px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.accept-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.refuse-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.action-button:hover {
+  opacity: 0.8;
+}

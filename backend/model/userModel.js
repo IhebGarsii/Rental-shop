@@ -12,10 +12,25 @@ const userModel = new Schema({
   image: {
     type: String,
   },
+  firstName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+  },
+  cin: {
+    type: String,
+  },
   idCars: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "carModel",
+    },
+  ],
+  roles: [
+    {
+      type: String,
+      default: "USER",
     },
   ],
 });

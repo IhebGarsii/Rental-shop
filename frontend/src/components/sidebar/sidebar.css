@@ -1,8 +1,8 @@
 .sidebar {
   display: grid;
   width: 100%;
-  margin: 20px;
-  grid-template-columns: 2fr 5fr;
+
+  grid-template-columns: 20% 80%;
 }
 .sidebar-nav {
   padding: 50px;
@@ -10,5 +10,30 @@
   flex-direction: column;
   gap: 30px;
   font-size: 1.5rem;
+  height: 100%;
+  background-color: rgb(46, 45, 45);
+  align-items: center;
 
+  width: 100%;
+  border-right: 1px solid white;
+}
+
+.sidebar-nav > a {
+  color: rgb(0, 0, 0);
+  font-family: "ROBOTO";
+  border-radius: 10px;
+  width: 70%;
+  font-size: 1rem;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: aliceblue;
+}
+.sidebar-nav > a:hover {
+  background-color: rgb(203, 188, 167);
+}
+
+.sideBar-outlet {
+  background-color: rgb(74, 74, 74);
 }

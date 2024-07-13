@@ -65,10 +65,12 @@ const carModel = new Schema({
     type: String,
     /*  required: true, */
   },
-  idRenter: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "userModel",
-  },
+  idRenter: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "userModel",
+    },
+  ],
   availableIn: {
     type: String,
   },

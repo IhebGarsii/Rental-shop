@@ -79,18 +79,3 @@ export const deleteCar = async (id) => {
   }
 };
 
-export const bookCar = async (idCar, idUser, data) => {
-  try {
-    const response = await fetch(`${BASE_URL}/bookCar/${idCar}/${idUser}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(data),
-    });
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-  }
-};

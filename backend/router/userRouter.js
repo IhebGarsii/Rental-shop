@@ -1,6 +1,12 @@
 const express = require("express");
 const userRouter = express.Router();
-const { login, signup, getAllUsers } = require("../controller/userController");
+const {
+  login,
+  signup,
+  getAllUsers,
+  getUser,
+  blockUser,
+} = require("../controller/userController");
 
 const multer = require("multer");
 
@@ -21,4 +27,9 @@ userRouter.post("/login", login);
 userRouter.post("/signup", upload.single("image"), signup);
 
 userRouter.get("/getAllUsers", getAllUsers);
+
+userRouter.get("/getUser/:id", getUser);
+
+userRouter.delete("/blockUser/:idUser", blockUser);
+
 module.exports = userRouter;

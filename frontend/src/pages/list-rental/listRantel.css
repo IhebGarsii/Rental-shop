@@ -4,3 +4,26 @@
   gap: 20px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+.car-list-filter {
+  padding: 20px;
+}
+.availability {
+  color: white;
+}
+.price-filter {
+  color: white;
+}
+.ranged-input {
+  display: flex;
+  justify-content: space-between;
+}
+.fiter-chekbox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.filter-lable {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+}

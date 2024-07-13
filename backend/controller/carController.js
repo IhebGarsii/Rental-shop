@@ -1,5 +1,6 @@
 const carModel = require("../model/carModel");
 const userModel = require("../model/userModel");
+const bookingModel = require("../model/bookingModel");
 
 const getCars = async (req, res) => {
   try {
@@ -93,30 +94,12 @@ const deleteCar = async (req, res) => {
   }
 };
 
-const bookCar = async (req, res) => {
-  const { idCar, idUser } = req.params;
+const availble = async (req, res) => {
+  const { idCar } = req.params;
 
   try {
-    const car = await carModel.findById(idCar);
-    if (!car) {
-      return res.status(203).json("car Not Found");
-    }
-    const user = await userModel.findById(idUser);
-    if (!user) {
-      return res.status(203).json("user Not Found");
-    }
-    car.rented = true;
-    car.idRenter = idUser;
-    car.startDate = req.body.startDate;
-    car.endDate = req.body.endDate;
-    user.idCars.push(idUser);
-    await car.save();
-    await user.save();
-    return res.status(200).json("boocked succesfuly");
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json(error);
-  }
+    const cars = await carModel.find(rented === false);
+    console.log(cars);
+  } catch (error) {}
 };
-
-module.exports = { addCar, getCars, getCar, updateCar, deleteCar, bookCar };
+module.exports = { addCar, getCars, getCar, updateCar, deleteCar };

@@ -1,0 +1,23 @@
+.booking-List-container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.booking-component {
+  padding: 20px;
+  margin: 10px;
+}
+
+.booking-List-container > select {
+  color: black;
+  font-size: 1.1rem;
+}
+.action-button {
+  padding: 10px 15px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

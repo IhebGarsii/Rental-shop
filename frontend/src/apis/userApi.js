@@ -40,3 +40,25 @@ export const getAllUser = async () => {
     return error;
   }
 };
+
+export const getUser = async (idUser) => {
+  try {
+    const response = await fetch(`${BASE_URL}/getUser/${idUser}`);
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const blockUser = async (idUser
+  
+) => {
+  try {
+    const response = await fetch(`${BASE_URL}/blockUser/${idUser}`, {
+      method: "DELETE",
+    });
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};

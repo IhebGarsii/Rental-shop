@@ -40,6 +40,6 @@ carRouter.put("/updateCar/:id", upload.array("image"), updateCar);
 
 carRouter.delete("/deleteCar/:id", deleteCar);
 
-carRouter.post("/bookCar/:idCar/:idUser", bookCar);
+
 
 module.exports = carRouter;
