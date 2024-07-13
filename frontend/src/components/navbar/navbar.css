@@ -39,3 +39,43 @@
   display: flex;
   justify-content: center;
 }
+.navbar-container-small {
+  display: none;
+}
+@media screen and (max-width: 600px) {
+
+  .navbar-container-small {
+    display: block;
+  }
+  .navbar-container {
+    display: none;
+  }
+  .navbar-link-auth {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  .links {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .logout-btn {
+    height: 30px;
+    width: 70px;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    justify-content: center;
+  }
+  .ss {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    
+  }
+  .auth {
+    height: 100%;
+  }
+}

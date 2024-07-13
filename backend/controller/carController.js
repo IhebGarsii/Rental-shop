@@ -35,6 +35,7 @@ const addCar = async (req, res) => {
     weeklyRent,
     monthlyRent,
     conditions,
+    type,
   } = req.body;
   const images = req.files.map((file) => file.originalname);
 
@@ -54,6 +55,7 @@ const addCar = async (req, res) => {
       weeklyRent: weeklyRent,
       monthlyRent: monthlyRent,
       conditions: conditions,
+      type: type,
     });
     const newcar = await car.save();
     console.log(newcar);

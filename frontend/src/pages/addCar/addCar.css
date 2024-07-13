@@ -26,3 +26,6 @@ select,
   padding: 5px;
   border: none;
 }
+.addCarr-form > input {
+  color: black;
+}

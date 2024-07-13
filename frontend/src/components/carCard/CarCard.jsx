@@ -16,8 +16,12 @@ function CarCard({ car }) {
       </div>
       <p className="car-deksc"> {car.description} </p>
       <div className="basic-info">
-        <span className="car-seat"> {car.seats} Seats </span>
-        <span className="car-seat"> {car.dailyRent} a day </span>
+        <span className="car-seat"> Seating Capacity {car.seats} </span>
+
+        <span className="car-seat">
+          {" "}
+          <span> {car.dailyRent}</span>$ a day{" "}
+        </span>
       </div>
 
       <p className="car-desc"> {car.conditions} </p>

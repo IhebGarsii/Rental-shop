@@ -2,6 +2,8 @@
   background-color: #e5e5e5;
   width: 70%;
   position: relative;
+  padding: 20px;
+  border-radius: 5px;
 }
 
 .car-detail-container {
@@ -28,7 +30,7 @@
   opacity: 0.5;
 }
 
-.imgs-container {
+.imgs-containerr {
   width: 90%;
   display: flex;
   justify-content: space-between;
@@ -90,6 +92,14 @@
   color: #000000;
   padding: 5px;
 }
+.car-detail-action {
+  display: flex;
+
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  gap: 20px;
+}
 
 .rent-car {
   display: flex;
@@ -100,9 +110,14 @@
 .rent-btn {
   width: 250px;
   color: white;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: bolder;
-  background-color: rgb(91, 243, 88);
+  background-color: rgb(22, 166, 20);
+  transition: 0.1s;
+}
+.rent-btn:hover {
+  background-color: rgb(12, 125, 10);
+  border-radius: 20px;
 }
 
 .rent-form-none {
@@ -110,7 +125,6 @@
 }
 .rent-form-display {
   position: absolute;
-
   height: 100vh;
   width: 50%;
   top: 0;
@@ -121,4 +135,5 @@
 
 .rent-btn-container {
   width: 100%;
+  text-align: center;
 }

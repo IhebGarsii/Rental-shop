@@ -35,7 +35,7 @@ function CarDetail() {
       {car && (
         <>
           <div className="car-detail-container">
-            <div className="img-container">
+            <div className="img-containerr">
               <img
                 className="first-image"
                 src={`http://localhost:4000/uploads/cars/${car.images[i]}`}
@@ -103,6 +103,8 @@ function CarDetail() {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="car-detail-action">
             <Link to={`/update/${car._id}`}> update</Link>
             <button onClick={onDelete}>Delete</button>
           </div>

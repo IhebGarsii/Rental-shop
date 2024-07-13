@@ -32,10 +32,15 @@
 
 .basic-info {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  justify-content: center;
+  flex-direction: column;
 }
 .car-seat {
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: bold;
+}
+.car-seat > span {
+  font-size: 3rem;
+  padding: 0px;
+  margin: 0px;
 }

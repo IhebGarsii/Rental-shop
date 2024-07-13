@@ -29,6 +29,7 @@ function AddCar() {
       formData.append("weeklyRent", data.weeklyRent);
       formData.append("monthlyRent", data.monthlyRent);
       formData.append("conditions", data.conditions);
+      formData.append("type", data.type);
 
       const car = await addCar(formData);
       console.log("Car added:", car);
@@ -71,6 +72,7 @@ function AddCar() {
           <label htmlFor=""> Navigation System</label>
           <input type="checkbox" name="" id="" {...register("navigation")} />
         </div>
+        <input type="text" {...register("type")} placeholder="type" />
         <input
           type="text"
           placeholder="Daily Rent Price"

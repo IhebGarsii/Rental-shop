@@ -76,11 +76,12 @@ const carModel = new Schema({
   },
   startDate: {
     type: Date,
-    default: new Date().toLocaleDateString(),
   },
   endDate: {
     type: Date,
-    default: new Date().toLocaleDateString(),
+  },
+  type: {
+    type: String,
   },
 });
 

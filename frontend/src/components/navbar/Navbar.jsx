@@ -22,6 +22,41 @@ function Navbar() {
 
   return (
     <div className="navbar">
+      <div className="navbar-container-small">
+        <Link to="home" className="company-info">
+          <img src={logo} alt="company logo" className="company-logo" />
+          Rent a Bitch
+        </Link>
+        <div className="navbar-link-auth">
+          <nav className="links">
+            <Link to="home">Home</Link>
+            <Link to="Cars">Cars</Link>
+            <Link to="MyBookink">My Bookink</Link>
+            <Link to="dashboard">dashboard</Link>
+          </nav>
+          <div className="auth">
+            <div className="ss">
+              {logedIn && (
+                <img
+                  className="company-logo"
+                  src={`http://localhost:4000/uploads/users/${localStorage.getItem(
+                    "image"
+                  )}`}
+                  alt=""
+                />
+              )}
+              {logedIn && (
+                <button className="logout-btn" onClick={logout}>
+                  Logout
+                </button>
+              )}
+            </div>
+          </div>
+
+          {!logedIn && <Link to="login">Login</Link>}
+          {!logedIn && <Link to="signup">Signup</Link>}
+        </div>
+      </div>
       <div className="navbar-container">
         <Link to="home" className="company-info">
           <img src={logo} alt="company logo" className="company-logo" />
