@@ -1,0 +1,16 @@
+.userBooking {
+  min-height: 90vw;
+  padding: 50px;
+}
+
+.userBooking {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.booking-table {
+}
+.wid {
+  width: 90px;
+}

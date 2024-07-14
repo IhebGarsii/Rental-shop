@@ -41,7 +41,9 @@ const bookingModel = new Schema({
   billingAddress: {
     type: String,
   },
-
+  daysDiffence: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("bookingModel", bookingModel);

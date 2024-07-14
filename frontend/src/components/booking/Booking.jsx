@@ -36,6 +36,7 @@ function Booking({ booking }) {
         booking.idUser,
         booking._id
       );
+
       console.log("resopnse", response);
     } catch (error) {
       console.error(error);
@@ -72,7 +73,7 @@ function Booking({ booking }) {
               <td>
                 {user.firstName} {user.LastName}
               </td>
-              <td>{booking.startDate}</td>
+              <td> {booking.startDate}</td>
               <td>{booking.endDate}</td>
               <td>
                 <button

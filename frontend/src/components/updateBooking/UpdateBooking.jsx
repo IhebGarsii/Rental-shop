@@ -1,44 +1,63 @@
-import React, { useEffect, useState } from "react";
-import { bookCar } from "../../apis/bookingApi";
-import "./bookCar.css";
+import React, { useEffect } from "react";
+import { updateBookingById } from "../../apis/bookingApi.js";
+import "../bookCar/bookCar.css";
 import { useForm } from "react-hook-form";
-function BookCar({ car }) {
-  const [render, setRender] = useState(false);
-  const { register, handleSubmit } = useForm();
+
+function UpdateBooking({ booking }) {
+  const { register, handleSubmit, setValue } = useForm();
+
+  // Helper function to format the date correctly
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+    const day = String(date.getUTCDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+  const formatExpiryDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+    return `${year}-${month}`;
+  };
+
+  useEffect(() => {
+    if (booking) {
+      console.log("booking", booking);
+      setValue("startDate", formatDate(booking.startDate));
+      setValue("endDate", formatDate(booking.endDate));
+      setValue("dropoffLocation", booking.dropoffLocation);
+      setValue("cardNumber", booking.cardNumber);
+      setValue("expiryDate", formatExpiryDate(booking.expiryDate));
+      setValue("cvv", booking.cvv);
+      setValue("licenseNumber", booking.licenseNumber);
+      setValue("billingAddress", booking.billingAddress);
+    }
+  }, [booking, setValue]);
+
   const handleBook = async (data, e) => {
     e.preventDefault();
     try {
-      const book = await bookCar(car._id, localStorage.getItem("idUser"), data);
-
-      setRender(true);
+      await updateBookingById(data, booking._id);
+      console.log("Booking updated successfully");
     } catch (error) {
-      console.error(error);
+      console.error("Error updating booking:", error);
     }
   };
-  useEffect(() => {}, [render]);
+
   return (
     <div className="book-car">
       <form className="book-form" onSubmit={handleSubmit(handleBook)}>
         <div className="label">
           <label htmlFor="startDate">Start Date</label>
-          <input
-            type="Date"
-            name="startDate"
-            {...register("startDate")}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
+          <input type="date" name="startDate" {...register("startDate")} />
         </div>
         <div className="label">
           <label htmlFor="endDate">End Date</label>
-          <input
-            type="Date"
-            {...register("endDate")}
-            name="endDate"
-            onChange={(e) => setEndDate(e.target.value)}
-          />
+          <input type="date" {...register("endDate")} name="endDate" />
         </div>
         <div className="label">
-          <label htmlFor="dropoff_location">Droping Location</label>
+          <label htmlFor="dropoff_location">Dropoff Location</label>
           <input
             type="text"
             name="dropoff_location"
@@ -53,14 +72,6 @@ function BookCar({ car }) {
             name="card_number"
             {...register("cardNumber")}
           />
-        </div>
-        <div className="label">
-          <label htmlFor="time">Payment Duration</label>
-          <select className="time" name="time">
-            <option value="DAYS">Daily</option>
-            <option value="WEEK">Weekly</option>
-            <option value="MONTH">Monthly</option>
-          </select>
         </div>
         <div className="label">
           <label htmlFor="expiry-date">Expiry Date:</label>
@@ -91,11 +102,10 @@ function BookCar({ car }) {
             {...register("billingAddress")}
           />
         </div>
-
-        <button type="submit">Book</button>
+        <button type="submit">Update Booking</button>
       </form>
     </div>
   );
 }
 
-export default BookCar;
+export default UpdateBooking;

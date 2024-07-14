@@ -31,48 +31,32 @@ function Users() {
     fetchUsers();
   }, []);
   return (
-    <div>
+    <div className="users">
       {data &&
         data.map((user) => (
           <div className="user-container">
-            <table className="user-table">
-              {/* <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Roles</th>
-                  <th>Actions</th>
-                </tr>
-              </thead> */}
-              <tbody>
-                <tr>
-                  <td className="img-container">
-                    <img
-                      className="user-img"
-                      src={`http://localhost:4000/uploads/users/${user.image}`}
-                      alt=""
-                    />
-                    {user.firstName} {user.lastName}
-                  </td>
-                  <td> {user.email} </td>
-                  <td>
-                    {user.roles.map((role) => (
-                      <span> {role} </span>
-                    ))}
-                  </td>
-
-                  <td>
-                    <button
-                      onClick={() => handleBlock(user._id)}
-                      className="action-button refuse-button"
-                    >
-                      Block
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="user-left">
+              <img
+                className="user-img"
+                src={`http://localhost:4000/uploads/users/${user.image}`}
+                alt=""
+              />
+              {user.firstName} {user.lastName}
+            </div>
+            <div className="user-middle">
+              {user.email}
+              {user.roles.map((role) => (
+                <span> {role} </span>
+              ))}
+            </div>
+            <div className="user-right">
+              <button
+                onClick={() => handleBlock(user._id)}
+                className="action-button refuse-button"
+              >
+                Block
+              </button>
+            </div>
           </div>
         ))}
     </div>

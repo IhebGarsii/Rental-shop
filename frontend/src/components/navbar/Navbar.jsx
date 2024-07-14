@@ -31,7 +31,7 @@ function Navbar() {
           <nav className="links">
             <Link to="home">Home</Link>
             <Link to="Cars">Cars</Link>
-            <Link to="MyBookink">My Bookink</Link>
+            <Link to="userBooking">My Bookink</Link>
             <Link to="dashboard">dashboard</Link>
           </nav>
           <div className="auth">
@@ -60,12 +60,12 @@ function Navbar() {
       <div className="navbar-container">
         <Link to="home" className="company-info">
           <img src={logo} alt="company logo" className="company-logo" />
-          Rent a Bitch
+          Company logo
         </Link>
         <nav className="links">
           <Link to="home">Home</Link>
           <Link to="Cars">Cars</Link>
-          <Link to="MyBookink">My Bookink</Link>
+          <Link to="userBooking">My Bookink</Link>
           <Link to="dashboard">dashboard</Link>
         </nav>
         <div className="auth">

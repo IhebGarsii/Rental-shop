@@ -124,7 +124,7 @@ function UpdateCar() {
           placeholder="Conditions"
           {...register("conditions")}
         />
-        <button type="submit"> Add Car</button>
+        <button type="submit"> Update Car</button>
       </form>
     </div>
   );

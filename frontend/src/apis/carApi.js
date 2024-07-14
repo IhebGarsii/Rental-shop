@@ -17,11 +17,6 @@ export const getCars = async () => {
 
 export const getCar = async (id) => {
   try {
-    /*  return ({ data, isLoading, error } = useFetch(
-      `${BASE_URL}/getCar/${id}`,
-      "GET"
-    )); */
-
     const response = await fetch(`${BASE_URL}/getCar/${id}`, {
       method: "GET",
       headers: {
@@ -78,4 +73,3 @@ export const deleteCar = async (id) => {
     console.error(error);
   }
 };
-

@@ -16,6 +16,7 @@ import SideBar from "./components/sidebar/SideBar.jsx";
 import Users from "./pages/dashboard/users/Users.jsx";
 import BookingList from "./pages/dashboard/requests/BookingList.jsx";
 import Footer from "./components/footer/Footer.jsx";
+import UserBooking from "./pages/userBooking/UserBooking.jsx";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
             element: <BookingList />,
           },
         ],
+      },
+      {
+        path: "userBooking",
+        element: <UserBooking />,
       },
       {
         path: "car/:id",
