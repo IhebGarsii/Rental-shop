@@ -1,0 +1,26 @@
+.notification-icon {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.notification-list {
+  background-color: aliceblue;
+  position: absolute;
+  right: 70px;
+  top: 70px;
+  width: 20%;
+  border-radius: 5px;
+  height: 70vh;
+  overflow: scroll;
+}
+
+.badge {
+  padding: 3px;
+  background-color: hsl(0, 100%, 46%);
+  color: white;
+  position: absolute;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  top: 5px;
+  right: 24.3%;
+}

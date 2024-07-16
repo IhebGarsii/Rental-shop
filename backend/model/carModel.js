@@ -74,12 +74,28 @@ const carModel = new Schema({
   availableIn: {
     type: String,
   },
-  startDate: {
-    type: Date,
-  },
-  endDate: {
-    type: Date,
-  },
+  startDate: [
+    {
+      type: Date,
+    },
+  ],
+  endDate: [
+    {
+      type: Date,
+    },
+  ],
+  bookingDuration: [
+    {
+      startDate: {
+        type: Date,
+        required: true,
+      },
+      endDate: {
+        type: Date,
+        required: true,
+      },
+    },
+  ],
   type: {
     type: String,
   },

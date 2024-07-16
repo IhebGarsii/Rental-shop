@@ -46,8 +46,8 @@ function BookingList() {
       </select>
       {filter &&
         filter.map((book) => (
-          <div className="booking-component">
-            <Booking booking={book} key={book._id} />
+          <div key={book._id} className="booking-component">
+            <Booking booking={book} />
           </div>
         ))}
     </div>

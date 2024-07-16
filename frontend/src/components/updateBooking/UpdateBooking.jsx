@@ -16,6 +16,10 @@ function UpdateBooking({ booking }) {
   };
   const formatExpiryDate = (dateString) => {
     const date = new Date(dateString);
+    if (isNaN(date)) {
+      console.error("Invalid date:", dateString); // Add error logging
+      return "";
+    }
     const year = date.getUTCFullYear();
     const month = String(date.getUTCMonth() + 1).padStart(2, "0");
     return `${year}-${month}`;
@@ -29,6 +33,7 @@ function UpdateBooking({ booking }) {
       setValue("dropoffLocation", booking.dropoffLocation);
       setValue("cardNumber", booking.cardNumber);
       setValue("expiryDate", formatExpiryDate(booking.expiryDate));
+
       setValue("cvv", booking.cvv);
       setValue("licenseNumber", booking.licenseNumber);
       setValue("billingAddress", booking.billingAddress);
@@ -38,6 +43,7 @@ function UpdateBooking({ booking }) {
   const handleBook = async (data, e) => {
     e.preventDefault();
     try {
+      console.log("Formatted expiryDate:", data.expiryDate); // Change this line
       await updateBookingById(data, booking._id);
       console.log("Booking updated successfully");
     } catch (error) {
@@ -46,7 +52,7 @@ function UpdateBooking({ booking }) {
   };
 
   return (
-    <div className="book-car">
+    <div className="update-car">
       <form className="book-form" onSubmit={handleSubmit(handleBook)}>
         <div className="label">
           <label htmlFor="startDate">Start Date</label>

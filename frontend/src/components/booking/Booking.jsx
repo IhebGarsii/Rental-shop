@@ -18,7 +18,6 @@ function Booking({ booking }) {
     };
     fetchCar();
     const fetchUser = async () => {
-      console.log("userId booking", booking.idUser);
       try {
         const user = await getUser(booking.idUser);
         setUser(user);
@@ -31,13 +30,28 @@ function Booking({ booking }) {
 
   const handelAccept = async () => {
     try {
-      const response = await acceptBooking(
-        booking.idCar,
-        booking.idUser,
-        booking._id
-      );
+      //************** */
+      const hireOn = new Date(booking.startDate);
+      const returnOn = new Date(booking.endDate);
+      hireOn.setHours(0, 0, 0, 0);
+      returnOn.setHours(23, 59, 59, 999);
+      console.log("eeeeeeeee", car.bookingDuration);
 
-      console.log("resopnse", response);
+      const isConflict = car.bookingDuration.some((book) => {
+        const startDate = new Date(book.startDate);
+        const endDate = new Date(book.endDate);
+        console.log("aaaaaaa", hireOn, returnOn);
+        console.log("eeeeeee", hireOn < endDate && returnOn > startDate);
+        return hireOn < endDate && returnOn > startDate;
+      });
+
+      if (isConflict) {
+        console.log("The car is already booked for the selected dates.");
+        return;
+      }
+
+      //*********** */
+      const response = await acceptBooking(booking);
     } catch (error) {
       console.error(error);
     }

@@ -1,0 +1,11 @@
+.notification-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.notification-container>span{
+    color: darkblue;
+    font-weight: 700;
+}

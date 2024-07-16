@@ -126,8 +126,18 @@
 }
 .rent-form-display {
   position: absolute;
-  height: 100vh;
+  height: 70vh;
+  margin: 50px;
+  text-align: left;
+  overflow: scroll;
+  scrollbar-width: none;
+  font-size: 1.2rem;
+  font-weight: bold;
   width: 50%;
+  -webkit-box-shadow: 3px 3px 7px 2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 3px 7px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 3px 7px 2px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
   top: 0;
   bottom: 0;
   left: 25%;
@@ -137,4 +147,13 @@
 .rent-btn-container {
   width: 100%;
   text-align: center;
+}
+
+.close-booking-btn {
+  position: absolute;
+  top: 55px;
+  right: 255px;
+  font-size: 2.3rem;
+  color: red;
+  padding: 5px;
 }

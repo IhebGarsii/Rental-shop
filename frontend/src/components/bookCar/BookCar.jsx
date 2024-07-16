@@ -2,12 +2,36 @@ import React, { useEffect, useState } from "react";
 import { bookCar } from "../../apis/bookingApi";
 import "./bookCar.css";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+
 function BookCar({ car }) {
   const [render, setRender] = useState(false);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setError, clearErrors, watch } = useForm();
   const handleBook = async (data, e) => {
     e.preventDefault();
+
     try {
+      const hireOn = new Date(data.startDate);
+      const returnOn = new Date(data.endDate);
+
+      hireOn.setHours(0, 0, 0, 0);
+      returnOn.setHours(23, 59, 59, 999);
+      console.log("eeeeeeeee", car.bookingDuration);
+
+      const isConflict = car.bookingDuration.some((book) => {
+        const startDate = new Date(book.startDate);
+        const endDate = new Date(book.endDate);
+        console.log("aaaaaaa", hireOn, returnOn);
+        console.log("eeeeeee", hireOn < endDate && returnOn > startDate);
+        return hireOn < endDate && returnOn > startDate;
+      });
+
+      if (isConflict) {
+        toast.error("The car is already booked for the selected dates.");
+        console.log("The car is already booked for the selected dates.");
+        return;
+      }
+
       const book = await bookCar(car._id, localStorage.getItem("idUser"), data);
 
       setRender(true);
@@ -15,30 +39,21 @@ function BookCar({ car }) {
       console.error(error);
     }
   };
+
   useEffect(() => {}, [render]);
   return (
     <div className="book-car">
       <form className="book-form" onSubmit={handleSubmit(handleBook)}>
         <div className="label">
-          <label htmlFor="startDate">Start Date</label>
-          <input
-            type="Date"
-            name="startDate"
-            {...register("startDate")}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
+          <label htmlFor="startDate">Start Date:</label>
+          <input type="Date" name="startDate" {...register("startDate")} />
         </div>
         <div className="label">
-          <label htmlFor="endDate">End Date</label>
-          <input
-            type="Date"
-            {...register("endDate")}
-            name="endDate"
-            onChange={(e) => setEndDate(e.target.value)}
-          />
+          <label htmlFor="endDate">End Date:</label>
+          <input type="Date" {...register("endDate")} name="endDate" />
         </div>
         <div className="label">
-          <label htmlFor="dropoff_location">Droping Location</label>
+          <label htmlFor="dropoff_location">Droping Location:</label>
           <input
             type="text"
             name="dropoff_location"
@@ -55,7 +70,7 @@ function BookCar({ car }) {
           />
         </div>
         <div className="label">
-          <label htmlFor="time">Payment Duration</label>
+          <label htmlFor="time">Payment Duration:</label>
           <select className="time" name="time">
             <option value="DAYS">Daily</option>
             <option value="WEEK">Weekly</option>

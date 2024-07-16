@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import "./addCar.css";
 import { useForm } from "react-hook-form";
 import { addCar } from "../../apis/carApi";
+import toast from "react-hot-toast";
+
 function AddCar() {
   const { register, handleSubmit } = useForm();
 
@@ -32,7 +34,12 @@ function AddCar() {
       formData.append("type", data.type);
 
       const car = await addCar(formData);
-      console.log("Car added:", car);
+      console.log("car.ok", car.ok);
+   /*    if (car.ok) {
+        toast.success("Successfully created!");
+      } else {
+        toast.error("error");
+      } */
     } catch (error) {
       console.error("Error adding car:", error);
     }

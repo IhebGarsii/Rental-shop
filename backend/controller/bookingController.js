@@ -1,7 +1,9 @@
 const bookingModel = require("../model/bookingModel");
 const carModel = require("../model/carModel");
 const userModel = require("../model/userModel");
-const notificationModel = require("../model/adminNotification");
+
+const adminNotification = require("../model/adminNotification");
+
 const bookCar = async (req, res) => {
   const { idCar, idUser } = req.params;
   const {
@@ -26,18 +28,13 @@ const bookCar = async (req, res) => {
       return res.status(404).json({ msg: "User not found" });
     }
 
-    const bookings = await bookingModel.find({
-      idCar: idCar,
-      idUser: idUser,
-    });
-    if (bookings.length > 0) {
-      return res.status(400).json({ msg: "You have already booked this car" });
-    }
+    /*  */
     const start = new Date(startDate);
     const end = new Date(endDate);
 
     let timeDifference = end - start;
     const daysDiffence = timeDifference / (1000 * 3600 * 24);
+
     const booking = new bookingModel({
       idUser,
       idCar,
@@ -51,18 +48,15 @@ const bookCar = async (req, res) => {
       billingAddress,
       daysDiffence,
     });
+
     const description = `${user.firstName} has requested a booking for ${car.model}`;
-    const notification = new notificationModel({
+    const notification = new adminNotification({
       description,
+      target: "ADMIN",
     });
     await notification.save();
     await booking.save();
     if (!booking) {
-      return res.status(400).json({ msg: "error" });
-    }
-
-    await car.save();
-    if (!car) {
       return res.status(400).json({ msg: "error" });
     }
 
@@ -100,24 +94,31 @@ const acceptBooking = async (req, res) => {
     }
     const booking = await bookingModel.findById(idBooking);
     if (!booking) {
-      return res.status(404).json("USer Not Found");
+      return res.status(404).json({ errorMsg: "Booking Not Found" });
     }
     booking.status = "ACCEPTED";
     car.rented = true;
     car.idRenter.push(idUser);
-    car.startDate = booking.startDate;
-    car.endDate = booking.endDate;
+    const { startDate, endDate } = req.body;
+    console.log("eeeeeeeeeeeee", { startDate, endDate });
+
+    const bookin = { startDate, endDate };
+    car.bookingDuration.push(bookin);
+
     user.idCars.push(idCar);
     await car.save();
     await user.save();
     await booking.save();
     const description = `The admin has accepted your request to book ${car.model}`;
-    const notification = new notificationModel({
+    const notification = new adminNotification({
       description,
+      target: "USER",
     });
     await notification.save();
     return res.status(200).json("booking accepted");
-  } catch (error) {}
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
 const refuseBooking = async (req, res) => {
@@ -136,8 +137,9 @@ const refuseBooking = async (req, res) => {
     await booking.save();
     car.rented = false;
     const description = `The admin has refused your request to book ${car.model}`;
-    const notification = new notificationModel({
+    const notification = new adminNotification({
       description,
+      target: "USER",
     });
     await notification.save();
     return res.status(200).json("Booking Refused");
@@ -167,15 +169,32 @@ const getBooking = async (req, res) => {
 const updateBooking = async (req, res) => {
   const { idBooking } = req.params;
 
-  console.log(req.params);
   try {
-    console.log(req.body);
+    const originalBooking = await bookingModel.findById(idBooking);
+    const user = await userModel.findById(originalBooking.idUser);
+    const car = await carModel.findById(originalBooking.idCar);
+
     const booking = await bookingModel.findByIdAndUpdate(idBooking, req.body, {
       new: true,
     });
-    if (!booking) {
-      return res.status(404).json({ msg: "notfound" });
-    }
+    const start = new Date(req.body.startDate);
+    const end = new Date(req.body.endDate);
+
+    let timeDifference = end - start;
+    const daysDiffence = timeDifference / (1000 * 3600 * 24);
+    booking.daysDiffence = daysDiffence;
+    await booking.save();
+
+    const description = `${user.firstName} has updated his request `;
+    const notification = new adminNotification({
+      changes: booking,
+      original: originalBooking,
+      description,
+      target: "USER ADMIN",
+    });
+    await notification.save();
+    console.log("notification", notification);
+
     return res.status(200).json(booking);
   } catch (error) {
     console.log(error);
@@ -188,30 +207,58 @@ const deleteBooking = async (req, res) => {
 
   try {
     const booking = await bookingModel.findByIdAndDelete(idBooking);
+
+    const car = await carModel.findById(booking.idCar);
+    const userR = await userModel.findById(booking.idUser);
     if (booking.status === "ACCEPTED") {
-      const car = await carModel.findById(booking.idCar);
       const idUserStr = booking.idUser.toString();
       car.idRenter = car.idRenter.filter(
         (renter) => renter.toString() !== idUserStr
       );
       const idCarStr = booking.idCar.toString();
-      const user = await userModel.findById(booking.idUser);
-      user.idCars = user.idCars.filter(
+
+      userR.idCars = userR.idCars.filter(
         (renter) => renter.toString() !== idCarStr
       );
+      car.bookingDuration = car.bookingDuration.filter(
+        (book) =>
+          book.startDate.toISOString() !== booking.startDate.toISOString() ||
+          book.endDate.toISOString() !== booking.endDate.toISOString()
+      );
+      console.log(car.bookingDuration);
       car.rented = false;
-      await user.save();
+      await userR.save();
       await car.save();
     }
-    const description = `${user.model} has deleted his request to book ${car.model}`;
-    const notification = new notificationModel({
+    const description = `${userR.firstName} has deleted his request to book ${car.model}`;
+    const notification = new adminNotification({
       description,
+      target: "USER ADMIN",
     });
     await notification.save();
     return res.status(200).json("booking has been deleted");
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);
+  }
+};
+
+const postRead = async (req, res) => {
+  console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+
+  try {
+    const notification = await adminNotification.find();
+    await Promise.all(
+      notification.map(async (one) => {
+        one.read = "READ";
+        await one.save(); // Save each notification individually
+      })
+    );
+
+    return res.status(200).json("notification has been read");
+  } catch (error) {
+    console.log(error);
+    return res.status(200).json(error);
   }
 };
 
@@ -222,5 +269,6 @@ module.exports = {
   refuseBooking,
   getBooking,
   updateBooking,
+  postRead,
   deleteBooking,
 };

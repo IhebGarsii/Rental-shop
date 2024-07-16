@@ -3,6 +3,8 @@ import "./navbar.css";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import logo from "../../assets/carRentalLogo.jpg";
 
+import Notification from "../notification/Notification.jsx";
+
 function Navbar() {
   const navigate = useNavigate();
   const [logedIn, setLogedIn] = useState();
@@ -69,6 +71,8 @@ function Navbar() {
           <Link to="dashboard">dashboard</Link>
         </nav>
         <div className="auth">
+          <Notification className="navbar-notification" />
+
           {logedIn && (
             <img
               className="company-logo"

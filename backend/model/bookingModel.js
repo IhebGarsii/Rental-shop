@@ -10,12 +10,16 @@ const bookingModel = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "carModel",
   },
+
   startDate: {
     type: Date,
+    required: true,
   },
   endDate: {
     type: Date,
+    required: true,
   },
+
   status: {
     type: String,
     default: "PENDING",
@@ -31,6 +35,7 @@ const bookingModel = new Schema({
   },
   expiryDate: {
     type: String,
+    match: /^(19|20)\d\d-(0[1-9]|1[0-2])$/,
   },
   cvv: {
     type: String,

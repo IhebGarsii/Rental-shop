@@ -22,6 +22,6 @@ bookingRouter.put("/updateBooking/:idBooking", updateBooking);
 
 bookingRouter.delete("/deleteBooking/:idBooking", deleteBooking);
 
-bookingRouter.get("/acceptBooking/:idCar/:idUser/:idBooking", acceptBooking);
+bookingRouter.post("/acceptBooking/:idCar/:idUser/:idBooking", acceptBooking);
 
 module.exports = bookingRouter;

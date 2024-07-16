@@ -1,4 +1,5 @@
 const BASE_URL = "http://localhost:4000/Cars";
+import toast from "react-hot-toast";
 
 export const getCars = async () => {
   try {
@@ -39,6 +40,11 @@ export const addCar = async (formData) => {
       body: formData,
     });
     console.log("from the api", formData);
+    if (car.ok) {
+      toast.success("Successfully created!");
+    } else {
+      toast.error("error");
+    }
     const response = await car.json();
     return response;
   } catch (error) {
@@ -53,9 +59,12 @@ export const updateCar = async (formData, id) => {
       body: formData,
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
-    console.log(response);
     const updatedCar = await response.json();
-
+    if (response.ok) {
+      toast.success("Successfully Updated!");
+    } else {
+      toast.error("error");
+    }
     return updatedCar;
   } catch (error) {
     console.log(error);
@@ -68,6 +77,11 @@ export const deleteCar = async (id) => {
       method: "DELETE",
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
+    if (response.ok) {
+      toast.success("Successfully Deleted!");
+    } else {
+      toast.error("error");
+    }
     return await response.json();
   } catch (error) {
     console.error(error);

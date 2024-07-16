@@ -17,7 +17,9 @@ import Users from "./pages/dashboard/users/Users.jsx";
 import BookingList from "./pages/dashboard/requests/BookingList.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import UserBooking from "./pages/userBooking/UserBooking.jsx";
+import toast, { Toaster } from "react-hot-toast";
 
+const notify = () => toast("Here is your toast.");
 const router = createBrowserRouter([
   {
     path: "/",
@@ -76,5 +78,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    <Toaster />
   </React.StrictMode>
 );

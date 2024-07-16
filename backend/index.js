@@ -6,6 +6,7 @@ const carRouter = require("./router/carRouter");
 const userRouter = require("./router/userRouter");
 const path = require("path");
 const bookingRouter = require("./router/bookingRouter");
+const notificationRouter = require("./router/notificationRouter");
 const carModel = require("./model/carModel");
 const app = express();
 app.use(express.json({ limit: "50mb" }));
@@ -14,6 +15,7 @@ app.use(cors());
 app.use("/Cars", carRouter);
 app.use("/User", userRouter);
 app.use("/Booking", bookingRouter);
+app.use("/Notification", notificationRouter);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use((err, req, res, next) => {
   if (err instanceof SyntaxError && err.status === 400 && "body" in err) {

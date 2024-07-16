@@ -1,6 +1,4 @@
 const carModel = require("../model/carModel");
-const userModel = require("../model/userModel");
-const bookingModel = require("../model/bookingModel");
 
 const getCars = async (req, res) => {
   try {
@@ -58,18 +56,18 @@ const addCar = async (req, res) => {
       type: type,
     });
     const newcar = await car.save();
-    console.log(newcar);
+
     return res.status(200).json(newcar);
   } catch (error) {
     console.log(error);
+    return res.status(500).json(error);
   }
 };
 
 const updateCar = async (req, res) => {
   const { id } = req.params;
-  console.log(req.params);
+
   try {
-    console.log(req.body);
     const carToUpdate = await carModel.findByIdAndUpdate(id, req.body, {
       new: true,
     });

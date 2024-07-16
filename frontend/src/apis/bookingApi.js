@@ -1,4 +1,5 @@
 const BASE_URL = "http://localhost:4000/Booking";
+import toast from "react-hot-toast";
 
 export const getBookings = async () => {
   try {
@@ -22,6 +23,12 @@ export const bookCar = async (idCar, idUser, data) => {
       },
       body: JSON.stringify(data),
     });
+    console.log("-*-*-*-*-*-*-*-*", response);
+    if (response.ok) {
+      toast.success("Successfully Updated!");
+    } else {
+      toast.error("error");
+    }
     return await response.json();
   } catch (error) {
     console.error(error);
@@ -52,17 +59,30 @@ export const deleteBooking = async (idBooking) => {
   }
 };
 
-export const acceptBooking = async (idCar, idUser, idBooking) => {
+export const acceptBooking = async (booking) => {
   try {
     const response = await fetch(
-      `${BASE_URL}/acceptBooking/${idCar}/${idUser}/${idBooking}`,
+      `${BASE_URL}/acceptBooking/${booking.idCar}/${booking.idUser}/${booking._id}`,
 
       {
-        method: "GET",
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(booking),
       }
     );
-    return await response.json();
+
+    const accept = await response.json();
+
+    if (response.ok) {
+      toast.success("Successfully Updated!");
+    } else {
+      console.log("qdfqdfqdf", accept.errorMsg);
+      toast.error(accept.errorMsg);
+    }
+    return accept;
   } catch (error) {
     console.error(error);
   }

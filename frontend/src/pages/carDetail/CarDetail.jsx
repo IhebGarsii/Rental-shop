@@ -3,6 +3,7 @@ import "./carDetail.css";
 import { deleteCar, getCar } from "../../apis/carApi";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import BookCar from "../../components/bookCar/BookCar";
+import { RxCross2 } from "react-icons/rx";
 function CarDetail() {
   const [car, setCar] = useState();
   const { id } = useParams();
@@ -44,13 +45,14 @@ function CarDetail() {
               <div className="imgs-container">
                 {car.images.map((image, index) => (
                   <img
+                  key={index}
                     onClick={() => seti(index)}
                     className={
                       i === index ? "rest-images-modifed" : "rest-images"
                     }
                     src={`http://localhost:4000/uploads/cars/${image}`}
                     alt=""
-                    srcset=""
+                   
                   />
                 ))}
               </div>
@@ -123,8 +125,13 @@ function CarDetail() {
               </button>
               <div className={rent ? "rent-form-display" : "rent-form-none"}>
                 <BookCar key={car._id} car={car} />
-                <button onClick={() => setRent(false)}>Close</button>
               </div>
+              {rent && (
+                <RxCross2
+                  className="close-booking-btn"
+                  onClick={() => setRent(false)}
+                />
+              )}
             </div>
           </div>
         </>

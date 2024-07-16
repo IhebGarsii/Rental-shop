@@ -34,7 +34,7 @@ function Users() {
     <div className="users">
       {data &&
         data.map((user) => (
-          <div className="user-container">
+          <div key={user._id} className="user-container">
             <div className="user-left">
               <img
                 className="user-img"

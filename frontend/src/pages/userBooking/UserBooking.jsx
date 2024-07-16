@@ -3,6 +3,7 @@ import "./userBooking.css";
 import { getBooking, deleteBooking } from "../../apis/bookingApi";
 import { Link } from "react-router-dom";
 import UpdateBooking from "../../components/updateBooking/UpdateBooking";
+import { RxCross2 } from "react-icons/rx";
 
 function UserBooking() {
   const [data, setData] = useState([]);
@@ -32,7 +33,7 @@ function UserBooking() {
     <div className="userBooking">
       {data &&
         data.map((booking) => (
-          <>
+          <div key={booking._id}>
             <table className="booking-table">
               <thead>
                 <tr>
@@ -74,11 +75,18 @@ function UserBooking() {
                 </tr>
               </tbody>
             </table>
-            <div className={rent ? "rent-form-display" : "rent-form-none"}>
-              <UpdateBooking key={booking.idCar._id} booking={booking} />
-              <button onClick={() => setRent(false)}>Close</button>
-            </div>
-          </>
+            {rent && (
+              <div className="rent-form-displays">
+                <div className="rent-form-display-center">
+                  <UpdateBooking key={booking.idCar._id} booking={booking} />
+                  <RxCross2
+                    className="close-u-btn"
+                    onClick={() => setRent(false)}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
         ))}
     </div>
   );

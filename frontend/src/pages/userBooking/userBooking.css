@@ -14,3 +14,30 @@
 .wid {
   width: 90px;
 }
+.rent-form-display-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rent-form-displays {
+  position: absolute;
+  left: 20%;
+  padding: 20px;
+  width: 60%;
+  top: 50px;
+}
+.close-u-btn {
+  position: absolute;
+  top: 40px;
+  right: 220px;
+  font-size: 2.3rem;
+  color: red;
+  padding: 5px;
+  transition: 0.5s;
+  
+}
+.close-u-btn:hover {
+  background-color: red;
+  color: white;
+  
+}
