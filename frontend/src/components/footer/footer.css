@@ -1,12 +1,27 @@
 .footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 70%;
 
-/* Unique styles for the newsletter form */
+  height: 70%;
+}
+.footer-container {
+  display: grid;
+  width: 100%;
+  gap: 30px;
+  grid-template-columns: 40% 30% 30%;
+}
+hr {
+  width: 100%;
+}
 .newsletter-form {
-  max-width: 300px;
+  width: 90%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   padding: 20px;
   border: 2px solid #333;
   border-radius: 8px;
@@ -20,7 +35,9 @@
   font-weight: bold;
   font-size: 20px;
 }
-
+.newsletter-form > form {
+  height: 80%;
+}
 .newsletter-form h2 {
   margin-top: 0;
   color: #333;
@@ -55,4 +72,31 @@
 
 .newsletter-form input[type="submit"]:hover {
   background-color: #ff8533;
+}
+
+.footer-middle > h3,
+.footer-right > h3 {
+  color: white;
+  opacity: 0.9;
+}
+.footer-middle > a,
+.footer-right > a {
+  color: white;
+  font-size: 1.2rem;
+}
+.footer-middle,
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 20px;
+  width: 70%;
+  opacity: 0.9;
+}
+
+.footer-bottom {
+  color: white;
+  padding-top: 20px;
 }

@@ -38,6 +38,7 @@ function ContactForm() {
           <button type="submit">Submit</button>
         </form>
       </div>
+
       <div className="contact-right">
         <img
           src="https://horizon-data.tn/wp-content/uploads/2020/05/contact-img.jpg"

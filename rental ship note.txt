@@ -14,6 +14,7 @@ add confirm when admin want to block user ***completed***
 add contact form in navbar and footer
 
 fix home carCard
+complete contact form
 
 what is customer journey
 

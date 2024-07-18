@@ -13,12 +13,14 @@ function Login() {
         email,
         password,
       };
-      const login = await signin(data);
-      if (login) {
-        localStorage.setItem("token", login.token);
-        localStorage.setItem("image", login.user.image);
-        localStorage.setItem("idUser", login.user._id);
-        localStorage.setItem("roles", login.roles);
+      const login1 = await signin(data);
+      if (login1) {
+        localStorage.setItem("token", login1.token);
+        localStorage.setItem("image", login1.user.image);
+        localStorage.setItem("idUser", login1.user._id);
+        localStorage.setItem("roles", login1.user.roles);
+
+        console.log(login1);
         navigate("/home");
       }
     } catch (error) {

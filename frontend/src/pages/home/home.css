@@ -226,3 +226,13 @@ p {
   justify-content: center;
   background-color: #171717;
 }
+
+.home-footer {
+  width: 100%;
+  margin-top: 100px;
+  padding: 20px;
+  background-color: #042062;
+  display: flex;
+  justify-content: center;
+  height: 72vh;
+}

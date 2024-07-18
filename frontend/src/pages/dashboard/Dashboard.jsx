@@ -1,24 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import "./dashboard.css";
+import { postNewsLetter } from "../../apis/NewsLetterApi";
 
 function Dashboard() {
+  const [subject, setSubject] = useState("");
+  const [text, setText] = useState("");
+  const submitLetter = async (e) => {
+    e.preventDefault();
+    try {
+      const data = { subject, text };
+      const letter = await postNewsLetter(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className="dashboard">
-      {/*  <nav>
-        <Link to="/dashboard/addCar">Add a Car</Link>
-      </nav>
-      <div className="addCar-outlet">
-        <Outlet />
-      </div> */}
       <div className="sidebar-container">
-        <h1>ssssssssssss</h1>
-        <h1>ssssssssssss</h1>
-        <h1>ssssssssssss</h1>
-        <h1>ssssssssssss</h1>
-        <h1>ssssssssssss</h1>
-        <h1>ssssssssssss</h1>
-        <h1>ssssssssssss</h1>
-        <h1>ssssssssssss</h1>
+        <form onSubmit={submitLetter}>
+          <input
+            type="text"
+            placeholder="Subject"
+            onChange={(e) => setSubject(e.target.value)}
+          />
+          <textarea
+            onChange={(e) => setText(e.target.value)}
+            name=""
+            id=""
+          ></textarea>
+          <button type="submit">Submit</button>
+        </form>
       </div>
     </div>
   );
