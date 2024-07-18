@@ -45,14 +45,13 @@ function CarDetail() {
               <div className="imgs-container">
                 {car.images.map((image, index) => (
                   <img
-                  key={index}
+                    key={index}
                     onClick={() => seti(index)}
                     className={
                       i === index ? "rest-images-modifed" : "rest-images"
                     }
                     src={`http://localhost:4000/uploads/cars/${image}`}
                     alt=""
-                   
                   />
                 ))}
               </div>
@@ -106,10 +105,12 @@ function CarDetail() {
               </div>
             </div>
           </div>
-          <div className="car-detail-action">
-            <Link to={`/update/${car._id}`}> update</Link>
-            <button onClick={onDelete}>Delete</button>
-          </div>
+          {localStorage.getItem("roles") === "ADMIN" && (
+            <div className="car-detail-action">
+              <Link to={`/update/${car._id}`}> update</Link>
+              <button onClick={onDelete}>Delete</button>
+            </div>
+          )}
           <div className="rent-car">
             <div className="rent-btn-container">
               <button

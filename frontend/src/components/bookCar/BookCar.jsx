@@ -28,7 +28,6 @@ function BookCar({ car }) {
 
       if (isConflict) {
         toast.error("The car is already booked for the selected dates.");
-        console.log("The car is already booked for the selected dates.");
         return;
       }
 

@@ -87,6 +87,7 @@ function Navbar() {
           {!logedIn && <Link to="signup">Signup</Link>}
 
           {logedIn && <button onClick={logout}>Logout</button>}
+          <button>Contact Us</button>
         </div>
       </div>
       <div className="outlet">

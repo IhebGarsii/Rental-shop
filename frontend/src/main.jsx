@@ -2,7 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  redirect,
+} from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
 import ListRantel from "./pages/list-rental/ListRantel.jsx";
@@ -17,9 +21,9 @@ import Users from "./pages/dashboard/users/Users.jsx";
 import BookingList from "./pages/dashboard/requests/BookingList.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import UserBooking from "./pages/userBooking/UserBooking.jsx";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./components/authFunction/AuthFunction.jsx";
 
-const notify = () => toast("Here is your toast.");
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,7 +33,7 @@ const router = createBrowserRouter([
       { path: "home", element: <Home /> },
       { path: "Cars", element: <ListRantel /> },
       {
-        path: "login",
+        path: "/login",
         element: <Login />,
       },
       {
@@ -38,23 +42,17 @@ const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <SideBar />,
+        element: <ProtectedRoute />,
         children: [
           {
-            path: "dashboard",
-            element: <Dashboard />,
-          },
-          {
-            path: "users",
-            element: <Users />,
-          },
-          {
-            path: "addCar",
-            element: <AddCar />,
-          },
-          {
-            path: "bookingRequests",
-            element: <BookingList />,
+            path: "",
+            element: <SideBar />,
+            children: [
+              { path: "", element: <Dashboard /> },
+              { path: "users", element: <Users /> },
+              { path: "addCar", element: <AddCar /> },
+              { path: "bookingRequests", element: <BookingList /> },
+            ],
           },
         ],
       },
@@ -68,9 +66,10 @@ const router = createBrowserRouter([
       },
       {
         path: "update/:id",
-        element: <UpdateCar />,
+
+        element: <ProtectedRoute />,
+        children: [{ element: <UpdateCar /> }],
       },
-      <Footer />,
     ],
   },
 ]);
@@ -78,6 +77,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    <Footer />
     <Toaster />
   </React.StrictMode>
 );

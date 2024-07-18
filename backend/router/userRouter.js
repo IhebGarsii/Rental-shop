@@ -6,6 +6,7 @@ const {
   getAllUsers,
   getUser,
   blockUser,
+  sendEmail,
 } = require("../controller/userController");
 
 const multer = require("multer");
@@ -27,6 +28,8 @@ userRouter.post("/login", login);
 userRouter.post("/signup", upload.single("image"), signup);
 
 userRouter.get("/getAllUsers", getAllUsers);
+
+userRouter.post("/sendEmail", sendEmail);
 
 userRouter.get("/getUser/:id", getUser);
 

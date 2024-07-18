@@ -16,6 +16,21 @@ export const getCars = async () => {
   }
 };
 
+export const getRandomCars = async () => {
+  try {
+    let methodd = "GET";
+    const cars = await fetch(`${BASE_URL}/getRandomCars`, {
+      method: methodd,
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
+    const response = await cars.json();
+
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getCar = async (id) => {
   try {
     const response = await fetch(`${BASE_URL}/getCar/${id}`, {
@@ -39,7 +54,6 @@ export const addCar = async (formData) => {
 
       body: formData,
     });
-    console.log("from the api", formData);
     if (car.ok) {
       toast.success("Successfully created!");
     } else {

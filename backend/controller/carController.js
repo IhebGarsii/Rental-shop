@@ -102,4 +102,30 @@ const availble = async (req, res) => {
     console.log(cars);
   } catch (error) {}
 };
-module.exports = { addCar, getCars, getCar, updateCar, deleteCar };
+const getRandomCars = async (req, res) => {
+  try {
+    // Get count of all cars in the database
+    const count = await carModel.countDocuments();
+
+    // Generate 5 random numbers between 0 and count-1
+    const randomIndexes = Array.from({ length: 5 }, () =>
+      Math.floor(Math.random() * count)
+    );
+
+    // Fetch 5 random cars based on the generated indexes
+    const randomCars = await carModel.find().skip(randomIndexes[0]).limit(5);
+
+    return res.status(200).json(randomCars);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = {
+  addCar,
+  getCars,
+  getCar,
+  updateCar,
+  deleteCar,
+  getRandomCars,
+};

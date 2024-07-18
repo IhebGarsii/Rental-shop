@@ -2,7 +2,13 @@ import React from "react";
 import "./carCard.css";
 
 import { Link } from "react-router-dom";
-function CarCard({ car }) {
+function CarCard({ car, homePage }) {
+  if (!homePage) {
+    var home = true;
+  } else {
+    home = false;
+  }
+  console.log("homePagehomePagehomePagehomePage", homePage);
   return (
     <div className="carCard">
       <img
@@ -14,7 +20,7 @@ function CarCard({ car }) {
         <h2> {car.model} </h2>
         <Link to={`/car/${car._id}`}>See More </Link>
       </div>
-      <p className="car-deksc"> {car.description} </p>
+      {home && <p className="car-desc"> {car.description} </p>}
       <div className="basic-info">
         <span className="car-seat"> Seating Capacity {car.seats} </span>
 

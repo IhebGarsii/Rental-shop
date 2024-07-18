@@ -50,12 +50,28 @@ export const getUser = async (idUser) => {
   }
 };
 
-export const blockUser = async (idUser
-  
-) => {
+export const blockUser = async (idUser) => {
   try {
     const response = await fetch(`${BASE_URL}/blockUser/${idUser}`, {
       method: "DELETE",
+    });
+    if (response.ok) {
+      toast.success("Successfully Blocked!");
+    } else {
+      toast.error("error");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const sendEmail = async (data) => {
+  try {
+    const response = await fetch(`${BASE_URL}/sendEmail`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
     });
     return await response.json();
   } catch (error) {

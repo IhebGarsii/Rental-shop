@@ -15,7 +15,7 @@
   background-color: rgb(218, 237, 253);
 }
 .car-img {
-  height: 200px;
+  height: 45%;
   width: 100%;
   border-radius: 5px;
 }
@@ -28,6 +28,8 @@
 .car-desc {
   overflow: hidden;
   text-align: left;
+
+  width: 100%;
 }
 
 .basic-info {

@@ -38,6 +38,8 @@
   display: none;
 }
 .navbar-notification {
+  color: black;
+  background-color: red;
 }
 @media screen and (max-width: 600px) {
   .navbar-container-small {

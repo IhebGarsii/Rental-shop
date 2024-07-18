@@ -7,8 +7,12 @@ function Users() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleBlock = async (idUser) => {
-    console.log(idUser);
-    await blockUser(idUser);
+    const confirmBlock = window.confirm(
+      "Are you sure you want to block this user?"
+    );
+    if (confirmBlock) {
+      await blockUser(idUser);
+    }
   };
 
   useEffect(() => {

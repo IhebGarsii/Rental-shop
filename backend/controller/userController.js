@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../model/userModel");
 const bcrypt = require("bcryptjs");
 const blockedEmailModel = require("../model/blockedEmail");
+const nodemailer = require("nodemailer");
 
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "3d" });
@@ -110,4 +111,42 @@ const blockUser = async (req, res) => {
   }
 };
 
-module.exports = { login, signup, getAllUsers, getUser, blockUser };
+const sendEmail = async (req, res) => {
+  try {
+    // Create a new transporter for sending emails
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "ihebgarsi78@gmail.com",
+        pass: "bvxixgsgsxvusrgb",
+      },
+    });
+
+    // Define the mail options
+    const mailOptions = {
+      from: "ihebgarsi78@gmail.com", // Sender address (your Gmail address)
+      to: req.body.email, // Receiver's email address
+      subject: req.body.subject, // Email subject
+      html: `
+        <p>You have received a new email :</p>
+      <p>${req.body.body}</p>
+      `,
+    };
+
+    // Send the email
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error("Error sending email:", error);
+        res.status(500).json({ message: "Failed to send email" });
+      } else {
+        console.log("Email sent:", info.response);
+        res.status(200).json({ message: "Email sent successfully" });
+      }
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+module.exports = { login, signup, getAllUsers, getUser, blockUser, sendEmail };

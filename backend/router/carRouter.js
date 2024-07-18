@@ -5,7 +5,8 @@ const {
   getCar,
   updateCar,
   deleteCar,
-  bookCar,
+
+  getRandomCars,
 } = require("../controller/carController.js");
 const multer = require("multer");
 const path = require("path");
@@ -29,6 +30,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 carRouter.use(requireAuth);
+getRandomCars;
+carRouter.get("/getRandomCars", getRandomCars);
 
 carRouter.get("/getCars", getCars);
 
@@ -39,7 +42,5 @@ carRouter.post("/addCar", upload.array("image"), addCar);
 carRouter.put("/updateCar/:id", upload.array("image"), updateCar);
 
 carRouter.delete("/deleteCar/:id", deleteCar);
-
-
 
 module.exports = carRouter;

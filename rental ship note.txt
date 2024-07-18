@@ -2,8 +2,18 @@ fix the filltre reset button problem because of the price range
 
 
 
-updateBooking can couse another scroll when clicked on fixed for now widh small margin
+updateBooking can couse another scroll when clicked on, fixed for now widh small margin
 
 fix some css in car detail overlap with notification absolute && rentbtn out car detail
 
-need to add toast not urgent
+need to compete toast not urgent think ***completed***
+
+add confirm when admin want to block user ***completed***
+
+
+add contact form in navbar and footer
+
+fix home carCard
+
+what is customer journey
+

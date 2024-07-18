@@ -18,6 +18,7 @@ function Login() {
         localStorage.setItem("token", login.token);
         localStorage.setItem("image", login.user.image);
         localStorage.setItem("idUser", login.user._id);
+        localStorage.setItem("roles", login.roles);
         navigate("/home");
       }
     } catch (error) {
@@ -26,7 +27,7 @@ function Login() {
   };
   return (
     <div className="login-container">
-      <form onSubmit={onSubmit}>
+      {/*  <form onSubmit={onSubmit}>
         <div className="login-input-container">
           <label htmlFor="email">Email</label>
           <input
@@ -46,6 +47,34 @@ function Login() {
           />
         </div>
         <button type="submit">login</button>
+      </form> */}
+      <form onSubmit={onSubmit} className="form-control">
+        <p className="title">Login</p>
+        <div className="input-field">
+          <input
+            required=""
+            className="input"
+            type="text"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <label className="label" htmlFor="input">
+            Enter Email
+          </label>
+        </div>
+        <div className="input-field">
+          <input required="" className="input" type="password" />
+          <label
+            className="label"
+            htmlFor="input"
+            onChange={(e) => setPassword(e.target.value)}
+          >
+            Enter Password
+          </label>
+        </div>
+        <a>Forgot your password?</a>
+        <button className="submit-btn" onClick={onSubmit}>
+          Sign In
+        </button>
       </form>
     </div>
   );
