@@ -1,29 +1,60 @@
+/* Default Styles */
 .navbar {
   background-color: white;
-
   overflow-y: auto;
 }
+
 .navbar-container {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  height: 10vh;
+  justify-content: space-between;
+  padding: 10px 20px;
   position: sticky;
+  top: 0;
+  z-index: 1000;
+  flex-direction: column;
 }
+
+.navbar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 .company-info {
   display: flex;
   align-items: center;
   gap: 20px;
 }
+
 .company-logo {
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
+
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger-menu span {
+  font-size: 2rem;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .links {
   display: flex;
   gap: 40px;
 }
+
 .auth {
   display: flex;
   align-items: center;
@@ -34,51 +65,54 @@
   display: flex;
   justify-content: center;
 }
-.navbar-container-small {
-  display: none;
-}
+
 .navbar-notification {
   color: black;
   background-color: red;
 }
+
+/* Media Query for Smaller Screens */
 @media screen and (max-width: 1009px) {
-  .navbar-container > .links {
-    font-size: 1rem;
-    white-space: nowrap;
+  .navbar-container {
+    flex-direction: column;
+    align-items: flex-start;
   }
-}
-@media screen and (max-width: 600px) {
-  .navbar-container-small {
+
+  .navbar-header {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .hamburger-menu {
     display: block;
   }
-  .navbar-container {
+
+  .navbar-content {
     display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
-  .navbar-link-auth {
+
+  .navbar-content.active {
     display: flex;
-    justify-content: space-between;
-    padding: 20px;
   }
+
   .links {
     flex-direction: column;
     gap: 20px;
-  }
-  .logout-btn {
-    height: 30px;
-    width: 70px;
-    display: flex;
     align-items: center;
-    font-size: 1rem;
-    justify-content: center;
+    width: 100%;
   }
-  .ss {
-    display: flex;
-    justify-content: center;
+
+  .auth {
     flex-direction: column;
     gap: 20px;
+    width: 100%;
     align-items: center;
   }
-  .auth {
-    height: 100%;
-  }
+}
+
+.navbar-container.active .navbar-content {
+  display: flex;
 }
