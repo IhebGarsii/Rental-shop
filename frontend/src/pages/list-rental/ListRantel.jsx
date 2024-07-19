@@ -12,6 +12,8 @@ function ListRantel() {
   const [filter, setFilter] = useState([]);
   const [minValue, set_minValue] = useState(25);
   const [maxValue, set_maxValue] = useState(75);
+  const [currentR, setCurrentR] = useState(1);
+  const [currentE, setCurrentE] = useState(1);
 
   const handleInput = (e) => {
     set_minValue(e.minValue);
@@ -43,6 +45,14 @@ function ListRantel() {
     reset();
     setFilter(cars);
   };
+  const items = 8;
+
+  const NbPage = Math.ceil(filter.length / items);
+
+  const startIdenx = (currentR - 1) * items;
+  const endIndex = startIdenx + items;
+  const DataPerPageR = filter.slice(startIdenx, endIndex);
+
   const onSubmitFiltre = (data) => {
     const filteredCars = cars.filter((car) => {
       const hireOn = new Date(data.hireOn);
@@ -98,103 +108,124 @@ function ListRantel() {
   }
   return (
     <div className="ListRantel-container">
-      <form onSubmit={handleSubmit(onSubmitFiltre)} className="car-list-filter">
-        <div className="availability">
-          <h3>AVAILABLE ON</h3>
-          <div className="date-filter-container">
-            <span>from</span>
-            <input
-              type="date"
-              className="date-filter"
-              placeholder="HireOn"
-              {...register("hireOn")}
+      <div className="listRentel-fl">
+        <form
+          onSubmit={handleSubmit(onSubmitFiltre)}
+          className="car-list-filter"
+        >
+          <div className="availability">
+            <h3>AVAILABLE ON</h3>
+            <div className="date-filter-container">
+              <span>from</span>
+              <input
+                type="date"
+                className="date-filter"
+                placeholder="HireOn"
+                {...register("hireOn")}
+              />
+              <span>To</span>
+              <input
+                type="date"
+                placeholder="returnOn"
+                className="date-filter"
+                {...register("returnOn")}
+              />
+            </div>
+          </div>
+          <div className="price-filter">
+            <label htmlFor="price">PRICE a day</label>
+            <MultiRangeSlider
+              min={0}
+              max={100}
+              step={5}
+              minValue={minValue}
+              maxValue={maxValue}
+              onInput={(e) => {
+                handleInput(e);
+              }}
             />
-            <span>To</span>
-            <input
-              type="date"
-              placeholder="returnOn"
-              className="date-filter"
-              {...register("returnOn")}
-            />
+            <div className="ranged-input">
+              <span> {minValue} </span> <span> {maxValue} </span>
+            </div>
+            <div className="fiter-chekbox">
+              <h2>CATEGORY</h2>
+              <div className="filter-lable">
+                <input type="checkbox" {...register("compact")} />
+
+                <label htmlFor="">Compact</label>
+              </div>
+              <div className="filter-lable">
+                <input type="checkbox" {...register("suv")} />
+
+                <label htmlFor="">SUV</label>
+              </div>
+              <div className="filter-lable">
+                <input type="checkbox" {...register("coach")} />
+
+                <label htmlFor="">Coach</label>
+              </div>
+
+              <div className="filter-lable">
+                <input type="checkbox" {...register("mpv")} />
+                <label htmlFor="MPV">MPV</label>
+              </div>
+              <div className="filter-lable">
+                <input type="checkbox" {...register("sedan")} />
+                <label htmlFor="">Sedan</label>
+              </div>
+            </div>
+            <div className="fiter-chekbox">
+              <h2>CAR BRANDS</h2>
+              <div className="filter-lable">
+                <input type="checkbox" {...register("proton")} />
+
+                <label htmlFor="">proton</label>
+              </div>
+              <div className="filter-lable">
+                <input type="checkbox" {...register("perodua")} />
+
+                <label htmlFor="">Perodua</label>
+              </div>
+              <div className="filter-lable">
+                <input type="checkbox" {...register("toyota")} />
+
+                <label htmlFor="">Toyota</label>
+              </div>
+
+              <div className="filter-lable">
+                <input type="checkbox" {...register("nissan")} />
+                <label htmlFor="MPV">Nissan</label>
+              </div>
+              <div className="filter-lable">
+                <input type="checkbox" {...register("honda")} />
+                <label htmlFor="">Honda</label>
+              </div>
+            </div>
           </div>
+          <div className="filtre-actions">
+            <button type="submit">filtre</button>
+            <button onClick={resetFilte}>Reset</button>
+          </div>
+        </form>
+        <div className="ListRantel">
+          {cars &&
+            DataPerPageR.map((car) => <CarCard car={car} key={car._id} />)}
         </div>
-        <div className="price-filter">
-          <label htmlFor="price">PRICE a day</label>
-          <MultiRangeSlider
-            min={0}
-            max={100}
-            step={5}
-            minValue={minValue}
-            maxValue={maxValue}
-            onInput={(e) => {
-              handleInput(e);
-            }}
-          />
-          <div className="ranged-input">
-            <span> {minValue} </span> <span> {maxValue} </span>
-          </div>
-          <div className="fiter-chekbox">
-            <h2>CATEGORY</h2>
-            <div className="filter-lable">
-              <input type="checkbox" {...register("compact")} />
-
-              <label htmlFor="">Compact</label>
-            </div>
-            <div className="filter-lable">
-              <input type="checkbox" {...register("suv")} />
-
-              <label htmlFor="">SUV</label>
-            </div>
-            <div className="filter-lable">
-              <input type="checkbox" {...register("coach")} />
-
-              <label htmlFor="">Coach</label>
-            </div>
-
-            <div className="filter-lable">
-              <input type="checkbox" {...register("mpv")} />
-              <label htmlFor="MPV">MPV</label>
-            </div>
-            <div className="filter-lable">
-              <input type="checkbox" {...register("sedan")} />
-              <label htmlFor="">Sedan</label>
-            </div>
-          </div>
-          <div className="fiter-chekbox">
-            <h2>CAR BRANDS</h2>
-            <div className="filter-lable">
-              <input type="checkbox" {...register("proton")} />
-
-              <label htmlFor="">proton</label>
-            </div>
-            <div className="filter-lable">
-              <input type="checkbox" {...register("perodua")} />
-
-              <label htmlFor="">Perodua</label>
-            </div>
-            <div className="filter-lable">
-              <input type="checkbox" {...register("toyota")} />
-
-              <label htmlFor="">Toyota</label>
-            </div>
-
-            <div className="filter-lable">
-              <input type="checkbox" {...register("nissan")} />
-              <label htmlFor="MPV">Nissan</label>
-            </div>
-            <div className="filter-lable">
-              <input type="checkbox" {...register("honda")} />
-              <label htmlFor="">Honda</label>
-            </div>
-          </div>
-        </div>
-        <div className="filtre-actions">
-          <button type="submit">filtre</button>
-          <button onClick={resetFilte}>Reset</button>
-        </div>
-      </form>
-      <div className="ListRantel">
-        {cars && filter.map((car) => <CarCard car={car} key={car._id} />)}
+      </div>
+      <div className="paggination">
+        <button
+          onClick={() => setCurrentR((prev) => Math.max(prev - 1, 1))}
+          disabled={currentR === 1}
+        >
+          prev
+        </button>
+        <button>{currentR}</button>
+        <button
+          onClick={() => setCurrentR((prev) => Math.min(prev + 1, NbPage))}
+          disabled={currentR === NbPage}
+        >
+          next
+        </button>
       </div>
     </div>
   );

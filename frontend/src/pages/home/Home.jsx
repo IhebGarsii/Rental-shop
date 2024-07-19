@@ -51,6 +51,9 @@ function Home() {
           repudiandae.
         </p>
       </div>
+      <br />
+      <br />
+      <br />
       <div className="home-cars-container">
         <div className="home-cars">
           {randomCars &&
@@ -97,7 +100,14 @@ function Home() {
           </div>
         </div>
       </Fade>
-
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <div className="review-partners">
         <div className="card-list">
           <Fade cascade>
@@ -163,7 +173,6 @@ function Home() {
           </Fade>
         </div>
         <div className="partner-list">
-          
           <div className="home-partner">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/800px-BMW.svg.png"

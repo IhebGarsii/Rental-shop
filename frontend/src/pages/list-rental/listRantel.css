@@ -1,17 +1,26 @@
 .ListRantel-container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 20px;
-  justify-content: center;
+  width: 100%;
   background: linear-gradient(
     180.2deg,
     rgb(30, 33, 48) 6.8%,
     rgb(74, 98, 110) 131%
   );
 }
+.listRentel-fl {
+  display: flex;
+  justify-content: space-around;
+
+  width: 90%;
+}
 .ListRantel {
-  max-width: 70%;
+  width: 80%;
   display: grid;
   gap: 20px;
+  padding: 20px;
   grid-template-columns: 1fr 1fr 1fr;
 }
 @media screen and (max-width: 600px) {

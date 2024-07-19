@@ -108,12 +108,12 @@ const getRandomCars = async (req, res) => {
     const count = await carModel.countDocuments();
 
     // Generate 5 random numbers between 0 and count-1
-    const randomIndexes = Array.from({ length: 5 }, () =>
+    const randomIndexes = Array.from({ length: 4 }, () =>
       Math.floor(Math.random() * count)
     );
 
     // Fetch 5 random cars based on the generated indexes
-    const randomCars = await carModel.find().skip(randomIndexes[0]).limit(5);
+    const randomCars = await carModel.find().skip(randomIndexes[0]).limit(4);
 
     return res.status(200).json(randomCars);
   } catch (error) {
