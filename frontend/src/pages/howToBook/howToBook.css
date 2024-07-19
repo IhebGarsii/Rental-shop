@@ -1,0 +1,101 @@
+.HowToBook {
+  display: flex;
+  padding: 50px;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: #fbfcf8;
+}
+.top-how {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 70%;
+  gap: 100px;
+}
+.top-how1 {
+  display: flex;
+  justify-content: center;
+}
+.top-how2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 2fr 1fr;
+  justify-items: center;
+  align-items: center;
+  gap: 50px;
+  width: 100%;
+}
+.top-how2 > img {
+  height: 300px;
+  width: 200px;
+  border-radius: 10px;
+}
+
+.left-top {
+  text-align: left;
+  width: 100%;
+}
+.left-top > p {
+  width: 100%;
+  padding: 5px 0;
+}
+
+.right-top {
+  width: 100%;
+  padding: 5px 0;
+
+  text-align: left;
+}
+.right-top > p {
+  width: 100%;
+}
+.how-detail > img {
+  width: 400px;
+  height: 400px;
+}
+
+.bottom-how {
+  display: grid;
+  justify-content: center;
+  width: 70%;
+  grid-template-rows: 3fr 1fr 1fr;
+}
+.how-detail {
+  display: flex;
+  gap: 50px;
+  width: 100%;
+
+  justify-content: center;
+}
+.detail-expain {
+  width: 100%;
+}
+.detail-expain > p {
+  width: 100%;
+}
+
+.how-email {
+  width: 100%;
+  font-size: 1.3rem;
+}
+.how-email > p {
+  width: 100%;
+}
+
+.how-steps {
+  display: flex;
+  margin-top: 50px;
+  width: 100%;
+}
+
+.HowToBook > hr {
+  width: 70%;
+  margin: 30px 0;
+}
+
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

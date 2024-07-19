@@ -69,6 +69,7 @@ function Navbar() {
           <Link to="Cars">Cars</Link>
           <Link to="userBooking">My Bookink</Link>
           <Link to="dashboard">dashboard</Link>
+          <Link to="howToBook">HOW TO BOOK</Link>
         </nav>
         <div className="auth">
           <Notification className="navbar-notification" />
@@ -87,7 +88,7 @@ function Navbar() {
           {!logedIn && <Link to="signup">Signup</Link>}
 
           {logedIn && <button onClick={logout}>Logout</button>}
-          <button>Contact Us</button>
+          <a href="#home-contact">Contact Us</a>
         </div>
       </div>
       <div className="outlet">

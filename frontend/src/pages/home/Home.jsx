@@ -46,9 +46,7 @@ function Home() {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam iusto
           itaque quo ad quam, eos natus commodi modi incidunt sed non soluta.
           Dolor odit consequuntur corporis voluptas, obcaecati magnam beatae!
-          Esse et adipisci laboriosam fuga aliquid ipsum dolor culpa at vero
-          reprehenderit nemo nihil inventore laborum, rerum quaerat sapiente
-          repudiandae.
+          Esse et adipisci laboriosam fuga
         </p>
       </div>
       <br />
@@ -211,7 +209,7 @@ function Home() {
         </div>
       </div>
 
-      <div className="contactfrom">
+      <div id="home-contact" className="contactfrom">
         <ContactForm />
       </div>
 

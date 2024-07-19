@@ -26,9 +26,9 @@ function Notification() {
     fetchNotification();
   }, []);
   return (
-    <div onClick={handlePostRead}>
+    <div onClick={handlePostRead} className="notification-component">
       <FaBell className="notification-icon" icon={FaBell} />
-      {badge>0 &&  <div className="badge"> {badge} </div>}
+      {badge > 0 && <div className="badge"> {badge} </div>}
       {displayNotification && (
         <div className="notification-list">
           {notification &&

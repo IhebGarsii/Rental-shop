@@ -6,7 +6,7 @@
 .navbar-container {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   height: 10vh;
   position: sticky;
 }
@@ -40,6 +40,12 @@
 .navbar-notification {
   color: black;
   background-color: red;
+}
+@media screen and (max-width: 1009px) {
+  .navbar-container > .links {
+    font-size: 1rem;
+    white-space: nowrap;
+  }
 }
 @media screen and (max-width: 600px) {
   .navbar-container-small {

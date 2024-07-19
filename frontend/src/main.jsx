@@ -23,6 +23,7 @@ import Footer from "./components/footer/Footer.jsx";
 import UserBooking from "./pages/userBooking/UserBooking.jsx";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/authFunction/AuthFunction.jsx";
+import HowToBook from "./pages/howToBook/HowToBook.jsx";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/howToBook",
+        element: <HowToBook />,
       },
       {
         path: "signup",
