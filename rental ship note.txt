@@ -13,8 +13,15 @@ add confirm when admin want to block user ***completed***
 
 add contact form in navbar and footer
 
-fix home carCard
-complete contact form
+fix home carCard      ***completed***
+complete contact form ***completed***
+
+
+make the website responsev
+
+add how to book
+
+add location 
 
 what is customer journey
 

@@ -48,8 +48,6 @@ function HowToBook() {
       </div>
       <hr />
 
-      <br />
-
       <div className="bottom-how">
         <div className="how-detail">
           <div className="detail-expain">

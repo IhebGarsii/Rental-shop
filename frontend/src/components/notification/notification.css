@@ -8,12 +8,19 @@
 .notification-list {
   background-color: aliceblue;
   position: absolute;
-  right: 70px;
-  top: 70px;
-  width: 20%;
+  left: -200px;
+  top: 50px;
+  width: 300px;
   border-radius: 5px;
   height: 70vh;
   overflow: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+@media screen and (max-width: 1019px) {
+  .notification-list {
+    left: 0px;
+  }
 }
 
 .badge {

@@ -21,7 +21,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-content: space-between;
-  background-color: aliceblue;
+  background-color: var(--body-background);
   width: 80%;
   border-radius: 10px;
   padding: 10px;

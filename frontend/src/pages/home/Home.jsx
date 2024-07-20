@@ -49,9 +49,7 @@ function Home() {
           Esse et adipisci laboriosam fuga
         </p>
       </div>
-      <br />
-      <br />
-      <br />
+      
       <div className="home-cars-container">
         <div className="home-cars">
           {randomCars &&
@@ -98,14 +96,7 @@ function Home() {
           </div>
         </div>
       </Fade>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+
       <div className="review-partners">
         <div className="card-list">
           <Fade cascade>

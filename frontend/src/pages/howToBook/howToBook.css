@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background-color: #fbfcf8;
+  background-color:var(--body-background);
 }
 .top-how {
   display: flex;

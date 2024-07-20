@@ -2,8 +2,9 @@
   display: flex;
 
   justify-content: space-between;
-  background-color: #fff;
-  padding: 10px 0;
+  background-color: #ffffff;
+  padding: 10px 20px;
+
   width: 70%;
 }
 .contact-right > img {
@@ -21,7 +22,7 @@
 
   justify-content: center;
   padding: 20px;
- 
+
   border-radius: 10px;
   background: #ffffff;
   box-shadow: 20px 20px 60px #898989, -20px -20px 60px #b9b9b9;
