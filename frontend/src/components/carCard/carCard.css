@@ -81,7 +81,9 @@
   font-weight: 500;
   color: var(--font-color-sub);
 }
-
+.car-img {
+  height: fit-content;
+}
 .card-btn {
   height: 35px;
   background: var(--bg-color);
@@ -113,7 +115,18 @@
 .card-btn:active {
   transform: translateY(3px);
 }
- .car-img{
-    width: 100%;
+.car-img {
+  width: 100%;
+}
+
+@media screen and (max-width: 1069px) {
+  .card-title {
+    font-size: 1rem;
   }
-        
+  .card{
+    height: fit-content;
+  }
+  .card-subtitle{
+   height: fit-content;
+  }
+}

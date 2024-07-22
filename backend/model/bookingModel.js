@@ -10,7 +10,6 @@ const bookingModel = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "carModel",
   },
-
   startDate: {
     type: Date,
     required: true,
@@ -42,7 +41,7 @@ const bookingModel = new Schema({
   licenseNumber: {
     type: String,
   },
-  billingAddress: {
+  pickupLocation: {
     type: String,
   },
   payCheck: {
@@ -52,7 +51,10 @@ const bookingModel = new Schema({
   daysDiffence: {
     type: String,
   },
-  dailyRent: {
+  fullPrice: {
+    type: String,
+  },
+  paymentType: {
     type: String,
   },
 });

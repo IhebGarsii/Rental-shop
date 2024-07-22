@@ -16,13 +16,11 @@ function BookCar({ car }) {
 
       hireOn.setHours(0, 0, 0, 0);
       returnOn.setHours(23, 59, 59, 999);
-      console.log("eeeeeeeee", car.bookingDuration);
 
       const isConflict = car.bookingDuration.some((book) => {
         const startDate = new Date(book.startDate);
         const endDate = new Date(book.endDate);
-        console.log("aaaaaaa", hireOn, returnOn);
-        console.log("eeeeeee", hireOn < endDate && returnOn > startDate);
+      
         return hireOn < endDate && returnOn > startDate;
       });
 
@@ -70,10 +68,10 @@ function BookCar({ car }) {
         </div>
         <div className="label">
           <label htmlFor="time">Payment Duration:</label>
-          <select className="time" name="time">
-            <option value="DAYS">Daily</option>
-            <option value="WEEK">Weekly</option>
-            <option value="MONTH">Monthly</option>
+          <select className="time" name="time" {...register("paymentType")}>
+            <option value={car.dailyRent}>Daily</option>
+            <option value={car.weeklyRent}>Weekly</option>
+            <option value={car.monthlyRent}>Monthly</option>
           </select>
         </div>
         <div className="label">
@@ -98,11 +96,11 @@ function BookCar({ car }) {
           />
         </div>
         <div className="label">
-          <label htmlFor="billing-address">Billing Address:</label>
+          <label htmlFor="billing-address">Pickup Location:</label>
           <input
             type="text"
             name="billing_address"
-            {...register("billingAddress")}
+            {...register("pickupLocation")}
           />
         </div>
 

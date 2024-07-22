@@ -35,13 +35,14 @@ function Booking({ booking }) {
       const returnOn = new Date(booking.endDate);
       hireOn.setHours(0, 0, 0, 0);
       returnOn.setHours(23, 59, 59, 999);
-      console.log("eeeeeeeee", car.bookingDuration);
+   /*    console.log("eeeeeeeee", car.bookingDuration); */
 
       const isConflict = car.bookingDuration.some((book) => {
+        console.log("book", book);
         const startDate = new Date(book.startDate);
         const endDate = new Date(book.endDate);
-        console.log("aaaaaaa", hireOn, returnOn);
-        console.log("eeeeeee", hireOn < endDate && returnOn > startDate);
+       /*  console.log("aaaaaaa", hireOn, returnOn);
+        console.log("eeeeeee", hireOn < endDate && returnOn > startDate); */
         return hireOn < endDate && returnOn > startDate;
       });
 

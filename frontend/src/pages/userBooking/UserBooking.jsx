@@ -20,6 +20,7 @@ function UserBooking() {
         const booking = await getBooking(localStorage.getItem("idUser"));
 
         setData(booking);
+
         booking.some((book) => {
           if (book.status === "ACCEPTED") {
             book.payCheck = true;
@@ -54,7 +55,7 @@ function UserBooking() {
       {data &&
         data.map((booking) => (
           <div key={booking._id}>
-            <table className="booking-table">
+            {/* <table className="booking-table">
               <thead>
                 <tr>
                   <th>Car Model</th>
@@ -102,7 +103,29 @@ function UserBooking() {
                   </td>
                 </tr>
               </tbody>
-            </table>
+            </table> */}
+            <div className="">
+              <div className="">
+                <img
+                  src={`http://localhost:4000/uploads/cars/${booking.idCar.images[0]}`}
+                  alt=""
+                />
+              </div>
+              <div className="">
+                <h3> {booking.idCar.model} </h3>{" "}
+                <span>{booking.fullPrice}$</span>
+                <h3> {booking.startDate} </h3>
+                <h3> {booking.endDate} </h3>
+                <span>Pick Up Location : {booking.pickupLocation}</span>
+                <span>Drop Off Location : {booking.dropoffLocation}</span>
+              </div>
+              <div className="">
+                <img
+                  src={`http://localhost:4000/uploads/users/${booking.idUser.image}`}
+                  alt=""
+                />
+              </div>
+            </div>
             {rent && (
               <div className="rent-form-displays">
                 <div className="rent-form-display-center">

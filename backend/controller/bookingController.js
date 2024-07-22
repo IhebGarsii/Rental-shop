@@ -12,9 +12,10 @@ const bookCar = async (req, res) => {
     expiryDate,
     cvv,
     licenseNumber,
-    billingAddress,
+    pickupLocation,
     startDate,
     endDate,
+    paymentType,
   } = req.body;
 
   try {
@@ -34,6 +35,7 @@ const bookCar = async (req, res) => {
 
     let timeDifference = end - start;
     const daysDiffence = timeDifference / (1000 * 3600 * 24);
+    const fullPrice = paymentType * daysDiffence;
 
     const booking = new bookingModel({
       idUser,
@@ -45,8 +47,9 @@ const bookCar = async (req, res) => {
       expiryDate,
       cvv,
       licenseNumber,
-      billingAddress,
+      pickupLocation,
       daysDiffence,
+      fullPrice,
     });
 
     const description = `${user.firstName} has requested a booking for ${car.model}`;
@@ -141,6 +144,12 @@ const refuseBooking = async (req, res) => {
       description,
       target: "USER",
     });
+    car.bookingDuration = car.bookingDuration.filter(
+      (book) =>
+        book.startDate.toISOString() !== booking.startDate.toISOString() ||
+        book.endDate.toISOString() !== booking.endDate.toISOString()
+    );
+    await car.save();
     await notification.save();
     return res.status(200).json("Booking Refused");
   } catch (error) {

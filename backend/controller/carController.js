@@ -99,7 +99,6 @@ const availble = async (req, res) => {
 
   try {
     const cars = await carModel.find(rented === false);
-    console.log(cars);
   } catch (error) {}
 };
 const getRandomCars = async (req, res) => {

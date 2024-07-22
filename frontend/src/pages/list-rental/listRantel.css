@@ -22,6 +22,15 @@
   padding: 20px;
   grid-template-columns: 1fr 1fr 1fr;
 }
+@media screen and (max-width: 1066px) {
+  .ListRantel {
+    grid-template-columns: 1fr 1fr;
+  }
+  .listRentel-fl {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+}
 @media screen and (max-width: 600px) {
   .ListRantel {
     width: 90%;

@@ -30,5 +30,7 @@ add brand slider in responsiv
  
 add sign in when click on rent car  ***completed***
 
+fix setHours in bookCar.jsx and maybe updateCar
+
 what is customer journey
 
