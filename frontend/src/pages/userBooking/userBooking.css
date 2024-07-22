@@ -17,12 +17,13 @@
 .rent-form-display-center {
   display: flex;
   align-items: center;
+  height: 100vh;
   justify-content: center;
 }
 .rent-form-displays {
   position: absolute;
+
   left: 20%;
-  height: fit-content;
   padding: 20px;
   width: 60%;
   top: 50px;

@@ -36,9 +36,6 @@
   position: relative;
 }
 
-.label {
-  position: absolute;
-}
 
 .title::before,
 .title::after {

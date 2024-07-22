@@ -8,6 +8,7 @@ const path = require("path");
 const bookingRouter = require("./router/bookingRouter");
 const notificationRouter = require("./router/notificationRouter");
 const newsRouter = require("./router/newsLetterRouter");
+const paymentRouter = require("./router/paymentRouter");
 const carModel = require("./model/carModel");
 const app = express();
 app.use(express.json({ limit: "50mb" }));
@@ -18,6 +19,8 @@ app.use("/User", userRouter);
 app.use("/Booking", bookingRouter);
 app.use("/NewsLetter", newsRouter);
 app.use("/Notification", notificationRouter);
+app.use("/Payment", paymentRouter);
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use((err, req, res, next) => {
   if (err instanceof SyntaxError && err.status === 400 && "body" in err) {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./userBooking.css";
 import { getBooking, deleteBooking } from "../../apis/bookingApi";
+import { pay } from "../../apis/PaymentApi";
 import { Link, useNavigate } from "react-router-dom";
 import UpdateBooking from "../../components/updateBooking/UpdateBooking";
 import { RxCross2 } from "react-icons/rx";
@@ -19,6 +20,11 @@ function UserBooking() {
         const booking = await getBooking(localStorage.getItem("idUser"));
 
         setData(booking);
+        booking.some((book) => {
+          if (book.status === "ACCEPTED") {
+            book.payCheck = true;
+          }
+        });
       } catch (error) {
         console.error(error);
       }
@@ -33,7 +39,16 @@ function UserBooking() {
       console.log(error);
     }
   };
+  const handlePayment = async (booking) => {
+    try {
+      const payment = await pay(booking);
+      console.log("payment", payment.url);
 
+      window.location = payment.url;
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className="userBooking">
       {data &&
@@ -75,6 +90,14 @@ function UserBooking() {
                       className="action-button refuse-button"
                     >
                       Delete
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      disabled={!booking.payCheck}
+                      onClick={() => handlePayment(booking)}
+                    >
+                      Pay
                     </button>
                   </td>
                 </tr>

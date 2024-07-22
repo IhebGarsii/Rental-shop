@@ -54,15 +54,15 @@ function UpdateBooking({ booking }) {
   return (
     <div className="update-car">
       <form className="book-form" onSubmit={handleSubmit(handleBook)}>
-        <div className="label">
+        <div className="update-label">
           <label htmlFor="startDate">Start Date</label>
           <input type="date" name="startDate" {...register("startDate")} />
         </div>
-        <div className="label">
+        <div className="update-label">
           <label htmlFor="endDate">End Date</label>
           <input type="date" {...register("endDate")} name="endDate" />
         </div>
-        <div className="label">
+        <div className="update-label">
           <label htmlFor="dropoff_location">Dropoff Location</label>
           <input
             type="text"
@@ -70,7 +70,7 @@ function UpdateBooking({ booking }) {
             {...register("dropoffLocation")}
           />
         </div>
-        <div className="label">
+        <div className="update-label">
           <label htmlFor="card-number">Card Number:</label>
           <input
             type="text"
@@ -79,7 +79,7 @@ function UpdateBooking({ booking }) {
             {...register("cardNumber")}
           />
         </div>
-        <div className="label">
+        <div className="update-label">
           <label htmlFor="expiry-date">Expiry Date:</label>
           <input
             type="month"
@@ -88,11 +88,11 @@ function UpdateBooking({ booking }) {
             name="expiry_date"
           />
         </div>
-        <div className="label">
+        <div className="update-label">
           <label htmlFor="cvv">CVV:</label>
           <input type="text" id="cvv" name="cvv" {...register("cvv")} />
         </div>
-        <div className="label">
+        <div className="updalabel">
           <label htmlFor="license-number">Driver's License Number:</label>
           <input
             type="text"
@@ -100,7 +100,7 @@ function UpdateBooking({ booking }) {
             {...register("licenseNumber")}
           />
         </div>
-        <div className="label">
+        <div className="update-label">
           <label htmlFor="billing-address">Billing Address:</label>
           <input
             type="text"

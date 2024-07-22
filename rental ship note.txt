@@ -1,4 +1,4 @@
-fix the filltre reset button problem because of the price range
+fix the filltre reset button problem because of the price range ***completed***
 
 
 
@@ -21,13 +21,14 @@ make the website responsev
 
 add how to book   ***completed***
 
+
 add location 
 
 fix cardCar in responsev
 
 add brand slider in responsiv
-
-add sign in when click on rent car
+ 
+add sign in when click on rent car  ***completed***
 
 what is customer journey
 

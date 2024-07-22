@@ -35,7 +35,6 @@ const bookingModel = new Schema({
   },
   expiryDate: {
     type: String,
-    match: /^(19|20)\d\d-(0[1-9]|1[0-2])$/,
   },
   cvv: {
     type: String,
@@ -46,7 +45,14 @@ const bookingModel = new Schema({
   billingAddress: {
     type: String,
   },
+  payCheck: {
+    type: Boolean,
+    default: false,
+  },
   daysDiffence: {
+    type: String,
+  },
+  dailyRent: {
     type: String,
   },
 });
