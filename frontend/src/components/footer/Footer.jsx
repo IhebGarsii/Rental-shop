@@ -23,7 +23,7 @@ function Footer() {
         <div className="newsletter-form">
           <p className="heading"> Subscribe to Our Newsletter</p>
           <form onSubmit={subscribe} className="form">
-            <label for="email">Email:</label>
+            <label htmlFor="email">Email:</label>
             <input
               required=""
               placeholder="Enter your email address"
@@ -35,24 +35,26 @@ function Footer() {
             <input value="Subscribe" type="submit" />
           </form>
         </div>
-        <div className="footer-middle">
-          <h3>something</h3>
-          <Link>kink</Link>
-          <Link>kink</Link>
-          <Link>kink</Link>
-          <Link>kink</Link>
-          <Link>kink</Link>
-          <Link>kink</Link>
-        </div>
-        <div className="footer-right">
-          <h3>something</h3>
+        <div className="left-footer">
+          <div className="footer-middle">
+            <h3>something</h3>
+            <Link>kink</Link>
+            <Link>kink</Link>
+            <Link>kink</Link>
+            <Link>kink</Link>
+            <Link>kink</Link>
+            <Link>kink</Link>
+          </div>
+          <div className="footer-right">
+            <h3>something</h3>
 
-          <Link>kink</Link>
-          <Link>kink</Link>
-          <Link>kink</Link>
-          <Link>kink</Link>
-          <Link>kink</Link>
-          <Link>kink</Link>
+            <Link>kink</Link>
+            <Link>kink</Link>
+            <Link>kink</Link>
+            <Link>kink</Link>
+            <Link>kink</Link>
+            <Link>kink</Link>
+          </div>
         </div>
       </div>
       <br />

@@ -30,6 +30,13 @@ function CarDetail() {
       console.log(error);
     }
   };
+  const handleOnclick = () => {
+    setRent(!rent);
+    if (!localStorage.getItem("idUser")) {
+      console.log("dssssssssss",!localStorage.getItem("idUser"));
+      return navigate("/login");
+    }
+  };
 
   return (
     <div className="carDetail">
@@ -114,7 +121,7 @@ function CarDetail() {
           <div className="rent-car">
             <div className="rent-btn-container">
               <button
-                onClick={() => setRent(!rent)}
+                onClick={handleOnclick}
                 disabled={car.rented}
                 className="rent-btn"
               >

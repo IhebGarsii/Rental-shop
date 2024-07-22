@@ -71,9 +71,8 @@ const router = createBrowserRouter([
       },
       {
         path: "update/:id",
-
         element: <ProtectedRoute />,
-        children: [{ element: <UpdateCar /> }],
+        children: [{ path: "", element: <UpdateCar /> }],
       },
     ],
   },

@@ -21,7 +21,7 @@ function Navbar() {
     } else {
       setLogedIn(true);
     }
-  }, []);
+  }, [localStorage.getItem("idUser")]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -53,9 +53,11 @@ function Navbar() {
             <Link to="howToBook" onClick={toggleMenu}>
               HOW TO BOOK
             </Link>
-            <Link to="dashboard" onClick={toggleMenu}>
-              dashboard
-            </Link>
+            {localStorage.getItem("roles") === "ADMIN" && (
+              <Link to="dashboard" onClick={toggleMenu}>
+                dashboard
+              </Link>
+            )}
           </nav>
           <div className="auth">
             <Notification className="navbar-notification" />

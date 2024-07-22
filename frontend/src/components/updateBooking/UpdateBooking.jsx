@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 
 function UpdateBooking({ booking }) {
   const { register, handleSubmit, setValue } = useForm();
-
+  console.log("eeeeeeeeee");
   // Helper function to format the date correctly
   const formatDate = (dateString) => {
     const date = new Date(dateString);

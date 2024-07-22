@@ -1,16 +1,18 @@
 .HowToBook {
   display: flex;
-  padding: 50px;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background-color:var(--body-background);
+  height: fit-content;
+  background-color: var(--body-background);
 }
+
 .top-how {
   display: flex;
   align-items: center;
   flex-direction: column;
   width: 70%;
+  height: 100%;
   gap: 100px;
 }
 .top-how1 {
@@ -20,11 +22,14 @@
 .top-how2 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 2fr 1fr;
+  grid-template-rows: auto auto;
   justify-items: center;
-  align-items: center;
-  gap: 50px;
+  align-items: start;
+  gap: 20px;
   width: 100%;
+}
+.top-how2 > p {
+  text-align: center;
 }
 .top-how2 > img {
   height: 300px;
@@ -59,17 +64,23 @@
   display: grid;
   justify-content: center;
   width: 70%;
-  grid-template-rows: 3fr 1fr 1fr;
+  gap: 20px;
+  height: fit-content;
+  grid-template-rows: 50% 25% 25%;
 }
 .how-detail {
   display: flex;
   gap: 50px;
   width: 100%;
-
+  height: fit-content;
   justify-content: center;
 }
 .detail-expain {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  justify-content: center;
 }
 .detail-expain > p {
   width: 100%;
@@ -77,6 +88,8 @@
 
 .how-email {
   width: 100%;
+
+  height: fit-content;
   font-size: 1.3rem;
 }
 .how-email > p {
@@ -85,6 +98,7 @@
 
 .how-steps {
   display: flex;
+  height: fit-content;
   margin-top: 50px;
   width: 100%;
 }
@@ -98,4 +112,57 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+@media screen and (max-width: 1019px) {
+  .top-how1 {
+    width: 90%;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .top-how {
+    width: 100%;
+    gap: 50px;
+  }
+  .top-how2 {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .top-how2 > p {
+    width: 90%;
+  }
+  .top-how2 > img {
+    width: 90%;
+  }
+  .how-detail {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+  }
+  .how-detail > img {
+    width: 90%;
+  }
+  .detail-expain {
+    padding-bottom: 0px;
+  }
+  .how-email {
+    width: 100%;
+    height: fit-content;
+    font-size: 1rem;
+  }
+  .how-email > p {
+    width: 100%;
+  }
+
+  .how-steps {
+    margin: 0px;
+    flex-wrap: wrap;
+  }
+  .bottom-how {
+    display: flex;
+
+    flex-direction: column;
+    height: fit-content;
+    width: 90%;
+  }
 }

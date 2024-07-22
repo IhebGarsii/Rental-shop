@@ -13,7 +13,6 @@
 .listRentel-fl {
   display: flex;
   justify-content: space-around;
-
   width: 90%;
 }
 .ListRantel {
@@ -25,7 +24,7 @@
 }
 @media screen and (max-width: 600px) {
   .ListRantel {
-    max-width: 80%;
+    width: 90%;
     display: grid;
     gap: 20px;
     grid-template-columns: 1fr;
@@ -38,6 +37,10 @@
   }
   .car-list-filter {
     width: 80%;
+  }
+  .listRentel-fl {
+    flex-wrap: wrap;
+    width: 100%;
   }
 }
 .car-list-filter {

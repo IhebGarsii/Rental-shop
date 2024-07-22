@@ -1,17 +1,16 @@
 .home {
-  min-height: 100vh;
   width: 100%;
   background-color: var(--body-background-yellow);
   /*   display: flex;
   flex-direction: column;
   align-items: center; */
+  height: fit-content;
 }
 .header-container {
   height: 100vh;
   background: url("../../assets/4k-bmw-background-spcec5lxwjfnh9tb.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-
   position: relative;
 }
 
@@ -43,7 +42,9 @@
   background-color: var(--body-background-yellow);
   padding-top: 50px;
   display: flex;
-  height: 70vh;
+  height: fit-content;
+
+  align-items: flex-start;
   justify-content: center;
 }
 .home-cars {
@@ -52,13 +53,14 @@
   justify-content: center;
   margin: 20px;
   gap: 20px;
+  height: 100%;
 }
 
 .about-us-container {
   width: 100%;
   display: flex;
   justify-content: center;
-  height: 100%;
+  height: fit-content;
   color: var(--h1-color);
   background-color: var(--body-background-yellow);
   padding-top: 100px;
@@ -108,10 +110,10 @@ p {
   width: 100%;
   display: flex;
   background-color: var(--body-background-yellow);
-  padding-top: 150px;
+  padding-top: 50px;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  height: fit-content;
 }
 
 .card-list {
@@ -121,15 +123,6 @@ p {
   justify-content: space-around;
 
   gap: 20px;
-}
-.review-card {
-  display: flex;
-  height: 70%;
-  align-items: center;
-  padding: 10px;
-  flex-direction: column;
-
-  width: 80%;
 }
 
 .review-avatar {
@@ -156,6 +149,7 @@ p {
   border-bottom-left-radius: 20px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .review-card span {
@@ -207,6 +201,7 @@ p {
   padding: 50px;
   background-color: var(--body-background-yellow);
   width: 100%;
+  height: fit-content;
 }
 .home-partner {
   text-align: center;
@@ -217,7 +212,7 @@ p {
 }
 .contactfrom {
   display: flex;
-  height: 70vh;
+  height: fit-content;
   width: 100%;
   justify-content: center;
   background-color: var(--body-background-yellow);
@@ -227,8 +222,69 @@ p {
   width: 100%;
   margin-top: 100px;
   padding: 20px;
-  background-color: #042062;
+  background-color: #02091a;
   display: flex;
   justify-content: center;
-  height: 72vh;
+  height: fit-content;
+}
+
+@media screen and (max-width: 1019px) {
+  .home-cars {
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+  .header-container {
+  }
+  .home-cars-container {
+    height: 25%;
+    display: flex;
+  }
+  .about-us {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    gap: 20px;
+  }
+  .about-left {
+    align-items: center;
+    gap: 30px;
+  }
+  .about-left-top {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card-list {
+    flex-direction: column;
+    align-items: center;
+
+    justify-content: center;
+  }
+  .review-partners {
+    height: fit-content;
+  }
+  .contactfrom {
+    height: fit-content;
+
+  }
+  .home-footer {
+    height: fit-content;
+  }
+  .home-title {
+    font-size: 3rem;
+    font-weight: bolder;
+    color: black;
+    width: 80%;
+  }
+  .home-decription {
+    font-size: 1.2rem;
+    left: 50px;
+    width: 80%;
+    font-weight: bolder;
+  }
 }

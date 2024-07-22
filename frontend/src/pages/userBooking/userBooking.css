@@ -22,6 +22,7 @@
 .rent-form-displays {
   position: absolute;
   left: 20%;
+  height: fit-content;
   padding: 20px;
   width: 60%;
   top: 50px;
@@ -34,10 +35,8 @@
   color: red;
   padding: 5px;
   transition: 0.5s;
-  
 }
 .close-u-btn:hover {
   background-color: red;
   color: white;
-  
 }

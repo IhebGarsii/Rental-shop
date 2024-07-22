@@ -29,27 +29,6 @@ function Login() {
   };
   return (
     <div className="login-container">
-      {/*  <form onSubmit={onSubmit}>
-        <div className="login-input-container">
-          <label htmlFor="email">Email</label>
-          <input
-            type="text"
-            name="email"
-            placeholder="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="login-input-container">
-          <label htmlFor="password">Password</label>
-          <input
-            type="text"
-            name="password"
-            placeholder="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">login</button>
-      </form> */}
       <form onSubmit={onSubmit} className="form-control">
         <p className="title">Login</p>
         <div className="input-field">

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import "./signup.css";
 import { signup } from "../../apis/userApi";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 function SignUp() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
+
   const onSubmit = async (data, e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -15,7 +17,6 @@ function SignUp() {
     formData.append("lastName", data.lastName);
     formData.append("cin", data.cin);
     formData.append("coverImage", data.coverImage);
-
     formData.append("image", data.image[0]);
 
     try {
@@ -25,39 +26,78 @@ function SignUp() {
         localStorage.setItem("image", login.user.image);
         localStorage.setItem("idUser", login.user._id);
         localStorage.setItem("roles", login.user.roles);
+        navigate("/home");
       }
-
-      navigate("/home");
     } catch (error) {
       console.error(error);
     }
   };
+
   return (
     <div className="signup">
-      <form
-        className="signup-form"
-        onSubmit={handleSubmit(onSubmit)}
-        encType="multipart/form-data"
-      >
-        <label htmlFor="firstName">Name</label>
-        <input type="text" name="firstName" {...register("firstName")} />
-
-        <label htmlFor="lastName">Last Name</label>
-        <input type="text" name="lastName" {...register("lastName")} />
-
-        <label htmlFor="email">Email</label>
-        <input type="email" placeholder="email" {...register("email")} />
-        <label htmlFor="password">Password</label>
-        <input type="text" placeholder="password" {...register("password")} />
-
-        <label htmlFor="cin">Cin</label>
-        <input type="text" name="cin" />
-        <label htmlFor="image">Profile photo</label>
-        <input type="file" name="image" {...register("image")} />
-        <label htmlFor="coverImage">Cover Image</label>
-        <input type="file" name="coverImage" />
-
-        <button type="submit">signup</button>
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <p className="title">Register</p>
+        <p className="message">Signup now and get full access to our app.</p>
+        <div className="flex">
+          <label>
+            <input
+              {...register("firstName")}
+              required
+              type="text"
+              className="input"
+              placeholder=" "
+            />
+            <span>Firstname</span>
+          </label>
+          <label>
+            <input
+              {...register("lastName")}
+              required
+              type="text"
+              className="input"
+              placeholder=" "
+            />
+            <span>Lastname</span>
+          </label>
+        </div>
+        <label>
+          <input
+            {...register("email")}
+            required
+            type="email"
+            className="input"
+            placeholder=" "
+          />
+          <span>Email</span>
+        </label>
+        <label>
+          <input
+            {...register("password")}
+            required
+            type="password"
+            className="input"
+            placeholder=" "
+          />
+          <span>Password</span>
+        </label>
+        <label>
+          <input required type="password" className="input" placeholder=" " />
+          <span>Confirm password</span>
+        </label>
+        <label>
+          <input
+            {...register("image")}
+            required
+            type="file"
+            className="input"
+            placeholder=" "
+          />
+          <span>Image</span>
+        </label>
+        <button className="submit">Submit</button>
+        <p className="signin">
+          Already have an account? <Link to="/login">Signin</Link>
+        </p>
       </form>
     </div>
   );

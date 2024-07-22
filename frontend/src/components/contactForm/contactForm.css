@@ -1,16 +1,26 @@
 .contact-form {
   display: flex;
-
   justify-content: space-between;
   background-color: #ffffff;
   padding: 10px 20px;
-
   width: 70%;
+  gap: 50px;
 }
-.contact-right > img {
-  width: 100%;
+
+.contact-right {
+  width: 50%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.contact-right > img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
 .form {
   position: relative;
   display: flex;
@@ -19,10 +29,8 @@
   gap: 40px;
   width: 100%;
   height: 90%;
-
   justify-content: center;
   padding: 20px;
-
   border-radius: 10px;
   background: #ffffff;
   box-shadow: 20px 20px 60px #898989, -20px -20px 60px #b9b9b9;
@@ -72,9 +80,45 @@
 }
 
 .contact-left {
-  margin: auto;
   width: 30%;
   height: 100%;
   display: flex;
   align-items: center;
+}
+
+@media screen and (max-width: 1019px) {
+  .contact-form {
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    align-items: center;
+    height: fit-content;
+  }
+
+  .contact-left {
+    width: 70%;
+    height: 50%;
+  }
+
+  .contact-right {
+    width: 70%;
+    height: 50%;
+  }
+}
+
+@media screen and (max-width: 787px) {
+  .contact-right {
+    width: 100%;
+    height: auto;
+  }
+
+  .contact-left {
+    width: 100%;
+    height: auto;
+  }
+
+  .contact-right > img {
+    width: 100%;
+    height: auto;
+  }
 }

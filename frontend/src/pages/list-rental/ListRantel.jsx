@@ -10,8 +10,8 @@ function ListRantel() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [filter, setFilter] = useState([]);
-  const [minValue, set_minValue] = useState(25);
-  const [maxValue, set_maxValue] = useState(75);
+  const [minValue, set_minValue] = useState(0);
+  const [maxValue, set_maxValue] = useState(100);
   const [currentR, setCurrentR] = useState(1);
   const [currentE, setCurrentE] = useState(1);
 

@@ -3,21 +3,24 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 70%;
-
-  height: 70%;
+  width: 100%;
+  height: fit-content;
 }
 .footer-container {
   display: grid;
   width: 100%;
   gap: 30px;
-  grid-template-columns: 40% 30% 30%;
+  grid-template-columns: 60% 40%;
+}
+.left-footer {
+  display: flex;
+  justify-content: space-between;
 }
 hr {
   width: 100%;
 }
 .newsletter-form {
-  width: 90%;
+  width: 50%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -99,4 +102,23 @@ hr {
 .footer-bottom {
   color: white;
   padding-top: 20px;
+}
+
+@media screen and (max-width: 1019px) {
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .footer-bottom {
+    color: white;
+    padding-top: 20px;
+  }
+  .newsletter-form {
+    width: 100%;
+  }
+  .footer {
+    width: 90%;
+    height: fit-content;
+  }
 }

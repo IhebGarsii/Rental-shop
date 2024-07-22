@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./userBooking.css";
 import { getBooking, deleteBooking } from "../../apis/bookingApi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UpdateBooking from "../../components/updateBooking/UpdateBooking";
 import { RxCross2 } from "react-icons/rx";
 
 function UserBooking() {
   const [data, setData] = useState([]);
   const [rent, setRent] = useState(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
+    if (!localStorage.getItem("idUser")) {
+      return navigate("/login");
+    }
     const fetchBookingById = async () => {
       try {
         const booking = await getBooking(localStorage.getItem("idUser"));

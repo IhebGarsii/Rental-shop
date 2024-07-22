@@ -9,34 +9,7 @@
   background-repeat: no-repeat;
 }
 
-/* .login-container > form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 30px;
-  -webkit-box-shadow: 0px 0px 7px 3px rgba(255, 255, 255, 1);
-  -moz-box-shadow: 0px 0px 7px 3px rgba(255, 255, 255, 1);
-  box-shadow: 0px 0px 7px 3px rgba(255, 255, 255, 1);
-  width: 25%;
-  height: 50%;
-  color: white;
-  font-size: 1.2rem;
-}
 
-.login-input-container {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 50%;
-}
-.login-input-container > input {
-  height: 30px;
-  border: none;
-  border-radius: 5px;
-  padding: 5px;
-}
- */
 .form-control {
   margin: 20px;
   background-color: #ffffff;
