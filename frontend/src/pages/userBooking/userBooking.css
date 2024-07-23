@@ -1,18 +1,57 @@
 .userBooking {
-  min-height: 90vw;
-  padding: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.userBooking-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  justify-content: space-around;
+  padding: 10px;
+
+  width: 70%;
 }
 
-.userBooking {
+.userBooking-left > img {
+  height: 100%;
+  width: 100%;
+}
+.userBooking-left {
+  height: 100%;
+  width: 70%;
+}
+.userBooking-right {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: center;
+}
+.rented-car-list {
+  display: flex;
+  flex-direction: column;
+}
+.userBooking-title {
+  display: flex;
+  justify-content: flex-start;
+  gap: 50%;
+  align-items: center;
+}
+.userBooking-left-middle {
+  display: flex;
+  height: 100%;
+  justify-content: flex-start;
 }
 
-.booking-table {
+.userBooking-middle {
+  display: flex;
+  padding: 10px;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.wid {
-  width: 90px;
+.userBooking-right > img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
 }
 .rent-form-display-center {
   display: flex;
@@ -40,4 +79,33 @@
 .close-u-btn:hover {
   background-color: red;
   color: white;
+}
+/* <reset-style> ============================ */
+.rented-car-list > a {
+  text-decoration: none;
+}
+
+/* <main-style> ============================ */
+.menu__link {
+  color: #0d2b84;
+  line-height: 2;
+  position: relative;
+  display: inline-block; /* Ensure the link takes up space */
+}
+
+.menu__link::before {
+  content: "";
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  background-color: #000000;
+  position: absolute;
+  bottom: -0.25rem;
+  left: 0;
+
+  transition: 0.4s;
+}
+
+.menu__link:hover::before {
+  width: 100%;
 }

@@ -163,7 +163,12 @@ const getBooking = async (req, res) => {
     console.log("eeeee");
     const bookings = await bookingModel
       .find({ idUser: idUser })
-      .populate("idUser")
+      .populate({
+        path: "idUser",
+        populate: {
+          path: "idCars",
+        },
+      })
       .populate("idCar");
 
     if (!bookings) {

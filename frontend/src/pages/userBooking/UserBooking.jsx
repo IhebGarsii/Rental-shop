@@ -54,7 +54,7 @@ function UserBooking() {
     <div className="userBooking">
       {data &&
         data.map((booking) => (
-          <div key={booking._id}>
+          <div className="userBooking-container" key={booking._id}>
             {/* <table className="booking-table">
               <thead>
                 <tr>
@@ -104,28 +104,70 @@ function UserBooking() {
                 </tr>
               </tbody>
             </table> */}
-            <div className="">
-              <div className="">
+            <div className="userBooking-left-middle">
+              <div className="userBooking-left">
                 <img
                   src={`http://localhost:4000/uploads/cars/${booking.idCar.images[0]}`}
                   alt=""
                 />
               </div>
-              <div className="">
-                <h3> {booking.idCar.model} </h3>{" "}
-                <span>{booking.fullPrice}$</span>
+              <div className="userBooking-middle">
+                <div className="userBooking-title">
+                  <Link to={`/car/${booking.idCar._id}`}>
+                    <h2>{booking.idCar.model} </h2>
+                  </Link>
+
+                  <span>{booking.fullPrice}$</span>
+                </div>
                 <h3> {booking.startDate} </h3>
                 <h3> {booking.endDate} </h3>
                 <span>Pick Up Location : {booking.pickupLocation}</span>
                 <span>Drop Off Location : {booking.dropoffLocation}</span>
-              </div>
-              <div className="">
-                <img
-                  src={`http://localhost:4000/uploads/users/${booking.idUser.image}`}
-                  alt=""
-                />
+                <div className="action">
+                  <button
+                    onClick={() => setRent(!rent)}
+                    className="action-button accept-button"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(booking._id)}
+                    className="action-button refuse-button"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    disabled={!booking.payCheck}
+                    onClick={() => handlePayment(booking)}
+                  >
+                    Pay
+                  </button>
+                </div>
               </div>
             </div>
+            <div className="userBooking-right">
+              <img
+                src={`http://localhost:4000/uploads/users/${booking.idUser.image}`}
+                alt=""
+              />
+              <h3>
+                {booking.idUser.firstName} {booking.idUser.lastName}
+              </h3>
+              <h4>Rented Cars: </h4>
+              <div className="rented-car-list">
+                {booking.idUser.idCars.map((car, index) => (
+                  <Link
+                    to={`/car/${car._id}`}
+                    className="menu__link"
+                    key={index}
+                  >
+                    {car.model}
+                    {"-->"}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             {rent && (
               <div className="rent-form-displays">
                 <div className="rent-form-display-center">
