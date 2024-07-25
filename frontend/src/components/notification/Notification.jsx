@@ -9,13 +9,15 @@ function Notification() {
   const [badge, setBadge] = useState();
   const handlePostRead = async () => {
     setDisplayNotification(!displayNotification);
-    const response = await postRead();
+    const response = await postRead(localStorage.getItem("idUser"));
     setBadge(0);
   };
   useEffect(() => {
     const fetchNotification = async () => {
       try {
-        const notification = await getNotifications();
+        const notification = await getNotifications(
+          localStorage.getItem("idUser")
+        );
 
         setNotification(notification.notification);
         setBadge(notification.i);

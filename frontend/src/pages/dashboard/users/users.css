@@ -1,12 +1,14 @@
 .users {
   display: flex;
-  flex-direction: column;
+  
   align-items: center;
   gap: 20px;
   padding: 10px;
-  width: 100%;
+  width: 50%;
 }
-
+#rented-lable {
+  white-space: nowrap;
+}
 .user-img {
   width: 70px;
   border-radius: 50%;
@@ -18,13 +20,18 @@
   gap: 10px;
 }
 .user-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-content: space-between;
-  background-color: var(--body-background);
+  display: flex;
+
+  align-items: flex-start;
   width: 80%;
+  background-color: white;
   border-radius: 10px;
   padding: 10px;
+}
+.rented-car-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .user-left {
@@ -37,13 +44,19 @@
 .user-middle {
   display: flex;
   justify-content: center;
-
-  align-items: center;
+  flex-direction: column;
+  align-items: start;
 }
 
 .user-right {
   display: flex;
   justify-content: center;
-
   align-items: center;
+}
+
+.user-left-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: start;
 }

@@ -24,6 +24,7 @@ function Users() {
         if (user) {
           setData(user);
           setIsLoading(false);
+          console.log(user);
         }
       } catch (error) {
         setIsLoading(false);
@@ -39,27 +40,36 @@ function Users() {
       {data &&
         data.map((user) => (
           <div key={user._id} className="user-container">
-            <div className="user-left">
-              <img
-                className="user-img"
-                src={`http://localhost:4000/uploads/users/${user.image}`}
-                alt=""
-              />
-              {user.firstName} {user.lastName}
-            </div>
-            <div className="user-middle">
-              {user.email}
-              {user.roles.map((role) => (
-                <span> {role} </span>
-              ))}
-            </div>
-            <div className="user-right">
+            <div className="user-left-container">
+              <div className="user-left">
+                <img
+                  className="user-img"
+                  src={`http://localhost:4000/uploads/users/${user.image}`}
+                  alt=""
+                />
+                {user.firstName} {user.lastName}
+              </div>
+              <h3>
+                <span>Email:</span> {user.email}
+              </h3>
+              <h3>
+                <span>Role:</span>
+                {user.roles.map((role) => (
+                  <span> {role} </span>
+                ))}
+              </h3>
               <button
                 onClick={() => handleBlock(user._id)}
                 className="action-button refuse-button"
               >
                 Block
               </button>
+            </div>
+            <h3 id="rented-lable">rented Cars:</h3>
+            <div className="rented-car-list">
+              {user.idCars.map((car) => (
+                <span> {car.model} </span>
+              ))}
             </div>
           </div>
         ))}

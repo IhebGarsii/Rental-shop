@@ -11,7 +11,7 @@ need to compete toast not urgent think ***completed***
 add confirm when admin want to block user ***completed***
 
 
-add contact form in navbar and footer
+add contact form in navbar and footer  ***completed***
 
 fix home carCard      ***completed***
 complete contact form ***completed***
@@ -24,15 +24,24 @@ add how to book   ***completed***
 
 add location 
 
-fix cardCar in responsev
+fix cardCar in responsev  ***completed***
 
-add brand slider in responsiv
+add brand slider in responsiv ***completed***
  
 add sign in when click on rent car  ***completed***
 
 fix setHours in bookCar.jsx and maybe updateCar
 
 add pagination fetch
+
+add animation to close book car ***completed*** 
+
+fix the contact login height ***completed***
+
+add all toast
+
+fix navigation default false
+
 what is customer journey
 
 when the rent state change it cause a rerender and the prop booking will be the last object in data state  l9it 7al enou na7i rent state w n5ali condetionly render b editingBookingId === booking._id w bech tkoun false lin na5tar edit 

@@ -31,12 +31,11 @@ const login = async (req, res) => {
 };
 
 const signup = async (req, res) => {
-  const { email, password, firstName, lastName, cin } = req.body;
+  const { email, password, firstName, lastName } = req.body;
   const blocked = await blockedEmailModel.findOne();
   if (blocked.emails.includes(email)) {
     return res.status(500).json("Sorry you were blocked");
   }
-  console.log(blocked.emails.includes(email));
   const image = req.file.originalname;
 
   try {
@@ -54,7 +53,6 @@ const signup = async (req, res) => {
       image,
       firstName,
       lastName,
-      cin,
     });
 
     await user.save();
@@ -68,7 +66,7 @@ const signup = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await userModel.find();
+    const users = await userModel.find().populate("idCars");
     if (users) {
       return res.status(200).json(users);
     }
@@ -79,16 +77,15 @@ const getAllUsers = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-  const { id } = req.params;
-
   try {
-    const user = await userModel.findById(id);
-    if (user) {
-      return res.status(200).json(user);
+    const users = await userModel.find().populate("idCars").exec();
+
+    if (users) {
+      return res.status(200).json(users);
     }
-    res.status(500).json("user not found");
+    res.status(404).json({ message: "Users not found" });
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({ message: error.message });
   }
 };
 

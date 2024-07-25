@@ -4,6 +4,7 @@ import { getCar } from "../../apis/carApi";
 import { getUser } from "../../apis/userApi";
 import { acceptBooking, refuseBooking } from "../../apis/bookingApi";
 import "./booking.css";
+import toast from "react-hot-toast";
 function Booking({ booking }) {
   const [car, setCar] = useState();
   const [user, setUser] = useState();
@@ -35,19 +36,17 @@ function Booking({ booking }) {
       const returnOn = new Date(booking.endDate);
       hireOn.setHours(0, 0, 0, 0);
       returnOn.setHours(23, 59, 59, 999);
-   /*    console.log("eeeeeeeee", car.bookingDuration); */
 
       const isConflict = car.bookingDuration.some((book) => {
         console.log("book", book);
         const startDate = new Date(book.startDate);
         const endDate = new Date(book.endDate);
-       /*  console.log("aaaaaaa", hireOn, returnOn);
-        console.log("eeeeeee", hireOn < endDate && returnOn > startDate); */
+
         return hireOn < endDate && returnOn > startDate;
       });
 
       if (isConflict) {
-        console.log("The car is already booked for the selected dates.");
+        toast.error("The car is already booked for the selected dates.");
         return;
       }
 
@@ -60,7 +59,6 @@ function Booking({ booking }) {
   const handelRefuse = async () => {
     try {
       const response = await refuseBooking(booking._id);
-      console.log("resopnse", response);
     } catch (error) {
       console.error(error);
     }

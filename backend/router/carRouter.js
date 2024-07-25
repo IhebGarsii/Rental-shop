@@ -30,7 +30,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-carRouter.use(requireAuth);
+/* carRouter.use(requireAuth); */
 
 carRouter.get("/getRandomCars", getRandomCars);
 carRouter.get("/getCars", getCars);

@@ -13,7 +13,7 @@ function BookingList() {
     const filterData = async () => {
       const fData = data.filter((f) => f.status === tag);
       setFilter(fData);
-      console.log(fData);
+    
     };
     filterData();
   }, [tag, data]);

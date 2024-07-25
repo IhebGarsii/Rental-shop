@@ -1,17 +1,17 @@
 const BASR_URL = "http://localhost:4000/Notification";
 
-export const getNotifications = async () => {
+export const getNotifications = async (idUser) => {
   try {
-    const response = await fetch(`${BASR_URL}/getNotification`);
+    const response = await fetch(`${BASR_URL}/getNotification/${idUser}`);
     return await response.json();
   } catch (error) {
     console.error(error);
   }
 };
 
-export const postRead = async () => {
+export const postRead = async (idUser) => {
   try {
-    const response = await fetch(`${BASR_URL}/postRead`);
+    const response = await fetch(`${BASR_URL}/postRead/${idUser}`);
     return await response.json();
   } catch (error) {
     console.error(error);

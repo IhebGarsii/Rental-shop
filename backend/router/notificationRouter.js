@@ -4,8 +4,8 @@ const { postRead } = require("../controller/bookingController");
 
 const notificationRouer = express.Router();
 
-notificationRouer.get("/getNotification", getNotification);
+notificationRouer.get("/getNotification/:idUser", getNotification);
 
-notificationRouer.get("/postRead", postRead);
+notificationRouer.get("/postRead/:idUser", postRead);
 
 module.exports = notificationRouer;

@@ -57,6 +57,7 @@ const bookCar = async (req, res) => {
     const notification = new adminNotification({
       description,
       target: "ADMIN",
+      idUser,
     });
     await notification.save();
     await booking.save();
@@ -115,6 +116,7 @@ const acceptBooking = async (req, res) => {
     const notification = new adminNotification({
       description,
       target: "USER",
+      idUser,
     });
     await notification.save();
     return res.status(200).json("booking accepted");
@@ -138,10 +140,12 @@ const refuseBooking = async (req, res) => {
     }
     await booking.save();
     car.rented = false;
+    const idUser = booking.idUser;
     const description = `The admin has refused your request to book ${car.model}`;
     const notification = new adminNotification({
       description,
       target: "USER",
+      idUser,
     });
     car.bookingDuration = car.bookingDuration.filter(
       (book) =>
@@ -200,11 +204,13 @@ const updateBooking = async (req, res) => {
     await booking.save();
 
     const description = `${user.firstName} has updated his request `;
+    const idUser = user._id;
     const notification = new adminNotification({
       changes: booking,
       original: originalBooking,
       description,
       target: "USER ADMIN",
+      idUser,
     });
     await notification.save();
 
@@ -243,10 +249,12 @@ const deleteBooking = async (req, res) => {
       await userR.save();
       await car.save();
     }
+    const idUser = userR._id;
     const description = `${userR.firstName} has deleted his request to book ${car.model}`;
     const notification = new adminNotification({
       description,
       target: "USER ADMIN",
+      idUser,
     });
     await notification.save();
     return res.status(200).json("booking has been deleted");
@@ -257,9 +265,9 @@ const deleteBooking = async (req, res) => {
 };
 
 const postRead = async (req, res) => {
-
+  const { idUser } = req.params;
   try {
-    const notification = await adminNotification.find();
+    const notification = await adminNotification.find({ idUser: idUser });
     await Promise.all(
       notification.map(async (one) => {
         one.read = "READ";

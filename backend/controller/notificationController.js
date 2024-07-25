@@ -1,8 +1,9 @@
 const adminNotificationModel = require("../model/adminNotification");
 
 const getNotification = async (req, res) => {
+  const { idUser } = req.params;
   try {
-    const notification = await adminNotificationModel.find();
+    const notification = await adminNotificationModel.find({ idUser: idUser });
     let i = 0;
     notification.forEach((element) => {
       if (element.read === "UNREAD") {

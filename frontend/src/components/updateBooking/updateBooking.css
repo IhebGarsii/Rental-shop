@@ -1,21 +1,9 @@
-.book-car {
-  background-color: aliceblue;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 20px 0px;
-}
-
 .book-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 100%;
   height: 100%;
-
 }
 .book-form > button {
   background-color: rgb(32, 241, 105);

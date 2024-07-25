@@ -4,6 +4,7 @@ import { getCars } from "../../apis/carApi";
 import MultiRangeSlider from "multi-range-slider-react";
 import CarCard from "../../components/carCard/CarCard";
 import { useForm } from "react-hook-form";
+import Loader from "../../components/loading/Loader";
 function ListRantel() {
   const { register, handleSubmit, reset } = useForm();
   const [cars, setCars] = useState([]);
@@ -45,7 +46,7 @@ function ListRantel() {
     reset();
     setFilter(cars);
   };
-  const items = 8;
+  const items = 9;
 
   const NbPage = Math.ceil(filter.length / items);
 
@@ -101,7 +102,13 @@ function ListRantel() {
   };
 
   if (isLoading) {
-    return <div>loadinggggggggggggggggggg</div>;
+    return (
+      <div className="loading">
+        <div className="loading-center">
+          <Loader />
+        </div>
+      </div>
+    );
   }
   if (error) {
     return <div> dssd {error} </div>;

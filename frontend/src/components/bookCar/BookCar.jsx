@@ -3,11 +3,20 @@ import { bookCar } from "../../apis/bookingApi";
 import "./bookCar.css";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-
+import { useNavigate } from "react-router-dom";
+import Loader from "../loading/Loader";
 function BookCar({ car }) {
   const [render, setRender] = useState(false);
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const handleBook = async (data, e) => {
+    setIsLoading(true);
+    if (!localStorage.getItem("idUser")) {
+      console.log("dssssssssss", !localStorage.getItem("idUser"));
+      setIsLoading(false);
+      return navigate("/login");
+    }
     e.preventDefault();
 
     try {
@@ -20,20 +29,25 @@ function BookCar({ car }) {
       const isConflict = car.bookingDuration.some((book) => {
         const startDate = new Date(book.startDate);
         const endDate = new Date(book.endDate);
-      
+
         return hireOn < endDate && returnOn > startDate;
       });
 
       if (isConflict) {
+        setIsLoading(false);
         toast.error("The car is already booked for the selected dates.");
         return;
       }
 
       const book = await bookCar(car._id, localStorage.getItem("idUser"), data);
-
+      setIsLoading(false);
       setRender(true);
     } catch (error) {
+      setIsLoading(false);
+
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -104,7 +118,7 @@ function BookCar({ car }) {
           />
         </div>
 
-        <button type="submit">Book</button>
+        <button type="submit"> {isLoading ? <Loader /> : "Book"} </button>
       </form>
     </div>
   );

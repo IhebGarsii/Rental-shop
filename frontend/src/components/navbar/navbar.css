@@ -2,6 +2,7 @@
 .navbar {
   background-color: #edf1f8;
   overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 .navbar-container {
@@ -11,7 +12,7 @@
   padding: 10px 20px;
   position: sticky;
   background-color: #edf1f8;
-
+  transition: 1s;
   top: 0;
   z-index: 1000;
 }
@@ -43,6 +44,18 @@
 .hamburger-menu span {
   font-size: 2rem;
 }
+.logout-btn {
+  width: 70px;
+  align-items: center;
+  color: white;
+  font-size: 1rem;
+  display: flex;
+  background-color: red;
+
+  justify-content: center;
+
+  height: 30px;
+}
 
 .navbar-content {
   display: flex;
@@ -50,12 +63,75 @@
   justify-content: space-around;
   width: 100%;
 }
+.cta {
+  position: relative;
+  margin: auto;
+  transition: all 0.2s ease;
+  border: 3px solid #552da8;
+  border-radius: 50px;
+  width:150px;
+  background: #552da8;
+  cursor: pointer;
+}
+
+.cta:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  border-radius: 50px;
+  background: white;
+  width: 45px;
+  height: 30px;
+  transition: all 0.8s ease;
+}
+
+.cta span {
+  position: relative;
+  font-family: Montserrat;
+  font-size: 18px;
+  color: white;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.cta svg {
+  position: relative;
+  top: 0;
+  margin-left: 10px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: white;
+  stroke-width: 2;
+  transform: translateX(-5px);
+  transition: all 0.5s ease;
+}
+
+.cta:hover:before {
+  width: 100%;
+  background: #1c1c1c;
+}
+
+.cta:hover svg {
+  transform: translateX(0);
+  transition: all 2s ease;
+}
+
+.cta:active {
+  transform: scale(0.95);
+  transition: all 2s ease;
+}
 
 .links {
   display: flex;
-  gap: 40px;
+  justify-content: space-around;
+  width: 100%;
 }
-
+.links > a {
+  color: black;
+}
 .auth {
   display: flex;
   align-items: center;
@@ -77,7 +153,6 @@
 @media screen and (max-width: 1019px) {
   .navbar-container {
     flex-direction: column;
-    transition: 1s ease-in-out;
     align-items: flex-start;
   }
 
@@ -99,6 +174,7 @@
 
   .navbar-content.active {
     display: flex;
+    transition: 1s;
   }
 
   .links {
@@ -117,5 +193,6 @@
 }
 
 .navbar-container.active .navbar-content {
+  transition: 1s;
   display: flex;
 }

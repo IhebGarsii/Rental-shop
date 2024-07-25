@@ -10,6 +10,7 @@ function CarDetail() {
   const [car, setCar] = useState();
   const { id } = useParams();
   const [rent, setRent] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate();
   useEffect(() => {
     const fetchCar = async () => {
@@ -50,6 +51,16 @@ function CarDetail() {
     const slideWidth = slider.querySelector(".one-slide").offsetWidth;
     slider.scrollBy({ left: slideWidth, behavior: "smooth" });
   };
+
+  if (isLoading) {
+    return (
+      <div className="loading">
+        <div className="loading-center">
+          <Loader />
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="carDetail">
       {car && (
@@ -125,97 +136,88 @@ function CarDetail() {
             </div>
 
             <div className="first-detail">
-              <div className="left-detail">
-                VEHICLE DETAIL
-                <span className="spans check-detail">
-                  Seats : <span> {car.seats} </span>
-                </span>
-                <hr />
-                <span className="spans check-detail">
-                  Doors :<span>{car.doors} </span>
-                </span>
-                <hr />
-                <h3 className="check-detail">
-                  Air Conditioning :
-                  {car.airConditioning ? (
-                    <span> &#9989;</span>
-                  ) : (
-                    <span>&#10060;</span>
-                  )}
-                </h3>
-                <hr />
-                <h3 className="check-detail">
-                  Navigation {car.navigarion && <span> &#9989; </span>}:
-                  <span>&#10060;</span>
-                </h3>
-                <hr />
-                <h3 className="check-detail">
-                  Location : <span> {car.location}</span>
-                </h3>
-                <hr />
-                <h3 className="check-detail">
-                  Interior material : <span> {car.interiorMaterial}</span>
-                </h3>
-                <hr />
+              <div className="lefti">
+                <div className="first-lefti">
+                  <div className="left-detail">
+                    VEHICLE DETAIL
+                    <span className="spans check-detail">
+                      Seats : <span> {car.seats} </span>
+                    </span>
+                    <hr />
+                    <span className="spans check-detail">
+                      Doors :<span>{car.doors} </span>
+                    </span>
+                    <hr />
+                    <h3 className="check-detail">
+                      Air Conditioning :
+                      {car.airConditioning ? (
+                        <span> &#9989;</span>
+                      ) : (
+                        <span>&#10060;</span>
+                      )}
+                    </h3>
+                    <hr />
+                    <h3 className="check-detail">
+                      Navigation {car.navigarion && <span> &#9989; </span>}:
+                      <span>&#10060;</span>
+                    </h3>
+                    <hr />
+                    <h3 className="check-detail">
+                      Location : <span> {car.location}</span>
+                    </h3>
+                    <hr />
+                    <h3 className="check-detail">
+                      Interior material : <span> {car.interiorMaterial}</span>
+                    </h3>
+                    <hr />
+                  </div>
+                  <div className="left-detail">
+                    VEHICLE CONDITION
+                    <span className="spans check-detail">
+                      Mileage : <span> {car.mileage} </span>
+                    </span>
+                    <hr />
+                    <span className="spans check-detail">
+                      Condition :<span>{car.condition} </span>
+                    </span>
+                    <hr />
+                    <h3 className="check-detail">
+                      Current issues : <span> {car.currentIssues}</span>
+                    </h3>
+                    <hr />
+                  </div>
+                </div>
+                <div className="left-detail">
+                  ENGINE
+                  <h3 className="check-detail">
+                    fuel : <span>{car.fuel}</span>
+                  </h3>
+                  <h3 className="check-detail">
+                    Transmission : <span> {car.transmission}</span>
+                  </h3>
+                  <h3 className="check-detail">
+                    Drive type : <span> {car.driveType}</span>
+                  </h3>
+                  <h3 className="check-detail">
+                    Power : <span> {car.power}</span>
+                  </h3>
+                  <h3 className="check-detail">
+                    Engine capacity : <span> {car.engineCapacity}</span>
+                  </h3>
+                  <h3 className="check-detail">
+                    Consumption : <span> {car.consumption}</span>
+                  </h3>
+                  <h3 className="check-detail">
+                    CO2 emissions : <span> {car.CO2emissions}</span>
+                  </h3>
+                  <h3 className="check-detail">
+                    Emission class : <span> {car.emissionClass}</span>
+                  </h3>
+                </div>
               </div>
-              <div className="left-detail">
-                ENGINE
-                <h3 className="check-detail">
-                  fuel : <span>{car.fuel}</span>
-                </h3>
-                <h3 className="check-detail">
-                  Transmission : <span> {car.transmission}</span>
-                </h3>
-                <h3 className="check-detail">
-                  Drive type : <span> {car.driveType}</span>
-                </h3>
-                <h3 className="check-detail">
-                  Power : <span> {car.power}</span>
-                </h3>
-                <h3 className="check-detail">
-                  Engine capacity : <span> {car.engineCapacity}</span>
-                </h3>
-                <h3 className="check-detail">
-                  Consumption : <span> {car.consumption}</span>
-                </h3>
-                <h3 className="check-detail">
-                  CO2 emissions : <span> {car.CO2emissions}</span>
-                </h3>
-                <h3 className="check-detail">
-                  Emission class : <span> {car.emissionClass}</span>
-                </h3>
-              </div>
-              <div className="left-detail">
-                VEHICLE CONDITION
-                <span className="spans check-detail">
-                  Mileage : <span> {car.mileage} </span>
-                </span>
-                <hr />
-                <span className="spans check-detail">
-                  Condition :<span>{car.condition} </span>
-                </span>
-                <hr />
-                <h3 className="check-detail">
-                  Current issues : <span> {car.currentIssues}</span>
-                </h3>
-                <hr />
-              </div>
-            </div>
-          </div>
-          <div className="rent-car">
-            <div className="rent-btn-container">
-              <button onClick={handleOnclick} className="rent-btn">
-                <span>Rent Car</span>
-              </button>
-              <div className={rent ? "rent-form-display" : "rent-form-none"}>
+              <div className="rent-car">
                 <BookCar key={car._id} car={car} />
               </div>
-              {rent && (
-                <RxCross2
-                  className="close-booking-btn"
-                  onClick={() => setRent(false)}
-                />
-              )}
             </div>
           </div>
         </>
