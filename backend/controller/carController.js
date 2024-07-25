@@ -34,30 +34,58 @@ const addCar = async (req, res) => {
     monthlyRent,
     conditions,
     type,
+    location,
+    interiorMaterial,
+    driveType,
+    power,
+    engineCapacity,
+    consumption,
+    CO2emissions,
+    emissionClass,
+    mileage,
+    condition,
+    currentIssues,
   } = req.body;
-  const images = req.files.map((file) => file.originalname);
+
+  const images = req.files["image"]
+    ? req.files["image"].map((file) => file.originalname)
+    : [];
+  const imageInteriors = req.files["imageInterior"]
+    ? req.files["imageInterior"].map((file) => file.originalname)
+    : [];
 
   try {
     const car = new carModel({
-      title: title,
-      description: description,
-      images: images,
-      model: model,
-      transmission: transmission,
-      fuel: fuel,
-      seats: seats,
-      doors: doors,
-      airConditioning: airConditioning,
-      navigation: navigation,
-      dailyRent: dailyRent,
-      weeklyRent: weeklyRent,
-      monthlyRent: monthlyRent,
-      conditions: conditions,
-      type: type,
+      title,
+      description,
+      images,
+      imageInterior: imageInteriors,
+      model,
+      transmission,
+      fuel,
+      seats,
+      doors,
+      airConditioning,
+      navigation,
+      dailyRent,
+      weeklyRent,
+      monthlyRent,
+      conditions,
+      type,
+      location,
+      interiorMaterial,
+      driveType,
+      power,
+      engineCapacity,
+      consumption,
+      CO2emissions,
+      emissionClass,
+      mileage,
+      condition,
+      currentIssues,
     });
-    const newcar = await car.save();
-
-    return res.status(200).json(newcar);
+    const newCar = await car.save();
+    return res.status(200).json(newCar);
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);
@@ -72,9 +100,9 @@ const updateCar = async (req, res) => {
       new: true,
     });
     if (!carToUpdate) {
-      return res.status(404).json({ msg: "notfound" });
+      return res.status(404).json({ msg: "not found" });
     }
-    return res.status(200).json("msg");
+    return res.status(200).json({ msg: "Car updated successfully" });
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);

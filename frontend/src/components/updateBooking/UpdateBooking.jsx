@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { updateBookingById } from "../../apis/bookingApi.js";
-import "../bookCar/bookCar.css";
+import "../updateBooking/updateBooking.css";
 import { useForm } from "react-hook-form";
 
 function UpdateBooking({ booking }) {
+  console.log("bookingbookingbookingbooking");
   const { register, handleSubmit, setValue } = useForm();
-  console.log("eeeeeeeeee");
   // Helper function to format the date correctly
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -14,25 +14,13 @@ function UpdateBooking({ booking }) {
     const day = String(date.getUTCDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
-  const formatExpiryDate = (dateString) => {
-    const date = new Date(dateString);
-    if (isNaN(date)) {
-      console.error("Invalid date:", dateString); // Add error logging
-      return "";
-    }
-    const year = date.getUTCFullYear();
-    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
-    return `${year}-${month}`;
-  };
 
   useEffect(() => {
     if (booking) {
-      console.log("booking", booking);
       setValue("startDate", formatDate(booking.startDate));
       setValue("endDate", formatDate(booking.endDate));
       setValue("dropoffLocation", booking.dropoffLocation);
       setValue("cardNumber", booking.cardNumber);
-      setValue("expiryDate", formatExpiryDate(booking.expiryDate));
 
       setValue("cvv", booking.cvv);
       setValue("licenseNumber", booking.licenseNumber);
@@ -43,7 +31,7 @@ function UpdateBooking({ booking }) {
   const handleBook = async (data, e) => {
     e.preventDefault();
     try {
-      console.log("Formatted expiryDate:", data.expiryDate); // Change this line
+      console.log("Formatted expiryDate:", booking._id); // Change this line
       await updateBookingById(data, booking._id);
       console.log("Booking updated successfully");
     } catch (error) {
@@ -54,23 +42,23 @@ function UpdateBooking({ booking }) {
   return (
     <div className="update-car">
       <form className="book-form" onSubmit={handleSubmit(handleBook)}>
-        <div className="update-label">
-          <label htmlFor="startDate">Start Date</label>
-          <input type="date" name="startDate" {...register("startDate")} />
+        <div className="label">
+          <label htmlFor="startDate">Start Date:</label>
+          <input type="Date" name="startDate" {...register("startDate")} />
         </div>
-        <div className="update-label">
-          <label htmlFor="endDate">End Date</label>
-          <input type="date" {...register("endDate")} name="endDate" />
+        <div className="label">
+          <label htmlFor="endDate">End Date:</label>
+          <input type="Date" {...register("endDate")} name="endDate" />
         </div>
-        <div className="update-label">
-          <label htmlFor="dropoff_location">Dropoff Location</label>
+        <div className="label">
+          <label htmlFor="dropoff_location">Droping Location:</label>
           <input
             type="text"
             name="dropoff_location"
             {...register("dropoffLocation")}
           />
         </div>
-        <div className="update-label">
+        <div className="label">
           <label htmlFor="card-number">Card Number:</label>
           <input
             type="text"
@@ -79,20 +67,12 @@ function UpdateBooking({ booking }) {
             {...register("cardNumber")}
           />
         </div>
-        <div className="update-label">
-          <label htmlFor="expiry-date">Expiry Date:</label>
-          <input
-            type="month"
-            id="expiry_date"
-            {...register("expiryDate")}
-            name="expiry_date"
-          />
-        </div>
-        <div className="update-label">
+
+        <div className="label">
           <label htmlFor="cvv">CVV:</label>
           <input type="text" id="cvv" name="cvv" {...register("cvv")} />
         </div>
-        <div className="updalabel">
+        <div className="label">
           <label htmlFor="license-number">Driver's License Number:</label>
           <input
             type="text"
@@ -100,15 +80,16 @@ function UpdateBooking({ booking }) {
             {...register("licenseNumber")}
           />
         </div>
-        <div className="update-label">
-          <label htmlFor="billing-address">Billing Address:</label>
+        <div className="label">
+          <label htmlFor="billing-address">Pickup Location:</label>
           <input
             type="text"
             name="billing_address"
-            {...register("billingAddress")}
+            {...register("pickupLocation")}
           />
         </div>
-        <button type="submit">Update Booking</button>
+
+        <button type="submit">Book</button>
       </form>
     </div>
   );

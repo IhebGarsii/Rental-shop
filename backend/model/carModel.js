@@ -11,6 +11,10 @@ const carModel = new Schema({
     type: [String],
     /*  required: true, */
   },
+  imageInterior: {
+    type: [String],
+    /*  required: true, */
+  },
   model: {
     type: String,
     /*  required: true, */
@@ -53,14 +57,7 @@ const carModel = new Schema({
     type: String,
     /*  required: true, */
   },
-  weeklyRent: {
-    type: String,
-    /*  required: true, */
-  },
-  monthlyRent: {
-    type: String,
-    /*  required: true, */
-  },
+
   conditions: {
     type: String,
     /*  required: true, */
@@ -97,6 +94,39 @@ const carModel = new Schema({
     },
   ],
   type: {
+    type: String,
+  },
+  location: {
+    type: String,
+  },
+  interiorMaterial: {
+    type: String,
+  },
+  driveType: {
+    type: String,
+  },
+  power: {
+    type: String,
+  },
+  engineCapacity: {
+    type: String,
+  },
+  consumption: {
+    type: String,
+  },
+  CO2emissions: {
+    type: String,
+  },
+  emissionClass: {
+    type: String,
+  },
+  mileage: {
+    type: String,
+  },
+  condition: {
+    type: String,
+  },
+  currentIssues: {
     type: String,
   },
 });

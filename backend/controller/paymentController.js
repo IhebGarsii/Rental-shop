@@ -19,8 +19,8 @@ const pay = async (req, res) => {
             product_data: {
               name: req.body.idCar.model,
               images: [
-                //change the url when deploying
-                `http://localhost:4000/uploads/cars/${req.body.idCar.images[0]}`,
+                //change the url when deploying http://localhost:4000/uploads/cars/${req.body.idCar.images[0]}
+                `https://img.a.transfermarkt.technology/portrait/big/122374-1620936394.JPG?lm=1 `,
               ],
             },
             unit_amount: req.body.idCar.dailyRent * 100,

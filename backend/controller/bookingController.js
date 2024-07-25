@@ -36,7 +36,7 @@ const bookCar = async (req, res) => {
     let timeDifference = end - start;
     const daysDiffence = timeDifference / (1000 * 3600 * 24);
     const fullPrice = paymentType * daysDiffence;
-
+    console.log(paymentType, "paymentTypepaymentTypepaymentTypepaymentType");
     const booking = new bookingModel({
       idUser,
       idCar,
@@ -50,6 +50,7 @@ const bookCar = async (req, res) => {
       pickupLocation,
       daysDiffence,
       fullPrice,
+      paymentType,
     });
 
     const description = `${user.firstName} has requested a booking for ${car.model}`;
@@ -72,7 +73,6 @@ const bookCar = async (req, res) => {
 
 const getBookings = async (req, res) => {
   try {
-    console.log("eeeee");
     const bookings = await bookingModel.find();
     if (!bookings) {
       return res.status(404).json("no booking were found");
@@ -103,7 +103,6 @@ const acceptBooking = async (req, res) => {
     car.rented = true;
     car.idRenter.push(idUser);
     const { startDate, endDate } = req.body;
-    console.log("eeeeeeeeeeeee", { startDate, endDate });
 
     const bookin = { startDate, endDate };
     car.bookingDuration.push(bookin);
@@ -160,7 +159,6 @@ const refuseBooking = async (req, res) => {
 const getBooking = async (req, res) => {
   const { idUser } = req.params;
   try {
-    console.log("eeeee");
     const bookings = await bookingModel
       .find({ idUser: idUser })
       .populate({
@@ -187,7 +185,7 @@ const updateBooking = async (req, res) => {
     const originalBooking = await bookingModel.findById(idBooking);
     const user = await userModel.findById(originalBooking.idUser);
     const car = await carModel.findById(originalBooking.idCar);
-
+    console.log(idBooking);
     const booking = await bookingModel.findByIdAndUpdate(idBooking, req.body, {
       new: true,
     });
@@ -197,6 +195,8 @@ const updateBooking = async (req, res) => {
     let timeDifference = end - start;
     const daysDiffence = timeDifference / (1000 * 3600 * 24);
     booking.daysDiffence = daysDiffence;
+    booking.fullPrice = daysDiffence * car.dailyRent;
+
     await booking.save();
 
     const description = `${user.firstName} has updated his request `;
@@ -207,7 +207,6 @@ const updateBooking = async (req, res) => {
       target: "USER ADMIN",
     });
     await notification.save();
-    console.log("notification", notification);
 
     return res.status(200).json(booking);
   } catch (error) {
@@ -258,7 +257,6 @@ const deleteBooking = async (req, res) => {
 };
 
 const postRead = async (req, res) => {
-  console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 
   try {
     const notification = await adminNotification.find();

@@ -5,12 +5,14 @@ import { pay } from "../../apis/PaymentApi";
 import { Link, useNavigate } from "react-router-dom";
 import UpdateBooking from "../../components/updateBooking/UpdateBooking";
 import { RxCross2 } from "react-icons/rx";
+import Delete from "../../components/button/Delete";
 
 function UserBooking() {
+  console.log("render");
   const [data, setData] = useState([]);
   const [rent, setRent] = useState(false);
+  const [editingBookingId, setEditingBookingId] = useState(null);
   const navigate = useNavigate();
-
   useEffect(() => {
     if (!localStorage.getItem("idUser")) {
       return navigate("/login");
@@ -32,10 +34,9 @@ function UserBooking() {
     };
     fetchBookingById();
   }, []);
-
   const handleDelete = async (idBooking) => {
     try {
-      const booking = await deleteBooking(idBooking);
+      const ss = await deleteBooking(idBooking);
     } catch (error) {
       console.log(error);
     }
@@ -50,60 +51,18 @@ function UserBooking() {
       console.error(error);
     }
   };
+  const handleEditClick = (bookingId) => {
+    setEditingBookingId(bookingId);
+  };
+  const handleCloseEdit = () => {
+    setEditingBookingId(null);
+  };
+
   return (
     <div className="userBooking">
       {data &&
         data.map((booking) => (
           <div className="userBooking-container" key={booking._id}>
-            {/* <table className="booking-table">
-              <thead>
-                <tr>
-                  <th>Car Model</th>
-                  <th>Status</th>
-                  <th>User</th>
-                  <th>Pick-up Date</th>
-                  <th>Drop-off Date</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="wid">
-                    <Link to={`/Car/${booking.idCar._id}`}>
-                      {booking.idCar.model}
-                    </Link>
-                  </td>
-                  <td>{booking.status}</td>
-                  <td>
-                    {booking.idUser.firstName} {booking.idUser.LastName}
-                  </td>
-                  <td> {booking.startDate}</td>
-                  <td>{booking.endDate}</td>
-                  <td>
-                    <button
-                      onClick={() => setRent(!rent)}
-                      className="action-button accept-button"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(booking._id)}
-                      className="action-button refuse-button"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      disabled={!booking.payCheck}
-                      onClick={() => handlePayment(booking)}
-                    >
-                      Pay
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table> */}
             <div className="userBooking-left-middle">
               <div className="userBooking-left">
                 <img
@@ -125,26 +84,26 @@ function UserBooking() {
                 <span>Drop Off Location : {booking.dropoffLocation}</span>
                 <div className="action">
                   <button
-                    onClick={() => setRent(!rent)}
-                    className="action-button accept-button"
+                    onClick={() => handleEditClick(booking._id)}
+                    className="Btn"
                   >
                     Edit
+                    <svg className="svg" viewBox="0 0 512 512">
+                      <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+                    </svg>
                   </button>
-                  <button
-                    onClick={() => handleDelete(booking._id)}
-                    className="action-button refuse-button"
-                  >
-                    Delete
-                  </button>
+                  <Delete onClick={() => handleDelete(booking._id)} />
                   <button
                     disabled={!booking.payCheck}
                     onClick={() => handlePayment(booking)}
+                    className="pay-btn"
                   >
                     Pay
                   </button>
                 </div>
               </div>
             </div>
+
             <div className="userBooking-right">
               <img
                 src={`http://localhost:4000/uploads/users/${booking.idUser.image}`}
@@ -168,14 +127,11 @@ function UserBooking() {
               </div>
             </div>
 
-            {rent && (
+            {editingBookingId === booking._id && (
               <div className="rent-form-displays">
-                <div className="rent-form-display-center">
-                  <UpdateBooking key={booking.idCar._id} booking={booking} />
-                  <RxCross2
-                    className="close-u-btn"
-                    onClick={() => setRent(false)}
-                  />
+                <div className="rent-form-container">
+                  <UpdateBooking booking={booking} />
+                  <RxCross2 className="close-u-btn" onClick={handleCloseEdit} />
                 </div>
               </div>
             )}
@@ -184,5 +140,4 @@ function UserBooking() {
     </div>
   );
 }
-
 export default UserBooking;

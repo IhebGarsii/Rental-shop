@@ -112,7 +112,7 @@ export const getBooking = async (idUser) => {
   }
 };
 export const updateBookingById = async (data, idBooking) => {
-  console.log("data", data);
+  console.log("data", idBooking);
   try {
     const response = await fetch(`${BASE_URL}/updateBooking/${idBooking}`, {
       method: "PUT",

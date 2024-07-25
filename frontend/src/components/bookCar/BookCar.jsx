@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 function BookCar({ car }) {
   const [render, setRender] = useState(false);
-  const { register, handleSubmit, setError, clearErrors, watch } = useForm();
+  const { register, handleSubmit } = useForm();
   const handleBook = async (data, e) => {
     e.preventDefault();
 

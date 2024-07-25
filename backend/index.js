@@ -39,14 +39,5 @@ mongoose
   )
   .then(() => console.log("Database connected"))
   .catch((err) => console.error("Database connection error:", err));
-const availble = async (req, res) => {
-  console.log("worked");
-  try {
-    const cars = await carModel.find({ rented: false });
 
-    console.log("eee", cars);
-  } catch (error) {
-    console.error(error);
-  }
-};
-availble();
+

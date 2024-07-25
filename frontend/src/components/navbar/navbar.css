@@ -1,6 +1,6 @@
 /* Default Styles */
 .navbar {
-  background-color: var(--body-background-yellow);
+  background-color: #edf1f8;
   overflow-y: auto;
 }
 
@@ -10,7 +10,8 @@
   justify-content: space-between;
   padding: 10px 20px;
   position: sticky;
-  background-color: var(--body-background-yellow);
+  background-color: #edf1f8;
+
   top: 0;
   z-index: 1000;
 }

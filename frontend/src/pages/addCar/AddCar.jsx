@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./addCar.css";
 import { useForm } from "react-hook-form";
 import { addCar } from "../../apis/carApi";
@@ -9,39 +9,27 @@ function AddCar() {
 
   const submit = async (data) => {
     try {
+      console.log("datadatadatadata", data);
       const formData = new FormData();
-      formData.append("title", data.title);
-      formData.append("description", data.description);
-
-      if (data.image && data.image.length > 0) {
-        for (let i = 0; i < data.image.length; i++) {
-          formData.append("image", data.image[i]);
+      Object.keys(data).forEach((key) => {
+        if (key === "image" || key === "imageInterior") {
+          for (let i = 0; i < data[key].length; i++) {
+            formData.append(key, data[key][i]);
+          }
+        } else {
+          formData.append(key, data[key]);
         }
-      }
-      formData.append("model", data.model);
-      formData.append("year", data.year);
-      formData.append("color", data.color);
-      formData.append("transmission", data.transmission);
-      formData.append("fuel", data.fuel);
-      formData.append("seats", data.seats);
-      formData.append("doors", data.doors);
-      formData.append("airConditioning", data.airConditioning);
-      formData.append("navigation", data.navigation);
-      formData.append("dailyRent", data.dailyRent);
-      formData.append("weeklyRent", data.weeklyRent);
-      formData.append("monthlyRent", data.monthlyRent);
-      formData.append("conditions", data.conditions);
-      formData.append("type", data.type);
+      });
 
-      const car = await addCar(formData);
-      console.log("car.ok", car.ok);
-   /*    if (car.ok) {
+      const response = await addCar(formData);
+      if (response.ok) {
         toast.success("Successfully created!");
       } else {
-        toast.error("error");
-      } */
+        toast.error("Error creating car");
+      }
     } catch (error) {
       console.error("Error adding car:", error);
+      toast.error("Error creating car");
     }
   };
 
@@ -55,41 +43,69 @@ function AddCar() {
           placeholder="description"
         />
         <input type="file" multiple {...register("image")} />
+        <input type="file" multiple {...register("imageInterior")} />
         <input type="text" {...register("model")} placeholder="Car Model" />
         <input type="number" {...register("year")} placeholder="Year" />
-        <input type="text" placeholder="Color" {...register("color")} />
-
+        <input type="text" {...register("location")} placeholder="location" />
+        <input
+          type="text"
+          {...register("interiorMaterial")}
+          placeholder="interiorMaterial"
+        />
+        <input type="text" {...register("driveType")} placeholder="driveType" />
+        <input
+          type="text"
+          {...register("engineCapacity")}
+          placeholder="engineCapacity"
+        />
+        <input type="text" {...register("power")} placeholder="power" />
+        <input
+          type="text"
+          {...register("consumption")}
+          placeholder="consumption"
+        />
+        <input
+          type="text"
+          {...register("CO2emissions")}
+          placeholder="CO2emissions"
+        />
+        <input
+          type="text"
+          {...register("emissionClass")}
+          placeholder="emissionClass"
+        />
+        <input type="text" {...register("mileage")} placeholder="mileage" />
+        <input type="text" {...register("condition")} placeholder="condition" />
+        <input
+          type="text"
+          {...register("currentIssues")}
+          placeholder="currentIssues"
+        />
         <select {...register("transmission")}>
-          <option>manual</option>
-          <option>automatic</option>
+          <option value="manual">Manual</option>
+          <option value="automatic">Automatic</option>
         </select>
         <input type="text" {...register("fuel")} placeholder="Fuel Type" />
-        <input type="number" placeholder="Seats" {...register("seats")} />
-        <input type="number" placeholder="Doors" {...register("doors")} />
+        <input type="number" {...register("seats")} placeholder="Seats" />
+        <input type="number" {...register("doors")} placeholder="Doors" />
         <div className="checkbox">
-          <label htmlFor="">Air Conditioning</label>
-          <input
-            type="checkbox"
-            name=""
-            id=""
-            {...register("airConditioning")}
-          />
+          <label>Air Conditioning</label>
+          <input type="checkbox" {...register("airConditioning")} />
         </div>
         <div className="checkbox">
-          <label htmlFor=""> Navigation System</label>
-          <input type="checkbox" name="" id="" {...register("navigation")} />
+          <label>Navigation System</label>
+          <input type="checkbox" {...register("navigation")} />
         </div>
         <input type="text" {...register("type")} placeholder="type" />
         <input
           type="text"
-          placeholder="Daily Rent Price"
           {...register("dailyRent")}
+          placeholder="Daily Rent Price"
         />
-
         <input
           type="text"
-          placeholder="Weekly Rent Price"
           {...register("weeklyRent")}
+          placeholder="Weekly Rent Price"
         />
         <input
           type="text"
@@ -98,10 +114,10 @@ function AddCar() {
         />
         <input
           type="text"
-          placeholder="Conditions"
           {...register("conditions")}
+          placeholder="Conditions"
         />
-        <button type="submit"> Add Car</button>
+        <button type="submit">Add Car</button>
       </form>
     </div>
   );

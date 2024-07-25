@@ -1,6 +1,7 @@
 .home {
   width: 100%;
-  background-color: var(--body-background-yellow);
+  background-color: #edf1f8;
+
   /*   display: flex;
   flex-direction: column;
   align-items: center; */
@@ -39,7 +40,8 @@
 
 .home-cars-container {
   width: 100%;
-  background-color: var(--body-background-yellow);
+  background-color: #edf1f8;
+
   padding-top: 50px;
   display: flex;
   height: fit-content;
@@ -62,7 +64,8 @@
   justify-content: center;
   height: fit-content;
   color: var(--h1-color);
-  background-color: var(--body-background-yellow);
+  background-color: #edf1f8;
+
   padding-top: 100px;
 }
 
@@ -72,6 +75,8 @@
   height: 100%;
   width: 70%;
   padding: 20px;
+  background-color: white;
+  border-radius: 10px;
   margin: 20px;
 }
 .about-left {
@@ -109,9 +114,11 @@ p {
 .review-partners {
   width: 100%;
   display: flex;
-  background-color: var(--body-background-yellow);
+
   padding-top: 50px;
   align-items: center;
+  background-color: #edf1f8;
+
   flex-direction: column;
   height: fit-content;
 }
@@ -199,7 +206,8 @@ p {
   justify-content: center;
   gap: 10%;
   padding: 50px;
-  background-color: var(--body-background-yellow);
+  background-color: #edf1f8;
+
   width: 100%;
   height: fit-content;
 }
@@ -215,7 +223,7 @@ p {
   height: fit-content;
   width: 100%;
   justify-content: center;
-  background-color: var(--body-background-yellow);
+  background-color: #edf1f8;
 }
 
 .home-footer {
@@ -270,7 +278,6 @@ p {
   }
   .contactfrom {
     height: fit-content;
-
   }
   .home-footer {
     height: fit-content;
