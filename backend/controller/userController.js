@@ -77,8 +77,9 @@ const getAllUsers = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
+  const { idUser } = req.params;
   try {
-    const users = await userModel.find().populate("idCars").exec();
+    const users = await userModel.findById(idUser);
 
     if (users) {
       return res.status(200).json(users);

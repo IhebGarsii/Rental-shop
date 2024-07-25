@@ -69,7 +69,7 @@
   transition: all 0.2s ease;
   border: 3px solid #552da8;
   border-radius: 50px;
-  width:150px;
+  width: 150px;
   background: #552da8;
   cursor: pointer;
 }
@@ -114,6 +114,7 @@
   background: #1c1c1c;
 }
 
+
 .cta:hover svg {
   transform: translateX(0);
   transition: all 2s ease;
@@ -126,7 +127,7 @@
 
 .links {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   width: 100%;
 }
 .links > a {
@@ -136,8 +137,23 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  width: 70%;
+  white-space: nowrap;
 }
-
+.acount-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  
+  padding: 3px;
+}
+.navbar-user-avatar {
+  width: 45px;
+}
+.navbar-name-flex {
+  display: flex;
+}
 .outlet {
   display: flex;
   justify-content: center;

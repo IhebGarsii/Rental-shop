@@ -31,7 +31,7 @@ userRouter.get("/getAllUsers", getAllUsers);
 
 userRouter.post("/sendEmail", sendEmail);
 
-userRouter.get("/getUser/:id", getUser);
+userRouter.get("/getUser/:idUser", getUser);
 
 userRouter.delete("/blockUser/:idUser", blockUser);
 

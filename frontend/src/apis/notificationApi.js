@@ -8,6 +8,14 @@ export const getNotifications = async (idUser) => {
     console.error(error);
   }
 };
+export const getAdminNotifications = async () => {
+  try {
+    const response = await fetch(`${BASR_URL}/getAdminNotifications`);
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const postRead = async (idUser) => {
   try {

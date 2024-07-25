@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./notification.css";
-import { getNotifications, postRead } from "../../apis/notificationApi";
+import {
+  getAdminNotifications,
+  getNotifications,
+  postRead,
+} from "../../apis/notificationApi";
 import NotificationRow from "../notificationRow/NotificationRow";
 import { FaBell } from "react-icons/fa";
 function Notification() {
@@ -15,10 +19,14 @@ function Notification() {
   useEffect(() => {
     const fetchNotification = async () => {
       try {
-        const notification = await getNotifications(
-          localStorage.getItem("idUser")
-        );
-
+        let notification;
+        if (localStorage.getItem("roles") === "ADMIN") {
+          console.log('eee')
+          notification = await getAdminNotifications();
+        } else {
+          notification = await getNotifications(localStorage.getItem("idUser"));
+        }
+        console.log(notification)
         setNotification(notification.notification);
         setBadge(notification.i);
       } catch (error) {

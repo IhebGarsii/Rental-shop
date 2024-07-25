@@ -3,11 +3,13 @@ import "./navbar.css";
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import logo from "../../assets/carRentalLogo.jpg";
 import Notification from "../notification/Notification.jsx";
+import { getUser } from "../../apis/userApi.js";
 
 function Navbar() {
   const navigate = useNavigate();
   const [logedIn, setLogedIn] = useState();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [user, setUser] = useState({});
 
   const logout = () => {
     localStorage.clear();
@@ -20,6 +22,11 @@ function Navbar() {
       setLogedIn(false);
     } else {
       setLogedIn(true);
+      const fetchUser = async () => {
+        const response = await getUser(localStorage.getItem("idUser"));
+        setUser(response);
+      };
+      fetchUser();
     }
   }, [localStorage.getItem("idUser")]);
 
@@ -65,17 +72,21 @@ function Navbar() {
             <Notification className="navbar-notification" />
             {logedIn && (
               <>
-                <img
-                  className="company-logo"
-                  src={`http://localhost:4000/uploads/users/${localStorage.getItem(
-                    "image"
-                  )}`}
-                  alt=""
-                />
-
                 <button className="logout-btn" onClick={logout}>
                   Logout
                 </button>
+                <div className="acount-container">
+                  <h3 className="navbar-name-flex">
+                    {user.firstName} {user.lastName}
+                  </h3>
+                  <img
+                    className="navbar-user-avatar"
+                    src={`http://localhost:4000/uploads/users/${localStorage.getItem(
+                      "image"
+                    )}`}
+                    alt=""
+                  />
+                </div>
               </>
             )}
             {!logedIn && (
