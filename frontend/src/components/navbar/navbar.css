@@ -156,9 +156,8 @@
 }
 .auth {
   display: flex;
-  align-items: center;
-  gap: 20px;
-  width: 70%;
+  justify-content: center;
+  width: 50%;
   white-space: nowrap;
 }
 .logout-img {

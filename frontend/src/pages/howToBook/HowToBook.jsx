@@ -111,6 +111,9 @@ function HowToBook() {
           </div>
         </div>
       </div>
+      <br />
+      <br />
+      <br />
     </div>
   );
 }

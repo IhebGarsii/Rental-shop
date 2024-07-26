@@ -73,33 +73,31 @@ function Navbar() {
           </nav>
           <div className="auth">
             {logedIn && (
-              <>
-                <div className="account" onClick={() => setAcount(!acount)}>
-                  <img className="arrow-dwon" src={arrowDwon} />
+              <div className="account" onClick={() => setAcount(!acount)}>
+                <img className="arrow-dwon" src={arrowDwon} />
 
-                  <h3 className="navbar-name-flex">
-                    {user.firstName} {user.lastName}
-                  </h3>
-                  <img
-                    className="navbar-user-avatar"
-                    src={`http://localhost:4000/uploads/users/${localStorage.getItem(
-                      "image"
-                    )}`}
-                    alt=""
-                  />
-                  <div className={acount ? "display-none" : "account-absolute"}>
-                    <div className="hover-logout-menu">
-                      <IoIosLogOut className="logout-img" />
-                      <h4 className="logout-btn" onClick={logout}>
-                        Logout
-                      </h4>
-                    </div>
-                    <div className="hover-notification-menu">
-                      <Notification className="navbar-notification" />
-                    </div>
+                <h3 className="navbar-name-flex">
+                  {user.firstName} {user.lastName}
+                </h3>
+                <img
+                  className="navbar-user-avatar"
+                  src={`http://localhost:4000/uploads/users/${localStorage.getItem(
+                    "image"
+                  )}`}
+                  alt=""
+                />
+                <div className={acount ? "display-none" : "account-absolute"}>
+                  <div className="hover-logout-menu">
+                    <IoIosLogOut className="logout-img" />
+                    <h4 className="logout-btn" onClick={logout}>
+                      Logout
+                    </h4>
+                  </div>
+                  <div className="hover-notification-menu">
+                    <Notification className="navbar-notification" />
                   </div>
                 </div>
-              </>
+              </div>
             )}
             {!logedIn && (
               <>

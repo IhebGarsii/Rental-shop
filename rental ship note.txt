@@ -40,9 +40,9 @@ fix the contact login height ***completed***
 
 add all toast
 
-fix navigation default false
+fix navigation default false  
 
-add forget password
+add forget password ***completed***
 
 add login widh role
 
