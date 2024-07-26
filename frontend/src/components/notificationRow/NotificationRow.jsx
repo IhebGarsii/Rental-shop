@@ -6,11 +6,11 @@ function NotificationRow({ notification }) {
       <div className="notification-row">
         <div className="notification-container">
           <hr />
-          <p> {notification.description}: </p>
+          <p id="noti-desc"> {notification.description}: </p>
           <h4>From:</h4>
           <span>
-            {" "}
-            Dropoff Location: {notification.original.dropoffLocation}{" "}
+            
+            Dropoff Location: {notification.original.dropoffLocation}
           </span>
           <span> Card Number: {notification.original.cardNumber} </span>
           <span> Expiry Date: {notification.original.expiryDate} </span>
@@ -20,8 +20,8 @@ function NotificationRow({ notification }) {
 
           <h4>To:</h4>
           <span>
-            {" "}
-            Dropoff Location: {notification.changes.dropoffLocation}{" "}
+            
+            Dropoff Location: {notification.changes.dropoffLocation}
           </span>
           <span> Card Number: {notification.changes.cardNumber} </span>
           <span> Expiry Date:{notification.changes.expiryDate} </span>
@@ -37,7 +37,7 @@ function NotificationRow({ notification }) {
     <div className="notification-row">
       <div className="notification-container">
         <hr />
-        <p> {notification.description} </p>
+        <p id="noti-desc"> {notification.description} </p>
         <hr />
       </div>
     </div>

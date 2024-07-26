@@ -5,10 +5,14 @@
   padding: 10px;
 }
 
-.notification-container>span{
-    color: darkblue;
-    font-weight: 700;
+.notification-container > span {
+  color: darkblue;
+  font-weight: 700;
 }
-.notification-container>p{
+.notification-container > p {
   width: 100%;
+}
+
+#noti-desc {
+  white-space: wrap;
 }

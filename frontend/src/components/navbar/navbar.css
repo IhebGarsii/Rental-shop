@@ -47,14 +47,36 @@
 .logout-btn {
   width: 70px;
   align-items: center;
-  color: white;
+  color: inherit;
   font-size: 1rem;
   display: flex;
-  background-color: red;
 
   justify-content: center;
 
   height: 30px;
+}
+
+.hover-notification-menu {
+  width: 100%;
+  text-align: center;
+  padding: 2px 0px;
+}
+
+.hover-notification-menu:hover {
+  background-color: #0066b2;
+  transition: 0.1s ease-in-out;
+  color: white;
+}
+.hover-logout-menu {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.hover-logout-menu:hover {
+  background-color: #0066b2;
+  color: white;
+  transition: 0.1s ease-in-out;
 }
 
 .navbar-content {
@@ -114,7 +136,6 @@
   background: #1c1c1c;
 }
 
-
 .cta:hover svg {
   transform: translateX(0);
   transition: all 2s ease;
@@ -140,14 +161,41 @@
   width: 70%;
   white-space: nowrap;
 }
-.acount-container {
+.logout-img {
+  width: 20px;
+  height: 30px;
+}
+.account-absolute {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 5px;
-  
-  padding: 3px;
+  padding: 5px 0px;
+  cursor: pointer;
+  background-color: white;
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 1);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 1);
+  flex-direction: column;
+  position: absolute;
+  top: 62px;
+  left: 0px;
+  right: 70px;
+  width: 100%;
 }
+.display-none {
+  display: none;
+}
+.arrow-dwon {
+  width: 15px;
+  margin: 5px;
+  cursor: pointer;
+}
+.account {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .navbar-user-avatar {
   width: 45px;
 }

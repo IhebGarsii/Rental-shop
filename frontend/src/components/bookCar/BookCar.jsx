@@ -50,7 +50,6 @@ function BookCar({ car }) {
       setIsLoading(false);
     }
   };
-
   useEffect(() => {}, [render]);
   return (
     <div className="book-car">

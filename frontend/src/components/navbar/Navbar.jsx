@@ -4,13 +4,16 @@ import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import logo from "../../assets/carRentalLogo.jpg";
 import Notification from "../notification/Notification.jsx";
 import { getUser } from "../../apis/userApi.js";
-
+import arrowDwon from "../../assets/arrow-dwon.png";
+import logoutImg from "../../assets/logout-svgrepo-com.svg";
+import { IoIosLogOut } from "react-icons/io";
 function Navbar() {
   const navigate = useNavigate();
   const [logedIn, setLogedIn] = useState();
   const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState({});
-
+  const [acount, setAcount] = useState(true);
+  console.log(acount);
   const logout = () => {
     localStorage.clear();
     setLogedIn(false);
@@ -69,13 +72,15 @@ function Navbar() {
             )}
           </nav>
           <div className="auth">
-            <Notification className="navbar-notification" />
             {logedIn && (
               <>
-                <button className="logout-btn" onClick={logout}>
-                  Logout
-                </button>
-                <div className="acount-container">
+                <div className="account">
+                  <img
+                    className="arrow-dwon"
+                    src={arrowDwon}
+                    onClick={() => setAcount(!acount)}
+                  />
+
                   <h3 className="navbar-name-flex">
                     {user.firstName} {user.lastName}
                   </h3>
@@ -86,6 +91,17 @@ function Navbar() {
                     )}`}
                     alt=""
                   />
+                  <div className={acount ? "display-none" : "account-absolute"}>
+                    <div className="hover-logout-menu">
+                      <IoIosLogOut className="logout-img"/>
+                      <h4 className="logout-btn" onClick={logout}>
+                        Logout
+                      </h4>
+                    </div>
+                    <div className="hover-notification-menu">
+                      <Notification className="navbar-notification" />
+                    </div>
+                  </div>
                 </div>
               </>
             )}

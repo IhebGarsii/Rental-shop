@@ -21,12 +21,12 @@ function Notification() {
       try {
         let notification;
         if (localStorage.getItem("roles") === "ADMIN") {
-          console.log('eee')
+          console.log("eee");
           notification = await getAdminNotifications();
         } else {
           notification = await getNotifications(localStorage.getItem("idUser"));
         }
-        console.log(notification)
+        console.log(notification);
         setNotification(notification.notification);
         setBadge(notification.i);
       } catch (error) {
@@ -37,7 +37,12 @@ function Notification() {
   }, []);
   return (
     <div onClick={handlePostRead} className="notification-component">
-      <FaBell className="notification-icon" icon={FaBell} />
+      <div className="noti-display">
+        <FaBell icon={FaBell} />
+        <h4 className="notification-name" id="notification-name">
+          Notification
+        </h4>
+      </div>
       {badge > 0 && <div className="badge"> {badge} </div>}
       {displayNotification && (
         <div className="notification-list">

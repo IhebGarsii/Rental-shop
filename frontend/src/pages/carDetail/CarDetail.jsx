@@ -25,13 +25,7 @@ function CarDetail() {
     fetchCar();
   }, []);
 
-  const handleOnclick = () => {
-    setRent(!rent);
-    if (!localStorage.getItem("idUser")) {
-      console.log("dssssssssss", !localStorage.getItem("idUser"));
-      return navigate("/login");
-    }
-  };
+  
   const onDelete = async (idCar) => {
     try {
       const carToDelete = await deleteCar(idCar);
@@ -215,7 +209,7 @@ function CarDetail() {
                   </h3>
                 </div>
               </div>
-              <div className="rent-car">
+              <div className="rent-car" >
                 <BookCar key={car._id} car={car} />
               </div>
             </div>
