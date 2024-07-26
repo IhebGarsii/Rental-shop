@@ -3,6 +3,7 @@ const userModel = require("../model/userModel");
 const bcrypt = require("bcryptjs");
 const blockedEmailModel = require("../model/blockedEmail");
 const nodemailer = require("nodemailer");
+const crypto = require("crypto");
 
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "3d" });
@@ -10,23 +11,27 @@ const createToken = (_id) => {
 
 const login = async (req, res) => {
   const { email, password } = req.body;
+  console.log(req.body);
   try {
-    console.log(process.env.SECRET);
     const user = await userModel.findOne({ email: email });
     if (!user) {
       console.log("erer");
       return res.status(404).json("email not found");
     }
-    console.log(user);
-    const match = bcrypt.compare(password, user.password);
+    console.log("Password: ", password);
+    console.log("User Password Hash: ", user.password);
+    const match = await bcrypt.compare(password, user.password);
+    console.log("Password Match: ", match);
     const token = createToken(user._id);
     if (!match) {
-      return res.status(200).json("mail & pass not match");
+      console.log(match, "deeeeee");
+      return res.status(500).json("incorrect email or password");
     }
 
     return res.status(200).json({ user, token });
   } catch (error) {
     console.log(error);
+    return res.status(404).json(error);
   }
 };
 
@@ -147,4 +152,60 @@ const sendEmail = async (req, res) => {
   }
 };
 
-module.exports = { login, signup, getAllUsers, getUser, blockUser, sendEmail };
+const passwordReset = async (req, res) => {
+  console.log(req.body);
+
+  try {
+    function generateRandomString(length) {
+      return crypto.randomBytes(length).toString("hex").slice(0, length);
+    }
+    const password = generateRandomString(10);
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+    const user = await userModel.findOne({ email: req.body.email });
+    user.password = hash;
+    await user.save();
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "ihebgarsi78@gmail.com",
+        pass: "bvxixgsgsxvusrgb",
+      },
+    });
+
+    // Define the mail options
+    const mailOptions = {
+      from: "ihebgarsi78@gmail.com", // Sender address (your Gmail address)
+      to: req.body.email, // Receiver's email address
+      subject: "Password Change", // Email subject
+      html: `
+        <p> your new password  :</p>
+      <p>${password}</p>
+      `,
+    };
+
+    // Send the email
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error("Error sending email:", error);
+        res.status(500).json({ message: "Failed to send email" });
+      } else {
+        console.log("Email sent:", info.response);
+        res.status(200).json({ message: "Email sent successfully" });
+      }
+    });
+    return res.status(200).json("password Changed");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+module.exports = {
+  login,
+  signup,
+  getAllUsers,
+  getUser,
+  blockUser,
+  sendEmail,
+  passwordReset,
+};

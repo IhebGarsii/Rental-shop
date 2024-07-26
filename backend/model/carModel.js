@@ -68,6 +68,12 @@ const carModel = new Schema({
       ref: "userModel",
     },
   ],
+  idBooking: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "bookingModel",
+    },
+  ],
   availableIn: {
     type: String,
   },

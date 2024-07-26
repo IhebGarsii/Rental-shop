@@ -42,6 +42,13 @@ add all toast
 
 fix navigation default false
 
+add forget password
+
+add login widh role
+
+add user profile like uiverse.io/   ***completed***
+add auth to notification    ***completed***
+notification need revamp show only notification conserns the user  ***completed***
 what is customer journey
 
 when the rent state change it cause a rerender and the prop booking will be the last object in data state  l9it 7al enou na7i rent state w n5ali condetionly render b editingBookingId === booking._id w bech tkoun false lin na5tar edit 

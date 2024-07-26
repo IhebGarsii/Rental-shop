@@ -10,7 +10,6 @@ import Delete from "../../components/button/Delete";
 function UserBooking() {
   console.log("render");
   const [data, setData] = useState([]);
-  const [rent, setRent] = useState(false);
   const [editingBookingId, setEditingBookingId] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {

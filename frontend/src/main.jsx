@@ -24,6 +24,7 @@ import UserBooking from "./pages/userBooking/UserBooking.jsx";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/authFunction/AuthFunction.jsx";
 import HowToBook from "./pages/howToBook/HowToBook.jsx";
+import ForgotPassword from "./pages/forgotPassword/ForgotPassword.jsx";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "car/:id",
         element: <CarDetail />,
+      },
+      {
+        path: "forgotPassword",
+        element: <ForgotPassword />,
       },
       {
         path: "update/:id",

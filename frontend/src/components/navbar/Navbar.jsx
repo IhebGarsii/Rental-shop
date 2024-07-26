@@ -74,12 +74,8 @@ function Navbar() {
           <div className="auth">
             {logedIn && (
               <>
-                <div className="account">
-                  <img
-                    className="arrow-dwon"
-                    src={arrowDwon}
-                    onClick={() => setAcount(!acount)}
-                  />
+                <div className="account" onClick={() => setAcount(!acount)}>
+                  <img className="arrow-dwon" src={arrowDwon} />
 
                   <h3 className="navbar-name-flex">
                     {user.firstName} {user.lastName}
@@ -93,7 +89,7 @@ function Navbar() {
                   />
                   <div className={acount ? "display-none" : "account-absolute"}>
                     <div className="hover-logout-menu">
-                      <IoIosLogOut className="logout-img"/>
+                      <IoIosLogOut className="logout-img" />
                       <h4 className="logout-btn" onClick={logout}>
                         Logout
                       </h4>

@@ -1,5 +1,5 @@
 const carModel = require("../model/carModel");
-
+const bookingModel = require("../model/bookingModel");
 const getCars = async (req, res) => {
   try {
     const cars = await carModel.find();
@@ -113,12 +113,30 @@ const deleteCar = async (req, res) => {
   const { id } = req.params;
   try {
     const carToDelete = await carModel.findByIdAndDelete(id);
+
     if (!carToDelete) {
-      return res.status(404).json("car not found");
+      return res.status(404).json("Car not found");
     }
-    return res.status(200).json("carDeleted");
+
+    const bookingIds = carToDelete.idBooking; // Assuming this is an array
+
+    // Check if there are any bookings to delete
+    if (bookingIds && bookingIds.length > 0) {
+      // Map the array of booking IDs to an array of promises for deletion
+      const deletePromises = bookingIds.map(async (bookingId) => {
+        return await bookingModel.findByIdAndDelete(bookingId);
+      });
+
+      // Wait for all deletions to complete
+      await Promise.all(deletePromises);
+    }
+
+    return res.status(200).json("Car and associated bookings deleted");
   } catch (error) {
     console.error(error);
+    return res
+      .status(500)
+      .json("An error occurred while deleting the car and its bookings");
   }
 };
 
@@ -147,7 +165,6 @@ const getRandomCars = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
-
 
 module.exports = {
   addCar,

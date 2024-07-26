@@ -181,6 +181,7 @@
   left: 0px;
   right: 70px;
   width: 100%;
+  z-index: 1000;
 }
 .display-none {
   display: none;
@@ -194,10 +195,17 @@
   position: relative;
   display: flex;
   align-items: center;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 5px;
 }
-
+.account:hover {
+  background-color: rgb(202, 202, 202);
+}
 .navbar-user-avatar {
   width: 45px;
+  height: 45px;
+  border-radius: 50%;
 }
 .navbar-name-flex {
   display: flex;

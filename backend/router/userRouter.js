@@ -7,6 +7,7 @@ const {
   getUser,
   blockUser,
   sendEmail,
+  passwordReset,
 } = require("../controller/userController");
 
 const multer = require("multer");
@@ -34,5 +35,7 @@ userRouter.post("/sendEmail", sendEmail);
 userRouter.get("/getUser/:idUser", getUser);
 
 userRouter.delete("/blockUser/:idUser", blockUser);
+
+userRouter.post("/passwordReset", passwordReset);
 
 module.exports = userRouter;

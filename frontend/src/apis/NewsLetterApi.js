@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 const BASR_URL = "http://localhost:4000/NewsLetter";
 
 export const subscribeNewsLetter = async (email) => {
@@ -9,7 +11,12 @@ export const subscribeNewsLetter = async (email) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    return response.json();
+    if (response.ok) {
+      toast.success("Subscription succeeded");
+      return response.json();
+    } else {
+      toast.error("Subscription failed");
+    }
   } catch (error) {
     console.error(error);
   }

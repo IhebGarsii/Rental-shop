@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./login.css";
 import { signin } from "../../apis/userApi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -14,14 +15,18 @@ function Login() {
         password,
       };
       const login1 = await signin(data);
-      if (login1) {
+      if (login1.ok) {
+        console.log("Login successful:", login1.ok);
         localStorage.setItem("token", login1.token);
         localStorage.setItem("image", login1.user.image);
         localStorage.setItem("idUser", login1.user._id);
         localStorage.setItem("roles", login1.user.roles);
 
-        console.log(login1);
         navigate("/home");
+      } else {
+        console.log("fail", login1.ok);
+        console.error("Login failed:", login1.error || "Unknown error");
+        toast.error(`Login failed: ${login1.error || "Unknown error"}`);
       }
     } catch (error) {
       console.log(error);
@@ -43,16 +48,17 @@ function Login() {
           </label>
         </div>
         <div className="input-field">
-          <input required="" className="input" type="password" />
-          <label
-            className="label"
-            htmlFor="input"
+          <input
+            required=""
+            className="input"
+            type="password"
             onChange={(e) => setPassword(e.target.value)}
-          >
+          />
+          <label className="label" htmlFor="input">
             Enter Password
           </label>
         </div>
-        <a>Forgot your password?</a>
+        <Link to="/forgotPassword">Forgot your password?</Link>
         <button className="submit-btn" onClick={onSubmit}>
           Sign In
         </button>

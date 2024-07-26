@@ -52,7 +52,8 @@ const bookCar = async (req, res) => {
       fullPrice,
       paymentType,
     });
-
+    car.idBooking.push(booking._id);
+    await car.save();
     const description = `${user.firstName} has requested a booking for ${car.model}`;
     const notification = new adminNotification({
       description,
@@ -246,6 +247,7 @@ const deleteBooking = async (req, res) => {
       );
       console.log(car.bookingDuration);
       car.rented = false;
+      car.idBooking.filter((id) => id.toString() !== booking._id.toString());
       await userR.save();
       await car.save();
     }
