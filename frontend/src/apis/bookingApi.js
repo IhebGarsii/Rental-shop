@@ -72,7 +72,7 @@ export const deleteBooking = async (idBooking) => {
 export const acceptBooking = async (booking) => {
   try {
     const response = await fetch(
-      `${BASE_URL}/acceptBooking/${booking.idCar}/${booking.idUser}/${booking._id}`,
+      `${BASE_URL}/acceptBooking/${booking.idCar._id}/${booking.idUser._id}/${booking._id}`,
 
       {
         method: "POST",

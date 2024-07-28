@@ -1,12 +1,15 @@
 .booking-List-container {
-  color: white;
+  width: 100%;
   display: flex;
   flex-direction: column;
+
   align-items: center;
 }
 
 .booking-component {
   padding: 20px;
+  width: 100%;
+
   margin: 10px;
 }
 
@@ -20,4 +23,8 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+.booking-wrapperr {
+  width: 100%;
+  border: 10px solid red;
 }

@@ -32,11 +32,11 @@ function Dashboard() {
       <div className="form-container">
         <form className="formm">
           <div className="form-group">
-            <label for="email">Company Email</label>
+            <label for="email">Subject</label>
             <input type="text" id="email" name="email" required="" />
           </div>
           <div className="form-group">
-            <label for="textarea">How Can We Help You?</label>
+            <label for="textarea">Type the body of the email</label>
             <textarea
               name="textarea"
               id="textarea"

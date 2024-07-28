@@ -102,16 +102,7 @@ function AddCar() {
           {...register("dailyRent")}
           placeholder="Daily Rent Price"
         />
-        <input
-          type="text"
-          {...register("weeklyRent")}
-          placeholder="Weekly Rent Price"
-        />
-        <input
-          type="text"
-          {...register("monthlyRent")}
-          placeholder="Monthly Rent Price"
-        />
+       
         <input
           type="text"
           {...register("conditions")}

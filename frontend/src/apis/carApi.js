@@ -101,3 +101,19 @@ export const deleteCar = async (id) => {
     console.error(error);
   }
 };
+
+
+export const getRentedCars = async (id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/getRentedCars`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    const car = await response.json();
+    return car;
+  } catch (error) {
+    console.log(error);
+  }
+};

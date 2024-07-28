@@ -5,7 +5,7 @@ const {
   getCar,
   updateCar,
   deleteCar,
-
+  getRentedCars,
   getRandomCars,
 } = require("../controller/carController.js");
 const multer = require("multer");
@@ -51,6 +51,7 @@ carRouter.put(
   ]),
   updateCar
 );
+carRouter.get("/getRentedCars", getRentedCars);
 carRouter.delete("/deleteCar/:id", deleteCar);
 
 module.exports = carRouter;

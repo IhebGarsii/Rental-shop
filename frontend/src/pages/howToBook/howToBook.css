@@ -4,7 +4,8 @@
   align-items: center;
   width: 100%;
   height: fit-content;
-  background-color: var(--body-background);
+  padding-top: 20px;
+  background-color: #edf1f8;
 }
 
 .top-how {

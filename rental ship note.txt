@@ -49,6 +49,56 @@ add login widh role
 add user profile like uiverse.io/   ***completed***
 add auth to notification    ***completed***
 notification need revamp show only notification conserns the user  ***completed***
+fix accept booking even if its boked maybe beceaus i accepted too fast that it didnt regester the date
+
+fix notification go without login
+add padding in MY BOOKING
 what is customer journey
 
 when the rent state change it cause a rerender and the prop booking will be the last object in data state  l9it 7al enou na7i rent state w n5ali condetionly render b editingBookingId === booking._id w bech tkoun false lin na5tar edit 
+
+
+
+
+
+
+
+
+
+
+Car Rental Web Application
+
+Overview:
+Developed a comprehensive and responsive car rental web application that offers user-friendly functionalities for both customers and administrators.
+
+Features:
+
+User Authentication and Management:
+
+User and admin login/logout and registration.
+Password recovery and reset options.
+Contact and Communication:
+
+Contact form to send automated emails to the agency.
+Newsletter subscription.
+Car Listings and Booking:
+
+Car list with filters for availability, price range, type, and model.
+Detailed car information pages.
+Booking functionality with a calendar showing car availability.
+Booking management in "My Booking" page with edit, delete, and payment options via Stripe.
+Admin Dashboard:
+
+Manage car listings with edit and delete options.
+View and manage user bookings, including accepting or rejecting requests.
+Filter bookings by status (accepted, pending, refused).
+User management, including viewing user details and blocking users.
+Send emails to newsletter subscribers.
+Notifications:
+
+Users receive notifications for booking status updates.
+Admin receives notifications for booking updates.
+Responsive Design:
+
+The web application is fully responsive, ensuring optimal user experience across various devices, including desktops, tablets, and smartphones.
+

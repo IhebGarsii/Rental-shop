@@ -75,7 +75,15 @@ const bookCar = async (req, res) => {
 
 const getBookings = async (req, res) => {
   try {
-    const bookings = await bookingModel.find();
+    const bookings = await bookingModel
+      .find()
+      .populate({
+        path: "idUser",
+        populate: {
+          path: "idCars",
+        },
+      })
+      .populate("idCar");
     if (!bookings) {
       return res.status(404).json("no booking were found");
     }
@@ -87,6 +95,8 @@ const getBookings = async (req, res) => {
 
 const acceptBooking = async (req, res) => {
   const { idCar, idUser, idBooking } = req.params;
+  console.log("params", req.params, "params");
+  console.log("body", req.body, "body");
   try {
     const car = await carModel.findById(idCar);
     if (!car) {
@@ -122,6 +132,7 @@ const acceptBooking = async (req, res) => {
     await notification.save();
     return res.status(200).json("booking accepted");
   } catch (error) {
+    console.log(error);
     return res.status(500).json(error);
   }
 };

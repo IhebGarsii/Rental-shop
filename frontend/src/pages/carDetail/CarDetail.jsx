@@ -213,9 +213,11 @@ function CarDetail() {
               </div>
             </div>
           </div>
-          <div className="calander-container">
-     {       <BookingCalandar  car={car} />}
-          </div>
+          {car.bookingDuration.length > 0 && (
+            <div className="calander-container">
+              <BookingCalandar car={car} />
+            </div>
+          )}
         </>
       )}
     </div>

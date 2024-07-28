@@ -32,7 +32,7 @@ function BookingList() {
       }
     };
     fetchRequests();
-  }, [filter]);
+  }, []);
   return (
     <div className="booking-List-container">
       <select
@@ -43,10 +43,16 @@ function BookingList() {
         <option value="REFUSED">REFUSED</option>
         <option value="PENDING">PENDING</option>
       </select>
+
       {filter &&
-        filter.map((book) => (
-          <div key={book._id} className="booking-component">
-            <Booking booking={book} />
+        filter.map((booking) => (
+          <div key={booking._id} className="booking-component">
+            <Booking booking={booking}>
+              <div className="booking-wrapperr">
+                <Booking.Full />
+                <Booking.AdminActions />
+              </div>
+            </Booking>
           </div>
         ))}
     </div>

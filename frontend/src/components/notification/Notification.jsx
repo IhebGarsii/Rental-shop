@@ -11,6 +11,7 @@ function Notification() {
   const [displayNotification, setDisplayNotification] = useState(false);
   const [notification, setNotification] = useState([]);
   const [badge, setBadge] = useState();
+  console.log("notificatin test");
   const handlePostRead = async () => {
     setDisplayNotification(!displayNotification);
     const response = await postRead(localStorage.getItem("idUser"));
@@ -21,12 +22,10 @@ function Notification() {
       try {
         let notification;
         if (localStorage.getItem("roles") === "ADMIN") {
-          console.log("eee");
           notification = await getAdminNotifications();
         } else {
           notification = await getNotifications(localStorage.getItem("idUser"));
         }
-        console.log(notification);
         setNotification(notification.notification);
         setBadge(notification.i);
       } catch (error) {

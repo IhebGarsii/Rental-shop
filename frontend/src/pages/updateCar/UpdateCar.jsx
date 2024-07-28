@@ -14,20 +14,29 @@ function UpdateCar() {
       try {
         const fetchedCar = await getCar(id);
         setCar(fetchedCar);
+
         setValue("title", fetchedCar.title);
         setValue("description", fetchedCar.description);
         setValue("model", fetchedCar.model);
         setValue("year", fetchedCar.year);
         setValue("color", fetchedCar.color);
+        setValue("location", fetchedCar.location);
         setValue("transmission", fetchedCar.transmission);
         setValue("fuel", fetchedCar.fuel);
         setValue("seats", fetchedCar.seats);
         setValue("doors", fetchedCar.doors);
+        setValue("driveType", fetchedCar.driveType);
+        setValue("engineCapacity", fetchedCar.engineCapacity);
+        setValue("power", fetchedCar.power);
+        setValue("consumption", fetchedCar.consumption);
+        setValue("CO2emissions", fetchedCar.CO2emissions);
+        setValue("emissionClass", fetchedCar.emissionClass);
+        setValue("mileage", fetchedCar.mileage);
+        setValue("currentIssues", fetchedCar.currentIssues);
         setValue("airConditioning", fetchedCar.airConditioning);
         setValue("navigation", fetchedCar.navigation);
         setValue("dailyRent", fetchedCar.dailyRent);
-        setValue("weeklyRent", fetchedCar.weeklyRent);
-        setValue("monthlyRent", fetchedCar.monthlyRent);
+
         setValue("conditions", fetchedCar.conditions);
       } catch (error) {
         console.log(error);
@@ -57,8 +66,17 @@ function UpdateCar() {
       formData.append("airConditioning", data.airConditioning);
       formData.append("navigation", data.navigation);
       formData.append("dailyRent", data.dailyRent);
-      formData.append("weeklyRent", data.weeklyRent);
-      formData.append("monthlyRent", data.monthlyRent);
+
+      formData.append("location", data.location);
+      formData.append("driveType", data.driveType);
+      formData.append("engineCapacity", data.engineCapacity);
+      formData.append("power", data.power);
+      formData.append("consumption", data.consumption);
+      formData.append("CO2emissions", data.CO2emissions);
+      formData.append("emissionClass", data.emissionClass);
+      formData.append("mileage", data.mileage);
+      formData.append("currentIssues", data.currentIssues);
+
       formData.append("conditions", data.conditions);
 
       const car = await updateCar(formData, id);
@@ -73,157 +91,81 @@ function UpdateCar() {
     <div className="updateCar">
       <form className="updateCar-form" onSubmit={handleSubmit(submit)}>
         <div className="form-group">
-          <label htmlFor="title">Name</label>
+          <input type="text" {...register("title")} placeholder="name" />
           <input
             type="text"
-            id="title"
-            {...register("title")}
-            placeholder="Name"
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="description">Description</label>
-          <input
-            type="text"
-            id="description"
             {...register("description")}
-            placeholder="Description"
+            placeholder="description"
           />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="image">Image</label>
-          <input type="file" id="image" multiple {...register("image")} />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="model">Car Model</label>
+          <input type="file" multiple {...register("image")} />
+          <input type="file" multiple {...register("imageInterior")} />
+          <input type="text" {...register("model")} placeholder="Car Model" />
+          <input type="number" {...register("year")} placeholder="Year" />
+          <input type="text" {...register("location")} placeholder="location" />
           <input
             type="text"
-            id="model"
-            {...register("model")}
-            placeholder="Car Model"
+            {...register("interiorMaterial")}
+            placeholder="interiorMaterial"
           />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="year">Year</label>
-          <input
-            type="number"
-            id="year"
-            {...register("year")}
-            placeholder="Year"
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="color">Color</label>
           <input
             type="text"
-            id="color"
-            placeholder="Color"
-            {...register("color")}
+            {...register("driveType")}
+            placeholder="driveType"
           />
-        </div>
+          <input
+            type="text"
+            {...register("engineCapacity")}
+            placeholder="engineCapacity"
+          />
+          <input type="text" {...register("power")} placeholder="power" />
+          <input
+            type="text"
+            {...register("consumption")}
+            placeholder="consumption"
+          />
+          <input
+            type="text"
+            {...register("CO2emissions")}
+            placeholder="CO2emissions"
+          />
+          <input
+            type="text"
+            {...register("emissionClass")}
+            placeholder="emissionClass"
+          />
+          <input type="text" {...register("mileage")} placeholder="mileage" />
 
-        <div className="form-group">
-          <label htmlFor="transmission">Transmission</label>
-          <select id="transmission" {...register("transmission")}>
+          <input
+            type="text"
+            {...register("currentIssues")}
+            placeholder="currentIssues"
+          />
+          <select {...register("transmission")}>
             <option value="manual">Manual</option>
             <option value="automatic">Automatic</option>
           </select>
-        </div>
+          <input type="text" {...register("fuel")} placeholder="Fuel Type" />
+          <input type="number" {...register("seats")} placeholder="Seats" />
+          <input type="number" {...register("doors")} placeholder="Doors" />
+          <div className="checkbox">
+            <label>Air Conditioning</label>
+            <input type="checkbox" {...register("airConditioning")} />
+          </div>
+          <div className="checkbox">
+            <label>Navigation System</label>
+            <input type="checkbox" {...register("navigation")} />
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="fuel">Fuel Type</label>
           <input
             type="text"
-            id="fuel"
-            {...register("fuel")}
-            placeholder="Fuel Type"
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="seats">Seats</label>
-          <input
-            type="number"
-            id="seats"
-            placeholder="Seats"
-            {...register("seats")}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="doors">Doors</label>
-          <input
-            type="number"
-            id="doors"
-            placeholder="Doors"
-            {...register("doors")}
-          />
-        </div>
-
-        <div className="checkbox">
-          <div className="s">
-            <label htmlFor="airConditioning">Air Conditioning</label>
-            <input
-              type="checkbox"
-              id="airConditioning"
-              {...register("airConditioning")}
-            />
-          </div>
-        </div>
-
-        <div className=" checkbox">
-          <div className="s">
-            <label htmlFor="navigation">Navigation System</label>
-            <input
-              type="checkbox"
-              id="navigation"
-              {...register("navigation")}
-            />
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="dailyRent">Daily Rent Price</label>
-          <input
-            type="text"
-            id="dailyRent"
-            placeholder="Daily Rent Price"
             {...register("dailyRent")}
+            placeholder="Daily Rent Price"
           />
-        </div>
 
-        <div className="form-group">
-          <label htmlFor="weeklyRent">Weekly Rent Price</label>
           <input
             type="text"
-            id="weeklyRent"
-            placeholder="Weekly Rent Price"
-            {...register("weeklyRent")}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="monthlyRent">Monthly Rent Price</label>
-          <input
-            type="text"
-            id="monthlyRent"
-            {...register("monthlyRent")}
-            placeholder="Monthly Rent Price"
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="conditions">Conditions</label>
-          <input
-            type="text"
-            id="conditions"
-            placeholder="Conditions"
             {...register("conditions")}
+            placeholder="Conditions"
           />
         </div>
 

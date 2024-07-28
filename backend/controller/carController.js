@@ -94,7 +94,7 @@ const addCar = async (req, res) => {
 
 const updateCar = async (req, res) => {
   const { id } = req.params;
-
+  console.log(req.body);
   try {
     const carToUpdate = await carModel.findByIdAndUpdate(id, req.body, {
       new: true,
@@ -165,7 +165,18 @@ const getRandomCars = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
-
+const getRentedCars = async (req, res) => {
+  try {
+    const cars = await carModel.find({ rented: true });
+    if (!cars || cars.length === 0) {
+      return res.status(404).json({ message: "There are no rented cars" });
+    }
+    return res.status(200).json(cars);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal server error", error });
+  }
+};
 module.exports = {
   addCar,
   getCars,
@@ -173,4 +184,5 @@ module.exports = {
   updateCar,
   deleteCar,
   getRandomCars,
+  getRentedCars,
 };
