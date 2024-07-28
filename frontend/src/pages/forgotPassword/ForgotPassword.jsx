@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./forgotPassword.css";
 import { passwordReset } from "../../apis/userApi";
+import { useNavigate } from "react-router-dom";
 function ForgotPassword() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const handlePassword = async () => {
     console.log(email);
     const response = await passwordReset(email);
+    navigate("/login");
   };
   return (
     <div className="forgot-password">

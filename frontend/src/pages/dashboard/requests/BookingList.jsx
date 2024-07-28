@@ -13,7 +13,6 @@ function BookingList() {
     const filterData = async () => {
       const fData = data.filter((f) => f.status === tag);
       setFilter(fData);
-    
     };
     filterData();
   }, [tag, data]);
@@ -33,7 +32,7 @@ function BookingList() {
       }
     };
     fetchRequests();
-  }, []);
+  }, [filter]);
   return (
     <div className="booking-List-container">
       <select

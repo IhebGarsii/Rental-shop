@@ -3,14 +3,14 @@ import "./carDetail.css";
 import { deleteCar, getCar } from "../../apis/carApi";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import BookCar from "../../components/bookCar/BookCar";
-import { RxCross2 } from "react-icons/rx";
 import Delete from "../../components/button/Delete";
+import BookingCalandar from "../../components/calendar/BookingCalandar";
 
 function CarDetail() {
   const [car, setCar] = useState();
   const { id } = useParams();
   const [rent, setRent] = useState(false);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const fetchCar = async () => {
@@ -25,7 +25,6 @@ function CarDetail() {
     fetchCar();
   }, []);
 
-  
   const onDelete = async (idCar) => {
     try {
       const carToDelete = await deleteCar(idCar);
@@ -209,10 +208,13 @@ function CarDetail() {
                   </h3>
                 </div>
               </div>
-              <div className="rent-car" >
+              <div className="rent-car">
                 <BookCar key={car._id} car={car} />
               </div>
             </div>
+          </div>
+          <div className="calander-container">
+     {       <BookingCalandar  car={car} />}
           </div>
         </>
       )}

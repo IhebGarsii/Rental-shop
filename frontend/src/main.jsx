@@ -25,7 +25,8 @@ import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/authFunction/AuthFunction.jsx";
 import HowToBook from "./pages/howToBook/HowToBook.jsx";
 import ForgotPassword from "./pages/forgotPassword/ForgotPassword.jsx";
-
+import { Provider } from "react-redux";
+import { store } from "./redux/store.js";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -85,7 +86,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
-    <RouterProvider router={router} />
-    <Toaster />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+      <Toaster />
+    </Provider>
   </>
 );

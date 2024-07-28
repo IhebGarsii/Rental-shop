@@ -2,13 +2,18 @@ import React, { useState } from "react";
 import "./login.css";
 import { signin } from "../../apis/userApi";
 import { Link, useNavigate } from "react-router-dom";
+import { login, logout } from "../../redux/userReducer";
+import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
   const onSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const data = {
         email,
@@ -16,12 +21,13 @@ function Login() {
       };
       const login1 = await signin(data);
       if (login1.ok) {
+        dispatch(login({ login1 }));
         console.log("Login successful:", login1.ok);
         localStorage.setItem("token", login1.token);
         localStorage.setItem("image", login1.user.image);
         localStorage.setItem("idUser", login1.user._id);
         localStorage.setItem("roles", login1.user.roles);
-
+        console.log("user redux", user);
         navigate("/home");
       } else {
         console.log("fail", login1.ok);

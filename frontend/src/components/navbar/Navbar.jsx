@@ -100,14 +100,14 @@ function Navbar() {
               </div>
             )}
             {!logedIn && (
-              <>
+              <div className="logout-state">
                 <Link to="login" onClick={toggleMenu}>
                   Login
                 </Link>
                 <Link to="signup" onClick={toggleMenu}>
                   Signup
                 </Link>
-              </>
+              </div>
             )}
             {hasHomeInUrl && (
               <a className="cta" href="#home-contact">

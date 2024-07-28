@@ -267,3 +267,7 @@
   transition: 1s;
   display: flex;
 }
+.logout-state{
+  display: flex;
+  gap: 20px;
+}
