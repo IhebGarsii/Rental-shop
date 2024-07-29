@@ -3,14 +3,28 @@ import "./signup.css";
 import { signup } from "../../apis/userApi";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 
 function SignUp() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
+  const formData = new FormData();
 
-  const onSubmit = async (data, e) => {
-    e.preventDefault();
-    const formData = new FormData();
+  const { mutate } = useMutation({
+    mutationFn: signup,
+    onSuccess: (data) => {
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("image", data.user.image);
+      localStorage.setItem("idUser", data.user._id);
+      localStorage.setItem("roles", data.user.roles);
+      navigate("/home");
+    },
+    onError: (error) => {
+      console.error("Signup failed:", error);
+      toast.error(`Signup failed: ${error.message || "Unknown error"}`);
+    },
+  });
+  const onSubmit = (data) => {
     formData.append("email", data.email);
     formData.append("password", data.password);
     formData.append("firstName", data.firstName);
@@ -18,19 +32,7 @@ function SignUp() {
     formData.append("cin", data.cin);
     formData.append("coverImage", data.coverImage);
     formData.append("image", data.image[0]);
-
-    try {
-      const login = await signup(formData);
-      if (login) {
-        localStorage.setItem("token", login.token);
-        localStorage.setItem("image", login.user.image);
-        localStorage.setItem("idUser", login.user._id);
-        localStorage.setItem("roles", login.user.roles);
-        navigate("/home");
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    mutate(formData);
   };
 
   return (
@@ -94,7 +96,9 @@ function SignUp() {
           />
           <span>Image</span>
         </label>
-        <button className="submit">Submit</button>
+        <button type="submit" className="submit">
+          Submit
+        </button>
         <p className="signin">
           Already have an account? <Link to="/login">Signin</Link>
         </p>

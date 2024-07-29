@@ -3,30 +3,33 @@ import "./userBooking.css";
 import { getBooking } from "../../apis/bookingApi";
 import { useNavigate } from "react-router-dom";
 import Booking from "../../components/booking/Booking";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 function UserBooking() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
+  const { mutate } = useMutation({
+    mutationFn: getBooking,
+    onSuccess: (data) => {
+      setData(data);
+      data.some((book) => {
+        if (book.status === "ACCEPTED") {
+          book.payCheck = true;
+        }
+      });
+    },
+    onError: (error) => {
+      console.log("fetching booking failed", error);
+      toast.error("fetching booking failed", error);
+    },
+  });
   useEffect(() => {
     if (!localStorage.getItem("idUser")) {
       return navigate("/login");
+    } else {
+      mutate(localStorage.getItem("idUser"));
     }
-    const fetchBookingById = async () => {
-      try {
-        const booking = await getBooking(localStorage.getItem("idUser"));
-
-        setData(booking);
-
-        booking.some((book) => {
-          if (book.status === "ACCEPTED") {
-            book.payCheck = true;
-          }
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchBookingById();
   }, []);
 
   return (
