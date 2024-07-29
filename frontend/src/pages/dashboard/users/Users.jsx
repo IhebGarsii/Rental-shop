@@ -1,40 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { getAllUser, blockUser } from "../../../apis/userApi";
 import "./users.css";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import Loader from "../../../components/loading/Loader";
 function Users() {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const { mutate: mutateBlock } = useMutation({
+    mutationFn: blockUser,
+    onSuccess: () => {
+      toast.success("user Blocked");
+    },
+    onError: (error) => {
+      toast.error("error in blocking the user ", error);
+    },
+  });
 
   const handleBlock = async (idUser) => {
     const confirmBlock = window.confirm(
       "Are you sure you want to block this user?"
     );
     if (confirmBlock) {
-      await blockUser(idUser);
+      mutateBlock(idUser);
     }
   };
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      setIsLoading(true);
-
-      try {
-        const user = await getAllUser();
-        if (user) {
-          setData(user);
-          setIsLoading(false);
-          console.log(user);
-        }
-      } catch (error) {
-        setIsLoading(false);
-        setError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchUsers();
-  }, []);
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["user"],
+    queryFn: getAllUser,
+  });
+  if (isLoading) {
+    return (
+      <div className="loading">
+        <div className="loading-center">
+          <Loader />
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="users">
       {data &&

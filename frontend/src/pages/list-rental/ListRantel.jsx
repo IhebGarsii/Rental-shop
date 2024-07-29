@@ -5,56 +5,48 @@ import MultiRangeSlider from "multi-range-slider-react";
 import CarCard from "../../components/carCard/CarCard";
 import { useForm } from "react-hook-form";
 import Loader from "../../components/loading/Loader";
+import { useQuery } from "@tanstack/react-query";
+
 function ListRantel() {
   const { register, handleSubmit, reset } = useForm();
-  const [cars, setCars] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [filter, setFilter] = useState([]);
-  const [minValue, set_minValue] = useState(0);
-  const [maxValue, set_maxValue] = useState(100);
+  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(100);
   const [currentR, setCurrentR] = useState(1);
-  const [currentE, setCurrentE] = useState(1);
+
+  const {
+    isLoading,
+    isError,
+    data: cars = [],
+    error,
+  } = useQuery({
+    queryKey: ["cars"],
+    queryFn: getCars,
+  });
+
+  useEffect(() => {
+    // Set filter when cars data is fetched
+    setFilter(cars);
+  }, [cars]);
 
   const handleInput = (e) => {
-    set_minValue(e.minValue);
-    set_maxValue(e.maxValue);
+    setMinValue(e.minValue);
+    setMaxValue(e.maxValue);
   };
-  useEffect(() => {
-    const fetchCars = async () => {
-      setIsLoading(true);
-      setError(false);
-      try {
-        const carsList = await getCars();
-        if (carsList) {
-          setCars(carsList);
-          setFilter(carsList);
-          setIsLoading(false);
-          setError(false);
-        }
-      } catch (error) {
-        console.log(error);
-        setIsLoading(false);
-        setError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchCars();
-  }, []);
-  const resetFilte = () => {
+
+  const resetFilter = () => {
     reset();
     setFilter(cars);
   };
-  const items = 9;
 
-  const NbPage = Math.ceil(filter.length / items);
+  const itemsPerPage = 9;
+  const NbPage = Math.ceil(filter.length / itemsPerPage);
 
-  const startIdenx = (currentR - 1) * items;
-  const endIndex = startIdenx + items;
-  const DataPerPageR = filter.slice(startIdenx, endIndex);
+  const startIndex = (currentR - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const dataPerPage = filter.slice(startIndex, endIndex);
 
-  const onSubmitFiltre = (data) => {
+  const onSubmitFilter = (data) => {
     const filteredCars = cars.filter((car) => {
       const hireOn = new Date(data.hireOn);
       const returnOn = new Date(data.returnOn);
@@ -72,8 +64,8 @@ function ListRantel() {
       }
       if (!data.hireOn && !data.returnOn) {
         isNotBooked = true;
-        console.log("went in");
       }
+
       const isWithinPriceRange =
         car.dailyRent >= minValue && car.dailyRent <= maxValue;
 
@@ -90,15 +82,14 @@ function ListRantel() {
         (!data.toyota || car.model.toLowerCase().includes("toyota")) &&
         (!data.nissan || car.model.toLowerCase().includes("nissan")) &&
         (!data.honda || car.model.toLowerCase().includes("honda"));
-      console.log(isNotBooked);
+
       return (
         isNotBooked && isWithinPriceRange && isMatchingType && isMatchingBrand
       );
     });
 
-    console.log("lets seee", filteredCars);
-
     setFilter(filteredCars);
+    setCurrentR(1); // Reset to the first page when filters are applied
   };
 
   if (isLoading) {
@@ -110,14 +101,16 @@ function ListRantel() {
       </div>
     );
   }
-  if (error) {
-    return <div> dssd {error} </div>;
+
+  if (isError) {
+    return <div>Error: {error.message}</div>;
   }
+
   return (
     <div className="ListRantel-container">
       <div className="listRentel-fl">
         <form
-          onSubmit={handleSubmit(onSubmitFiltre)}
+          onSubmit={handleSubmit(onSubmitFilter)}
           className="car-list-filter"
         >
           <div className="availability">
@@ -147,91 +140,62 @@ function ListRantel() {
               step={5}
               minValue={minValue}
               maxValue={maxValue}
-              onInput={(e) => {
-                handleInput(e);
-              }}
+              onInput={handleInput}
             />
             <div className="ranged-input">
-              <span> {minValue} </span> <span> {maxValue} </span>
+              <span>{minValue}</span> <span>{maxValue}</span>
             </div>
             <div className="fiter-chekbox">
               <h2>CATEGORY</h2>
-              <div className="filter-lable">
-                <input type="checkbox" {...register("compact")} />
-
-                <label htmlFor="">Compact</label>
-              </div>
-              <div className="filter-lable">
-                <input type="checkbox" {...register("suv")} />
-
-                <label htmlFor="">SUV</label>
-              </div>
-              <div className="filter-lable">
-                <input type="checkbox" {...register("coach")} />
-
-                <label htmlFor="">Coach</label>
-              </div>
-
-              <div className="filter-lable">
-                <input type="checkbox" {...register("mpv")} />
-                <label htmlFor="MPV">MPV</label>
-              </div>
-              <div className="filter-lable">
-                <input type="checkbox" {...register("sedan")} />
-                <label htmlFor="">Sedan</label>
-              </div>
+              {["compact", "suv", "coach", "mpv", "sedan"].map((type) => (
+                <div className="filter-lable" key={type}>
+                  <input type="checkbox" {...register(type)} />
+                  <label>{type.charAt(0).toUpperCase() + type.slice(1)}</label>
+                </div>
+              ))}
             </div>
             <div className="fiter-chekbox">
               <h2>CAR BRANDS</h2>
-              <div className="filter-lable">
-                <input type="checkbox" {...register("proton")} />
-
-                <label htmlFor="">proton</label>
-              </div>
-              <div className="filter-lable">
-                <input type="checkbox" {...register("perodua")} />
-
-                <label htmlFor="">Perodua</label>
-              </div>
-              <div className="filter-lable">
-                <input type="checkbox" {...register("toyota")} />
-
-                <label htmlFor="">Toyota</label>
-              </div>
-
-              <div className="filter-lable">
-                <input type="checkbox" {...register("nissan")} />
-                <label htmlFor="MPV">Nissan</label>
-              </div>
-              <div className="filter-lable">
-                <input type="checkbox" {...register("honda")} />
-                <label htmlFor="">Honda</label>
-              </div>
+              {["proton", "perodua", "toyota", "nissan", "honda"].map(
+                (brand) => (
+                  <div className="filter-lable" key={brand}>
+                    <input type="checkbox" {...register(brand)} />
+                    <label>
+                      {brand.charAt(0).toUpperCase() + brand.slice(1)}
+                    </label>
+                  </div>
+                )
+              )}
             </div>
           </div>
           <div className="filtre-actions">
-            <button type="submit">filtre</button>
-            <button onClick={resetFilte}>Reset</button>
+            <button type="submit">Filter</button>
+            <button type="button" onClick={resetFilter}>
+              Reset
+            </button>
           </div>
         </form>
         <div className="ListRantel">
-          {cars &&
-            DataPerPageR.map((car) => <CarCard car={car} key={car._id} />)}
+          {dataPerPage.length > 0 ? (
+            dataPerPage.map((car) => <CarCard car={car} key={car._id} />)
+          ) : (
+            <p>No cars available</p>
+          )}
         </div>
       </div>
-      <div className="paggination">
+      <div className="pagination">
         <button
           onClick={() => setCurrentR((prev) => Math.max(prev - 1, 1))}
           disabled={currentR === 1}
         >
-          prev
+          Prev
         </button>
         <button>{currentR}</button>
         <button
           onClick={() => setCurrentR((prev) => Math.min(prev + 1, NbPage))}
           disabled={currentR === NbPage}
         >
-          next
+          Next
         </button>
       </div>
     </div>

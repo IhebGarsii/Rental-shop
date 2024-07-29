@@ -3,13 +3,21 @@ import "./addCar.css";
 import { useForm } from "react-hook-form";
 import { addCar } from "../../apis/carApi";
 import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
 
 function AddCar() {
   const { register, handleSubmit } = useForm();
-
+  const { mutate } = useMutation({
+    mutationFn: addCar,
+    onSuccess: (data) => {
+      toast.success("Successfully created!");
+    },
+    onError: (error) => {
+      toast.error("Error creating car", error);
+    },
+  });
   const submit = async (data) => {
     try {
-      console.log("datadatadatadata", data);
       const formData = new FormData();
       Object.keys(data).forEach((key) => {
         if (key === "image" || key === "imageInterior") {
@@ -21,12 +29,7 @@ function AddCar() {
         }
       });
 
-      const response = await addCar(formData);
-      if (response.ok) {
-        toast.success("Successfully created!");
-      } else {
-        toast.error("Error creating car");
-      }
+      mutate(formData);
     } catch (error) {
       console.error("Error adding car:", error);
       toast.error("Error creating car");
@@ -102,7 +105,7 @@ function AddCar() {
           {...register("dailyRent")}
           placeholder="Daily Rent Price"
         />
-       
+
         <input
           type="text"
           {...register("conditions")}

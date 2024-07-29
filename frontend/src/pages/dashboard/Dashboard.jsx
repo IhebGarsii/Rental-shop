@@ -1,39 +1,43 @@
 import React, { useState } from "react";
 import "./dashboard.css";
 import { postNewsLetter } from "../../apis/NewsLetterApi";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 function Dashboard() {
   const [subject, setSubject] = useState("");
   const [text, setText] = useState("");
+  const { mutate: mutatePost } = useMutation({
+    mutationFn: postNewsLetter,
+    onSuccess: () => {
+      toast.success("The emails were Sent with success");
+    },
+    onError: (error) => {
+      toast.error("there was an error in sending the emails", error);
+    },
+  });
   const submitLetter = async (e) => {
     e.preventDefault();
     try {
       const data = { subject, text };
-      const letter = await postNewsLetter(data);
+      mutatePost(data);
     } catch (error) {
       console.error(error);
     }
   };
   return (
     <div className="dashboard">
-      {/*  <form onSubmit={submitLetter}>
-          <input
-            type="text"
-            placeholder="Subject"
-            onChange={(e) => setSubject(e.target.value)}
-          />
-          <textarea
-            onChange={(e) => setText(e.target.value)}
-            name=""
-            id=""
-          ></textarea>
-          <button type="submit">Submit</button>
-        </form> */}
       <div className="form-container">
-        <form className="formm">
+        <form onSubmit={submitLetter} className="formm">
           <div className="form-group">
             <label for="email">Subject</label>
-            <input type="text" id="email" name="email" required="" />
+            <input
+              type="text"
+              id="email"
+              name="email"
+              onChange={(e) => setSubject(e.target.value)}
+              required=""
+            />
           </div>
           <div className="form-group">
             <label for="textarea">Type the body of the email</label>
@@ -43,9 +47,8 @@ function Dashboard() {
               rows="10"
               cols="50"
               required=""
-            >
-              {" "}
-            </textarea>
+              onChange={(e) => setText(e.target.value)}
+            ></textarea>
           </div>
           <button className="form-submit-btn" type="submit">
             Submit

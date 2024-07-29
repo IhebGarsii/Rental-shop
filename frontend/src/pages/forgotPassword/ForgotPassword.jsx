@@ -2,14 +2,21 @@ import React, { useState } from "react";
 import "./forgotPassword.css";
 import { passwordReset } from "../../apis/userApi";
 import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 function ForgotPassword() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const handlePassword = async () => {
-    console.log(email);
-    const response = await passwordReset(email);
-    navigate("/login");
-  };
+  const { mutate } = useMutation({
+    mutationFn: passwordReset,
+    onSuccess: (data) => {
+      navigate("/login");
+    },
+    onError: (error) => {
+      toast.error("error in ressting password:", error);
+    },
+  });
+
   return (
     <div className="forgot-password">
       <div className="forgot-password-card">
@@ -24,7 +31,7 @@ function ForgotPassword() {
             type="text"
             value={email}
           />
-          <button onClick={handlePassword} className="sign-up">
+          <button onClick={() => mutate(email)} className="sign-up">
             Get Password
           </button>
         </div>

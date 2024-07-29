@@ -6,17 +6,31 @@ import aboutUs from "../../assets/aboutUs.jpg";
 import ContactForm from "../../components/contactForm/ContactForm";
 import Footer from "../../components/footer/Footer";
 import { Fade, Slide, Zoom, JackInTheBox } from "react-awesome-reveal";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../components/loading/Loader";
 function Home() {
-  const [randomCars, setRandomCars] = useState([]);
-  useEffect(() => {
-    const fetchRandomCarAPI = async () => {
-      try {
-        const cars = await getRandomCars();
-        setRandomCars(cars);
-      } catch (error) {}
-    };
-    fetchRandomCarAPI();
-  }, []);
+  const {
+    data: randomCars,
+    isLoading,
+    isError,
+    error
+  } = useQuery({
+    queryKey: ["randomCars"],
+    queryFn: getRandomCars,
+  });
+  if (isLoading) {
+    return (
+      <div className="loading">
+        <div className="loading-center">
+          <Loader />
+        </div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return <div>Error: {error.message}</div>;
+  }
   const reviewList = [
     {
       img: "https://www.shutterstock.com/shutterstock/photos/1865153395/display_1500/stock-photo-portrait-of-young-smiling-woman-looking-at-camera-with-crossed-arms-happy-girl-standing-in-1865153395.jpg",
