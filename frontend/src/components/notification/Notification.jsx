@@ -7,33 +7,33 @@ import {
 } from "../../apis/notificationApi";
 import NotificationRow from "../notificationRow/NotificationRow";
 import { FaBell } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
 function Notification() {
   const [displayNotification, setDisplayNotification] = useState(false);
-  const [notification, setNotification] = useState([]);
   const [badge, setBadge] = useState();
-  console.log("notificatin test");
   const handlePostRead = async () => {
     setDisplayNotification(!displayNotification);
     const response = await postRead(localStorage.getItem("idUser"));
     setBadge(0);
   };
-  useEffect(() => {
-    const fetchNotification = async () => {
-      try {
-        let notification;
-        if (localStorage.getItem("roles") === "ADMIN") {
-          notification = await getAdminNotifications();
-        } else {
-          notification = await getNotifications(localStorage.getItem("idUser"));
-        }
-        setNotification(notification.notification);
-        setBadge(notification.i);
-      } catch (error) {
-        console.log(error);
+
+  const { data: notification, isSuccess } = useQuery({
+    queryKey: ["notification"],
+    queryFn: () => {
+      if (localStorage.getItem("roles") === "ADMIN") {
+        return getAdminNotifications();
+      } else {
+        return getNotifications(localStorage.getItem("idUser"));
       }
-    };
-    fetchNotification();
-  }, []);
+    },
+  });
+  useEffect(() => {
+    if (isSuccess && notification) {
+      console.log(notification.i);
+      setBadge(notification.i); // Make sure notification.i exists
+    }
+  }, [notification]);
+
   return (
     <div onClick={handlePostRead} className="notification-component">
       <div className="noti-display">
@@ -45,8 +45,8 @@ function Notification() {
       {badge > 0 && <div className="badge"> {badge} </div>}
       {displayNotification && (
         <div className="notification-list">
-          {notification &&
-            notification
+          {notification.notification &&
+            notification.notification
               .slice()
               .reverse()
               .map((noti) => (

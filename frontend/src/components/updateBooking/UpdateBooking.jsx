@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { updateBookingById } from "../../apis/bookingApi.js";
 import "../updateBooking/updateBooking.css";
 import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 function UpdateBooking({ booking }) {
-  console.log("bookingbookingbookingbooking");
   const { register, handleSubmit, setValue } = useForm();
-  // Helper function to format the date correctly
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const year = date.getUTCFullYear();
@@ -28,17 +28,19 @@ function UpdateBooking({ booking }) {
     }
   }, [booking, setValue]);
 
-  const handleBook = async (data, e) => {
-    e.preventDefault();
-    try {
-      console.log("Formatted expiryDate:", booking._id); // Change this line
-      await updateBookingById(data, booking._id);
-      console.log("Booking updated successfully");
-    } catch (error) {
-      console.error("Error updating booking:", error);
-    }
+  const handleBook = async (data) => {
+    mutateUpdateBook(data);
   };
-
+  const { mutate: mutateUpdateBook } = useMutation({
+    mutationFn: (data) => updateBookingById(data, booking._id),
+    onSuccess: () => {
+      toast.success("booking updated with success");
+    },
+    onError: (error) => {
+      toast.error("error in updating the booking", error);
+    },
+  });
+ 
   return (
     <div className="update-car">
       <form className="book-form" onSubmit={handleSubmit(handleBook)}>

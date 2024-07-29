@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from "react";
 import "rentedCars.css";
-import { getRandomCars } from "../../apis/carApi";
+import { getRentedCars } from "../../apis/carApi";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../loading/Loader";
 function RentedCars() {
-  const [cars, setCars] = useState([]);
+  const {
+    data: cars,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({ queryKey: ["rentedCars"], queryFn: getRentedCars });
 
-  useEffect(() => {
-    const fetchCars = async () => {
-      try {
-        const response = getRandomCars();
-        if (!response) {
-          throw new Error("faild to fetch cars");
-        }
-        setCars(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchCars();
-  }, []);
-  return <div>{cars && cars.map((car) => <div>
-    
-  </div>)}</div>;
+  if (isLoading) {
+    return (
+      <div className="loading">
+        <div className="loading-center">
+          <Loader />
+        </div>
+      </div>
+    );
+  }
+
+  return <div>{cars && cars.map((car) => <div></div>)}</div>;
 }
 
 export default RentedCars;

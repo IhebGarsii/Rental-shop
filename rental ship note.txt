@@ -51,8 +51,16 @@ add auth to notification    ***completed***
 notification need revamp show only notification conserns the user  ***completed***
 fix accept booking even if its boked maybe beceaus i accepted too fast that it didnt regester the date
 
-fix notification go without login
-add padding in MY BOOKING
+fix notification go without login  ***completed***
+add padding in MY BOOKING       ***completed***
+
+
+add status of booking in user booking
+
+
+might change loading for randomCarList onstead of hole home page
+
+fix pay hover button
 what is customer journey
 
 when the rent state change it cause a rerender and the prop booking will be the last object in data state  l9it 7al enou na7i rent state w n5ali condetionly render b editingBookingId === booking._id w bech tkoun false lin na5tar edit 

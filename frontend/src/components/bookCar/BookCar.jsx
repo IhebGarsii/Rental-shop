@@ -5,13 +5,27 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Loader from "../loading/Loader";
+import { useMutation } from "@tanstack/react-query";
 function BookCar({ car }) {
   const [render, setRender] = useState(false);
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const { mutate: mutateBook } = useMutation({
+    mutationFn: (data) => {
+      bookCar(car._id, localStorage.getItem("idUser"), data);
+    },
+    onSuccess: () => {
+      toast.success(
+        "your booking is saved please wait for the admin to accept your booking"
+      );
+      setRender(true);
+    },
+    onError: () => {
+      toast.error("error in booking the car", error);
+    },
+  });
   const handleBook = async (data, e) => {
-    setIsLoading(true);
     if (!localStorage.getItem("idUser")) {
       console.log("dssssssssss", !localStorage.getItem("idUser"));
       setIsLoading(false);
@@ -34,20 +48,12 @@ function BookCar({ car }) {
       });
 
       if (isConflict) {
-        setIsLoading(false);
         toast.error("The car is already booked for the selected dates.");
         return;
       }
-
-      const book = await bookCar(car._id, localStorage.getItem("idUser"), data);
-      setIsLoading(false);
-      setRender(true);
+      mutateBook(data);
     } catch (error) {
-      setIsLoading(false);
-
       console.error(error);
-    } finally {
-      setIsLoading(false);
     }
   };
   useEffect(() => {}, [render]);

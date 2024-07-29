@@ -122,11 +122,7 @@ export const updateBookingById = async (data, idBooking) => {
       },
       body: JSON.stringify(data),
     });
-    if (response.ok) {
-      toast.success("Successfully Updated!");
-    } else {
-      toast.error(response.errorMsg);
-    }
+
     const updatedCar = await response.json();
 
     return updatedCar;

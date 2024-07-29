@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./contactForm.css";
 import { sendEmail } from "../../apis/userApi";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 function ContactForm() {
   const [email, setEmail] = useState("");
@@ -8,11 +10,19 @@ function ContactForm() {
   const [body, setBody] = useState("");
   const submitForm = async (e) => {
     e.preventDefault();
-    try {
-      const data = { email, body, subject };
-      const contact = await sendEmail(data);
-    } catch (error) {}
+
+    const data = { email, body, subject };
+    mutateContact(data);
   };
+  const { mutate: mutateContact } = useMutation({
+    mutationFn: sendEmail,
+    onSuccess: () => {
+      toast.success("Email sent");
+    },
+    onError: (error) => {
+      toast.error("sending email faild", error);
+    },
+  });
   return (
     <div className="contact-form">
       <div className="contact-left">
