@@ -154,6 +154,10 @@
 .links > a {
   color: black;
 }
+
+.links > a:hover {
+  color: rgb(57, 19, 230);
+}
 .auth {
   display: flex;
   justify-content: center;
@@ -189,7 +193,13 @@
   width: 15px;
   margin: 5px;
   cursor: pointer;
+  transition: transform 0.3s; 
 }
+
+.arrow-dwon:hover {
+  transform: scale(1.5); 
+}
+
 .account {
   position: relative;
   display: flex;
@@ -267,7 +277,7 @@
   transition: 1s;
   display: flex;
 }
-.logout-state{
+.logout-state {
   display: flex;
   gap: 20px;
 }

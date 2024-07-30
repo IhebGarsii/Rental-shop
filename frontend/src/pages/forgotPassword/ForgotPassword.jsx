@@ -4,6 +4,7 @@ import { passwordReset } from "../../apis/userApi";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import Loader from "../../components/loading/Loader";
 function ForgotPassword() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -31,8 +32,14 @@ function ForgotPassword() {
             type="text"
             value={email}
           />
-          <button onClick={() => mutate(email)} className="sign-up">
-            Get Password
+        
+          <button
+            disabled={isPending}
+            onClick={() => mutate(email)}
+            className="sign-up"
+            type="submit"
+          >
+            {isPending ? <Loader /> : <span> Submit</span>}
           </button>
         </div>
       </div>

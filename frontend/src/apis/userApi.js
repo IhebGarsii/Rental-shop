@@ -1,5 +1,4 @@
 const BASE_URL = "http://localhost:4000/User";
-import toast from "react-hot-toast";
 export const signin = async (data) => {
   try {
     const response = await fetch(`${BASE_URL}/login`, {
@@ -61,11 +60,7 @@ export const blockUser = async (idUser) => {
     const response = await fetch(`${BASE_URL}/blockUser/${idUser}`, {
       method: "DELETE",
     });
-    if (response.ok) {
-      toast.success("Successfully Blocked!");
-    } else {
-      toast.error("error");
-    }
+   
     return await response.json();
   } catch (error) {
     console.error(error);
@@ -79,11 +74,7 @@ export const sendEmail = async (data) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    if (response.ok) {
-      toast.success("Email Sent");
-      return await response.json();
-    }
-    toast.error("Error in sending the email");
+    
   } catch (error) {
     console.error(error);
   }

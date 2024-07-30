@@ -13,7 +13,6 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState({});
   const [acount, setAcount] = useState(true);
-  console.log(acount);
   const logout = () => {
     localStorage.clear();
     setLogedIn(false);
@@ -73,8 +72,12 @@ function Navbar() {
           </nav>
           <div className="auth">
             {logedIn && (
-              <div className="account" onClick={() => setAcount(!acount)}>
-                <img className="arrow-dwon" src={arrowDwon} />
+              <div className="account">
+                <img
+                  onClick={() => setAcount(!acount)}
+                  className="arrow-dwon"
+                  src={arrowDwon}
+                />
 
                 <h3 className="navbar-name-flex">
                   {user.firstName} {user.lastName}

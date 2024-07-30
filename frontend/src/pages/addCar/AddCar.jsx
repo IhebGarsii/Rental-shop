@@ -4,10 +4,11 @@ import { useForm } from "react-hook-form";
 import { addCar } from "../../apis/carApi";
 import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
+import Loader from "../../components/loading/Loader";
 
 function AddCar() {
   const { register, handleSubmit } = useForm();
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: addCar,
     onSuccess: (data) => {
       toast.success("Successfully created!");
@@ -111,7 +112,9 @@ function AddCar() {
           {...register("conditions")}
           placeholder="Conditions"
         />
-        <button type="submit">Add Car</button>
+        <button disabled={isPending} className="add-car-btn" type="submit">
+          {isPending ? <Loader /> : <span> Add Car</span>}
+        </button>
       </form>
     </div>
   );

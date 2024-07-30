@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { getBookings } from "../../../apis/bookingApi";
 import Booking from "../../../components/booking/Booking";
 import "./bookingList.css";
+import { useQuery } from "@tanstack/react-query";
 function BookingList() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState([]);
   const [filter, setFilter] = useState([]);
   const [tag, setTag] = useState("ACCEPTED");
-
+  const { data, setIsLoading, isError } = useQuery({
+    queryKey: ["bookings"],
+    queryFn: getBookings,
+  });
   useEffect(() => {
     const filterData = async () => {
       const fData = data.filter((f) => f.status === tag);
@@ -16,23 +17,7 @@ function BookingList() {
     };
     filterData();
   }, [tag, data]);
-  useEffect(() => {
-    const fetchRequests = async () => {
-      setIsLoading(true);
-      try {
-        const requestsList = await getBookings();
-        if (requestsList) {
-          setIsLoading(false);
-          setData(requestsList);
-        }
-      } catch (error) {
-        setError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchRequests();
-  }, []);
+
   return (
     <div className="booking-List-container">
       <select

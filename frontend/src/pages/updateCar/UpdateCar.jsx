@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./updateCar.css";
 import { useForm } from "react-hook-form";
 import { getCar, updateCar } from "../../apis/carApi";
+import { useMutation } from "@tanstack/react-query";
+import Loader from "../../components/loading/Loader";
 
 function UpdateCar() {
   const [car, setCar] = useState();
@@ -44,7 +46,15 @@ function UpdateCar() {
     };
     fetchCar();
   }, [setValue]);
-
+  const { mutate: mutateUpdateCar, isPending } = useMutation({
+    mutationFn: (formData) => updateCar(formData, id),
+    onSuccess: () => {
+      navigate("/Cars");
+    },
+    onError: (error) => {
+      console.error("Error updating car:", error);
+    },
+  });
   const submit = async (data) => {
     try {
       const formData = new FormData();
@@ -78,10 +88,7 @@ function UpdateCar() {
       formData.append("currentIssues", data.currentIssues);
 
       formData.append("conditions", data.conditions);
-
-      const car = await updateCar(formData, id);
-
-      navigate("/Cars");
+      mutateUpdateCar(formData);
     } catch (error) {
       console.error("Error adding car:", error);
     }
@@ -169,7 +176,9 @@ function UpdateCar() {
           />
         </div>
 
-        <button type="submit">Update Car</button>
+        <button disabled={isPending} className="add-car-btn" type="submit">
+          {isPending ? <Loader /> : <span> Update</span>}
+        </button>
       </form>
     </div>
   );

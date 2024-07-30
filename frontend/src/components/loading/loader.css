@@ -1,6 +1,6 @@
 .svgg {
   height: 100%;
-  width: 100%;
+
   transform-origin: center;
   animation: rotate4 2s linear infinite;
 }

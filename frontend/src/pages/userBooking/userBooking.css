@@ -30,6 +30,9 @@
 
   color: white;
 }
+.pay-btn:hover {
+  background-color: #04eb3a;
+}
 .pay-btn:disabled {
   background-color: #6c757d; /* Gray color for disabled state */
   color: #ffffff; /* Ensure text is readable */
@@ -68,8 +71,33 @@
 .userBooking-title {
   display: flex;
   justify-content: flex-start;
-  gap: 50%;
+
+  gap: 10px;
   align-items: center;
+}
+
+.accepted-class {
+  background-color: green; /* or any other style */
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.pending-class {
+  background-color: orange; /* or any other style */
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.refused-class {
+  background-color: red;
+  color: white; /* or any other style */
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 10px;
 }
 .userBooking-left-middle {
   display: flex;

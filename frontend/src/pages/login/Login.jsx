@@ -6,6 +6,7 @@ import { login } from "../../redux/userReducer";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Loader from "../../components/loading/Loader";
 
 function Login() {
   const navigate = useNavigate();
@@ -67,8 +68,9 @@ function Login() {
           </label>
         </div>
         <Link to="/forgotPassword">Forgot your password?</Link>
-        <button type="submit" className="submit-btn">
-          Sign In
+
+        <button disabled={isPending} className="submit-btn" type="submit">
+          {isPending ? <Loader /> : <span> Submit</span>}
         </button>
       </form>
     </div>

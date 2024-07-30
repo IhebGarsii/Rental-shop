@@ -136,7 +136,7 @@ function ListRantel() {
             <label htmlFor="price">PRICE a day</label>
             <MultiRangeSlider
               min={0}
-              max={100}
+              max={300}
               step={5}
               minValue={minValue}
               maxValue={maxValue}

@@ -96,8 +96,9 @@ function SignUp() {
           />
           <span>Image</span>
         </label>
-        <button type="submit" className="submit">
-          Submit
+
+        <button disabled={isPending} className="submit" type="submit">
+          {isPending ? <Loader /> : <span> Submit</span>}
         </button>
         <p className="signin">
           Already have an account? <Link to="/login">Signin</Link>

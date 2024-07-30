@@ -13,7 +13,7 @@ function Notification() {
   const [badge, setBadge] = useState();
   const handlePostRead = async () => {
     setDisplayNotification(!displayNotification);
-    const response = await postRead(localStorage.getItem("idUser"));
+    await postRead(localStorage.getItem("idUser"));
     setBadge(0);
   };
 

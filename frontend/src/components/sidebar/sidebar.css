@@ -10,6 +10,7 @@
   flex-direction: column;
   gap: 30px;
   font-size: 1.5rem;
+
   height: 100%;
   background-color: rgb(46, 45, 45);
   align-items: center;
@@ -37,6 +38,9 @@
 
 .sideBar-outlet {
   background-color: rgb(74, 74, 74);
+  width: 100%;
+
+
 }
 
 @media screen and (max-width: 600px) {

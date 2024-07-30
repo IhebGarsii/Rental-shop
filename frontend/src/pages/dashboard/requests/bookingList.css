@@ -2,8 +2,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-
   align-items: center;
+  justify-content: center;
 }
 
 .booking-component {
@@ -23,8 +23,21 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  height: 50px;
 }
 .booking-wrapperr {
   width: 100%;
-  border: 10px solid red;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.adminAction-container {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  border-radius: 10px;
+  justify-content: center;
+  gap: 10px;
+  
+  flex-direction: column;
 }

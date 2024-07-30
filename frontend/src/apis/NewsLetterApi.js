@@ -11,12 +11,6 @@ export const subscribeNewsLetter = async (email) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    if (response.ok) {
-      toast.success("Subscription succeeded");
-      return response.json();
-    } else {
-      toast.error("Subscription failed");
-    }
   } catch (error) {
     console.error(error);
   }

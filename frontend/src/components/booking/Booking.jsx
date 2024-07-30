@@ -1,126 +1,17 @@
-/* import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { getCar } from "../../apis/carApi";
-import { getUser } from "../../apis/userApi";
-import { acceptBooking, refuseBooking } from "../../apis/bookingApi";
-import "./booking.css";
-import toast from "react-hot-toast";
-function Booking({ booking }) {
-  const [car, setCar] = useState();
-  const [user, setUser] = useState();
-  useEffect(() => {
-    const fetchCar = async () => {
-      try {
-        const car = await getCar(booking.idCar);
-        setCar(car);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchCar();
-    const fetchUser = async () => {
-      try {
-        const user = await getUser(booking.idUser);
-        setUser(user);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchUser();
-  }, []);
-
-  const handelAccept = async () => {
-    try {
-    
-      const hireOn = new Date(booking.startDate);
-      const returnOn = new Date(booking.endDate);
-      hireOn.setHours(0, 0, 0, 0);
-      returnOn.setHours(23, 59, 59, 999);
-
-      const isConflict = car.bookingDuration.some((book) => {
-        console.log("book", book);
-        const startDate = new Date(book.startDate);
-        const endDate = new Date(book.endDate);
-
-        return hireOn < endDate && returnOn > startDate;
-      });
-
-      if (isConflict) {
-        toast.error("The car is already booked for the selected dates.");
-        return;
-      }
-
-      const response = await acceptBooking(booking);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const handelRefuse = async () => {
-    try {
-      const response = await refuseBooking(booking._id);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  return (
-    <div className="booking-component">
-      {car && user && (
-        <table className="booking-table">
-          <thead>
-            <tr>
-              <th>Car Model</th>
-              <th>Status</th>
-              <th>User</th>
-              <th>Pick-up Date</th>
-              <th>Drop-off Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <Link to={`/Car/${car._id}`}>{car.model}</Link>
-              </td>
-              <td>{booking.status}</td>
-              <td>
-                {user.firstName} {user.LastName}
-              </td>
-              <td> {booking.startDate}</td>
-              <td>{booking.endDate}</td>
-              <td>
-                <button
-                  className="action-button accept-button"
-                  onClick={handelAccept}
-                >
-                  Accept
-                </button>
-                <button
-                  className="action-button refuse-button"
-                  onClick={handelRefuse}
-                >
-                  Refuse
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      )}
-    </div>
-  );
-}
-
-export default Booking;
- */
 import React, { createContext, useState, useContext } from "react";
 import Delete from "../button/Delete";
 import UpdateBooking from "../updateBooking/UpdateBooking";
 import { RxCross2 } from "react-icons/rx";
-import { deleteBooking } from "../../apis/bookingApi";
+import {
+  deleteBooking,
+  acceptBooking,
+  refuseBooking,
+} from "../../apis/bookingApi";
 import { pay } from "../../apis/PaymentApi";
 import { Link } from "react-router-dom";
-import { acceptBooking, refuseBooking } from "../../apis/bookingApi";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import "./booking.css";
 
 const BookingContext = createContext();
 
@@ -155,6 +46,19 @@ Booking.Full = function BookingFull() {
   const handleCloseEdit = () => {
     setEditingBookingId(null);
   };
+  let className;
+
+  switch (booking.status) {
+    case "ACCEPTED":
+      className = "accepted-class";
+      break;
+    case "REFUSED":
+      className = "refused-class";
+      break;
+    default:
+      className = "pending-class";
+      break;
+  }
 
   return (
     <div className="userBooking-container">
@@ -171,6 +75,7 @@ Booking.Full = function BookingFull() {
               <h2>{booking.idCar.model}</h2>
             </Link>
             <span>{booking.fullPrice}$</span>
+            <span className={className}>{booking.status}</span>
           </div>
           <h3>{booking.startDate}</h3>
           <h3>{booking.endDate}</h3>
@@ -211,11 +116,13 @@ Booking.Full = function BookingFull() {
 
 Booking.AdminActions = function BookingAdminActions() {
   const { booking } = useBookingContext();
+  const queryClient = useQueryClient();
 
   const { mutate: acceptMutate } = useMutation({
     mutationFn: acceptBooking,
     onSuccess: () => {
       toast.success("Booking accepted successfully.");
+      queryClient.invalidateQueries(["bookings"]); // Adjust the query key if needed
     },
     onError: (error) => {
       console.log("Accepting booking failed", error);
@@ -227,6 +134,7 @@ Booking.AdminActions = function BookingAdminActions() {
     mutationFn: refuseBooking,
     onSuccess: () => {
       toast.success("Booking refused successfully.");
+      queryClient.invalidateQueries(["bookings"]); // Adjust the query key if needed
     },
     onError: (error) => {
       console.log("Refusing booking failed", error);
@@ -235,7 +143,7 @@ Booking.AdminActions = function BookingAdminActions() {
   });
 
   return (
-    <div className="">
+    <div className="adminAction-container">
       <button
         className="action-button accept-button"
         onClick={() => acceptMutate(booking)}
@@ -254,6 +162,7 @@ Booking.AdminActions = function BookingAdminActions() {
 
 Booking.Actions = function BookingActions() {
   const { booking, setEditingBookingId } = useBookingContext();
+  const queryClient = useQueryClient();
 
   const handleEditClick = (bookingId) => {
     setEditingBookingId(bookingId);
@@ -263,7 +172,7 @@ Booking.Actions = function BookingActions() {
     mutationFn: deleteBooking,
     onSuccess: () => {
       toast.success("Booking deleted successfully.");
-      // Optionally refetch or update the UI
+      queryClient.invalidateQueries(["bookings"]); // Adjust the query key if needed
     },
     onError: (error) => {
       console.log("Deleting booking failed", error);
@@ -275,7 +184,7 @@ Booking.Actions = function BookingActions() {
     mutationFn: pay,
     onSuccess: () => {
       toast.success("Payment successful.");
-      // Optionally refetch or update the UI
+      queryClient.invalidateQueries(["bookings"]); // Adjust the query key if needed
     },
     onError: (error) => {
       console.log("Payment failed", error);
