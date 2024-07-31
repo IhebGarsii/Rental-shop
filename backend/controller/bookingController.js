@@ -6,17 +6,8 @@ const adminNotification = require("../model/adminNotification");
 
 const bookCar = async (req, res) => {
   const { idCar, idUser } = req.params;
-  const {
-    dropoffLocation,
-    cardNumber,
-    expiryDate,
-    cvv,
-    licenseNumber,
-    pickupLocation,
-    startDate,
-    endDate,
-    paymentType,
-  } = req.body;
+  const { dropoffLocation, pickupLocation, startDate, endDate } = req.body;
+  const image = req.file; // Ensure this is a valid file object
 
   try {
     const car = await carModel.findById(idCar);
@@ -29,47 +20,47 @@ const bookCar = async (req, res) => {
       return res.status(404).json({ msg: "User not found" });
     }
 
-    /*  */
     const start = new Date(startDate);
     const end = new Date(endDate);
 
     let timeDifference = end - start;
-    const daysDiffence = timeDifference / (1000 * 3600 * 24);
-    const fullPrice = paymentType * daysDiffence;
-    console.log(paymentType, "paymentTypepaymentTypepaymentTypepaymentType");
+    const daysDifference = timeDifference / (1000 * 3600 * 24);
+
+    if (daysDifference < 0) {
+      return res.status(400).json({ msg: "End date must be after start date" });
+    }
+
+    const fullPrice = car.dailyRent * daysDifference;
+
     const booking = new bookingModel({
       idUser,
       idCar,
       startDate,
       endDate,
       dropoffLocation,
-      cardNumber,
-      expiryDate,
-      cvv,
-      licenseNumber,
       pickupLocation,
-      daysDiffence,
+      daysDifference,
       fullPrice,
-      paymentType,
+      image: image ? image.originalname : null, // Store only the file path
     });
+
     car.idBooking.push(booking._id);
     await car.save();
+
     const description = `${user.firstName} has requested a booking for ${car.model}`;
     const notification = new adminNotification({
       description,
       target: "ADMIN",
       idUser,
     });
+
     await notification.save();
     await booking.save();
-    if (!booking) {
-      return res.status(400).json({ msg: "error" });
-    }
 
     return res.status(200).json({ msg: "Booked successfully" });
   } catch (error) {
-    console.log("error", error);
-    return res.status(500).json(error);
+    console.error("Error:", error);
+    return res.status(500).json({ msg: "Internal server error" });
   }
 };
 

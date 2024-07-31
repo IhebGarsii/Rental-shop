@@ -179,7 +179,7 @@ function ListRantel() {
           {dataPerPage.length > 0 ? (
             dataPerPage.map((car) => <CarCard car={car} key={car._id} />)
           ) : (
-            <p>No cars available</p>
+            <p className="no-cars">No cars available!</p>
           )}
         </div>
       </div>

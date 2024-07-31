@@ -18,11 +18,17 @@
   width: 60%;
 }
 .book-form > button {
-  background-color: rgb(32, 241, 105);
+  background-color: rgb(57, 51, 225);
   font-size: 1.2rem;
+  height: 40px;
+  width: 150px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-self: center;
 }
 .book-form > button:hover {
-  background-color: rgb(9, 215, 81);
+  background-color: rgb(44, 41, 194);
 }
 .book-form > .label > input {
   height: 30px;

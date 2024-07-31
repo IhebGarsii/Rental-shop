@@ -11,23 +11,27 @@ export const getBookings = async () => {
   }
 };
 
-export const bookCar = async (idCar, idUser, data) => {
+export const bookCar = async (idCar, idUser, formData) => {
   try {
-    console.log("data", data);
     const response = await fetch(`${BASE_URL}/bookCar/${idCar}/${idUser}`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify(data),
+      body: formData,
     });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
 
     return await response.json();
   } catch (error) {
-    console.error(error);
+    console.error("API error:", error);
+    throw error; // This will be caught in your `onError` callback
   }
 };
+
 
 export const refuseBooking = async (idBooking) => {
   try {

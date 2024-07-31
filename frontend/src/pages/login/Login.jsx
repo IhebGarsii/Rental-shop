@@ -16,7 +16,7 @@ function Login() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
 
-  const mutation = useMutation({
+  const { mutate: mutateLogin ,isPending} = useMutation({
     mutationFn: signin,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["login"] });
@@ -36,7 +36,7 @@ function Login() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    mutation.mutate({ email, password });
+    mutateLogin({ email, password });
   };
 
   return (

@@ -5,23 +5,23 @@ const Schema = mongoose.Schema;
 const userModel = new Schema({
   email: {
     type: String,
-   /* /*  required: true, 
+    /* /*  required: true, 
     unique: true, */
   },
   password: {
     type: String,
-   /*  required: true, */
+    /*  required: true, */
   },
   image: {
     type: String,
   },
   firstName: {
     type: String,
-   /*  required: true, */
+    /*  required: true, */
   },
   lastName: {
     type: String,
-   /*  required: true, */
+    /*  required: true, */
   },
 
   idCars: [

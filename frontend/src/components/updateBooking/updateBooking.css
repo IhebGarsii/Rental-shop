@@ -5,11 +5,11 @@
   width: 100%;
   height: 100%;
 }
-.book-form > button {
+.update-booking {
   background-color: rgb(32, 241, 105);
   font-size: 1.2rem;
 }
-.book-form > button:hover {
+.update-booking:hover {
   background-color: rgb(9, 215, 81);
 }
 .book-form > .label > input {

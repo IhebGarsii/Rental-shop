@@ -29,18 +29,7 @@ const bookingModel = new Schema({
   dropoffLocation: {
     type: String,
   },
-  cardNumber: {
-    type: String,
-  },
-  expiryDate: {
-    type: String,
-  },
-  cvv: {
-    type: String,
-  },
-  licenseNumber: {
-    type: String,
-  },
+
   pickupLocation: {
     type: String,
   },
@@ -54,7 +43,7 @@ const bookingModel = new Schema({
   fullPrice: {
     type: String,
   },
-  paymentType: {
+  image: {
     type: String,
   },
 });

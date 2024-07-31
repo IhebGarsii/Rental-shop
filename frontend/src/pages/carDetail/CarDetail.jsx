@@ -153,8 +153,12 @@ function CarDetail() {
                     </h3>
                     <hr />
                     <h3 className="check-detail">
-                      Navigation {car.navigarion && <span> &#9989; </span>}:
-                      <span>&#10060;</span>
+                      Navigation :
+                      {car.navigation ? (
+                        <span> &#9989;</span>
+                      ) : (
+                        <span>&#10060;</span>
+                      )}
                     </h3>
                     <hr />
                     <h3 className="check-detail">

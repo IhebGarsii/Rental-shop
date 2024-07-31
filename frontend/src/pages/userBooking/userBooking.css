@@ -1,3 +1,16 @@
+.booking-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px;
+  margin: 0px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  background-color: white;
+  width: 70%;
+}
 .userBooking {
   width: 100%;
   display: flex;
@@ -19,36 +32,6 @@
   background-color: white;
   width: 70%;
 }
-.edit-booking-btn {
-  padding: 5px 10px;
-  background-color: #007bff;
-  color: white;
-}
-.pay-btn {
-  background-color: #28a745;
-  padding: 5px 10px;
-
-  color: white;
-}
-.pay-btn:hover {
-  background-color: #04eb3a;
-}
-.pay-btn:disabled {
-  background-color: #6c757d; /* Gray color for disabled state */
-  color: #ffffff; /* Ensure text is readable */
-  cursor: not-allowed; /* Show a not-allowed cursor */
-}
-.delete-booking-btn {
-  background-color: #dc3545;
-  color: white;
-  padding: 5px 10px;
-  margin: 5px;
-}
-.action {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
 .userBooking-left > img {
   height: 100%;
   width: 100%;
@@ -64,10 +47,6 @@
 
   align-items: center;
 }
-.rented-car-list {
-  display: flex;
-  flex-direction: column;
-}
 .userBooking-title {
   display: flex;
   justify-content: flex-start;
@@ -75,36 +54,6 @@
   gap: 10px;
   align-items: center;
 }
-
-.accepted-class {
-  background-color: green; /* or any other style */
-  color: white;
-  font-weight: bold;
-  padding: 5px;
-  border-radius: 10px;
-}
-
-.pending-class {
-  background-color: orange; /* or any other style */
-  color: white;
-  font-weight: bold;
-  padding: 5px;
-  border-radius: 10px;
-}
-
-.refused-class {
-  background-color: red;
-  color: white; /* or any other style */
-  font-weight: bold;
-  padding: 5px;
-  border-radius: 10px;
-}
-.userBooking-left-middle {
-  display: flex;
-  height: 80%;
-  justify-content: flex-start;
-}
-
 .userBooking-middle {
   display: flex;
   padding: 0px 10px;
@@ -117,139 +66,8 @@
   width: 100px;
   border-radius: 50%;
 }
-/* .rent-form-display-center {
+.userBooking-left-middle {
   display: flex;
-  align-items: center;
-  height: 80vh;
-  scroll-behavior: auto;
-  overflow-y: scroll;
-  background-color: red;
-  justify-content: center;
-  position: relative;
-}
-.rent-form {
-  display: none;
-}
-.rent-form-displays {
-  position: absolute;
-  left: 20%;
-  padding: 20px;
-  width: 60%;
-  top: 50px;
-  z-index: 500;
-} */
-
-.rent-form-displays {
-  position: absolute;
-  width: 30%;
-  z-index: 100;
-  left: 35%;
-  top: 10%;
-}
-.rent-form-container {
-  height: 500px;
-  position: relative;
-}
-
-.close-u-btn {
-  position: absolute;
-  top: 0%;
-  right: -3%;
-  font-size: 2.3rem;
-  color: red;
-  padding: 5px;
-  transition: 0.5s;
-}
-.close-u-btn:hover {
-  background-color: red;
-  color: white;
-}
-/* <reset-style> ============================ */
-.rented-car-list > a {
-  text-decoration: none;
-}
-
-/* <main-style> ============================ */
-.menu__link {
-  color: #0b3dd3;
-  line-height: 2;
-  position: relative;
-  display: inline-block; /* Ensure the link takes up space */
-}
-
-.menu__link::before {
-  content: "";
-  width: 0;
-  height: 2px;
-  border-radius: 2px;
-  background-color: #000000;
-  position: absolute;
-  bottom: -0.25rem;
-  left: 0;
-
-  transition: 0.4s;
-}
-
-.menu__link:hover::before {
-  width: 100%;
-}
-
-.Btn {
-  position: relative;
-  display: flex;
-  align-items: center;
+  height: 80%;
   justify-content: flex-start;
-  width: 180px;
-  height: 40px;
-  border: none;
-  padding: 0px 20px;
-  background-color: rgb(168, 38, 255);
-  color: white;
-  font-weight: 500;
-  cursor: pointer;
-  border-radius: 10px;
-  box-shadow: 5px 5px 0px rgb(140, 32, 212);
-  transition-duration: 0.3s;
-}
-
-.svg {
-  width: 13px;
-  position: absolute;
-  right: 0;
-  margin-right: 20px;
-  fill: white;
-  transition-duration: 0.3s;
-}
-
-.Btn:hover {
-  color: transparent;
-  background-color: rgb(168, 38, 255);
-}
-
-.Btn:hover svg {
-  right: 43%;
-  margin: 0;
-  padding: 0;
-  border: none;
-  transition-duration: 0.3s;
-}
-
-.Btn:active {
-  transform: translate(3px, 3px);
-  transition-duration: 0.3s;
-  box-shadow: 2px 2px 0px rgb(140, 32, 212);
-}
-
-.booking-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 10px;
-  margin: 0px;
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-  background-color: white;
-  width: 70%;
 }

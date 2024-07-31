@@ -16,13 +16,13 @@
   justify-content: space-around;
   width: 90%;
 }
-.loading{
+.loading {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.loading-center{
+.loading-center {
   height: 40%;
   width: 40%;
 }
@@ -33,6 +33,12 @@
   gap: 20px;
   padding: 20px;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+.no-cars {
+  font-size: 2rem;
+  color: white;
+  width: fit-content;
 }
 @media screen and (max-width: 1066px) {
   .ListRantel {

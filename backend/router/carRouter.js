@@ -9,8 +9,7 @@ const {
   getRandomCars,
 } = require("../controller/carController.js");
 const multer = require("multer");
-const path = require("path");
-const requireAuth = require("../middleware/auth.js");
+
 const carRouter = express.Router();
 
 const storage = multer.diskStorage({
@@ -28,7 +27,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage });
+ const upload = multer({ storage: storage });
 
 /* carRouter.use(requireAuth); */
 

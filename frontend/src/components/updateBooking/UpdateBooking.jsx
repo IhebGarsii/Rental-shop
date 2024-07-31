@@ -40,7 +40,7 @@ function UpdateBooking({ booking }) {
       toast.error("error in updating the booking", error);
     },
   });
- 
+
   return (
     <div className="update-car">
       <form className="book-form" onSubmit={handleSubmit(handleBook)}>
@@ -53,33 +53,19 @@ function UpdateBooking({ booking }) {
           <input type="Date" {...register("endDate")} name="endDate" />
         </div>
         <div className="label">
+          <label htmlFor="driving-licence">Driving Licence:</label>
+          <input
+            type="file"
+            name="driving-licence"
+            {...register("DrivingLicence")}
+          />
+        </div>
+        <div className="label">
           <label htmlFor="dropoff_location">Droping Location:</label>
           <input
             type="text"
             name="dropoff_location"
             {...register("dropoffLocation")}
-          />
-        </div>
-        <div className="label">
-          <label htmlFor="card-number">Card Number:</label>
-          <input
-            type="text"
-            id="card-number"
-            name="card_number"
-            {...register("cardNumber")}
-          />
-        </div>
-
-        <div className="label">
-          <label htmlFor="cvv">CVV:</label>
-          <input type="text" id="cvv" name="cvv" {...register("cvv")} />
-        </div>
-        <div className="label">
-          <label htmlFor="license-number">Driver's License Number:</label>
-          <input
-            type="text"
-            name="license-number"
-            {...register("licenseNumber")}
           />
         </div>
         <div className="label">
@@ -91,7 +77,9 @@ function UpdateBooking({ booking }) {
           />
         </div>
 
-        <button type="submit">Book</button>
+        <button className="update-booking" type="submit">
+          Update
+        </button>
       </form>
     </div>
   );

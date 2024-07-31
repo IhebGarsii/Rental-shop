@@ -5,7 +5,7 @@ import "./bookingList.css";
 import { useQuery } from "@tanstack/react-query";
 function BookingList() {
   const [filter, setFilter] = useState([]);
-  const [tag, setTag] = useState("ACCEPTED");
+  const [tag, setTag] = useState("PENDING");
   const { data, setIsLoading, isError } = useQuery({
     queryKey: ["bookings"],
     queryFn: getBookings,
@@ -24,9 +24,9 @@ function BookingList() {
         className="status-select"
         onChange={(e) => setTag(e.target.value)}
       >
+        <option value="PENDING">PENDING</option>
         <option value="ACCEPTED">ACCEPTED</option>
         <option value="REFUSED">REFUSED</option>
-        <option value="PENDING">PENDING</option>
       </select>
 
       {filter &&

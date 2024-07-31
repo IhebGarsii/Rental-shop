@@ -29,6 +29,7 @@ function Dashboard() {
     <div className="dashboard">
       <div className="form-container">
         <form onSubmit={submitLetter} className="formm">
+          <h2>Send an Email For News Letter</h2>
           <div className="form-group">
             <label for="email">Subject</label>
             <input

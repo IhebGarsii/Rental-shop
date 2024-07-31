@@ -26,26 +26,30 @@ function HowToBook() {
           </div>
         </div>
         <div className="top-how2">
-          <img src={filterScreenshot} alt="" />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
-            repudiandae, eius ratione facere neque minus placeat error libero
-            dolore id.
-          </p>
+          <div className="top-how2-img">
+            <img src={filterScreenshot} alt="" />
+            <img src={howToBookCars} alt="" />
+            <img src={mybooking} alt="" />
+          </div>
+          <div className="top-how2-p">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
+              repudiandae, eius ratione facere neque minus placeat error libero
+              dolore id.
+            </p>
 
-          <img src={howToBookCars} alt="" />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
-            repudiandae, eius ratione facere neque minus placeat error libero
-            dolore id.
-          </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
+              repudiandae, eius ratione facere neque minus placeat error libero
+              dolore id.
+            </p>
 
-          <img src={mybooking} alt="" />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
-            repudiandae, eius ratione facere neque minus placeat error libero
-            dolore id.
-          </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
+              repudiandae, eius ratione facere neque minus placeat error libero
+              dolore id.
+            </p>
+          </div>
         </div>
       </div>
       <hr />

@@ -55,6 +55,7 @@ const addCar = async (req, res) => {
     : [];
 
   try {
+    console.log(navigation)
     const car = new carModel({
       title,
       description,

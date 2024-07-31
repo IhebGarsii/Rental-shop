@@ -5,11 +5,12 @@ import { useNavigate } from "react-router-dom";
 import Booking from "../../components/booking/Booking";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import Loader from "../../components/loading/Loader";
 
 function UserBooking() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: getBooking,
     onSuccess: (data) => {
       setData(data);
@@ -31,10 +32,18 @@ function UserBooking() {
       mutate(localStorage.getItem("idUser"));
     }
   }, []);
-
+  if (isPending) {
+    return (
+      <div className="loader-booking">
+        <div className="loader-c">
+          <Loader />
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="userBooking">
-      {data &&
+      {data && data.length > 0 ? (
         data.map((booking) => (
           <Booking booking={booking} key={booking._id}>
             <div className="booking-wrapper">
@@ -42,7 +51,10 @@ function UserBooking() {
               <Booking.Actions />
             </div>
           </Booking>
-        ))}
+        ))
+      ) : (
+        <p className="no-cars">No bookings available!</p>
+      )}
     </div>
   );
 }

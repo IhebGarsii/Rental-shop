@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import "./booking.css";
+import Loader from "../loading/Loader.jsx";
 
 const BookingContext = createContext();
 
@@ -36,8 +37,6 @@ function Booking({ children, booking }) {
     </BookingContext.Provider>
   );
 }
-
-export default Booking;
 
 Booking.Full = function BookingFull() {
   const { booking, editingBookingId, setEditingBookingId } =
@@ -180,11 +179,11 @@ Booking.Actions = function BookingActions() {
     },
   });
 
-  const { mutate: payMutate } = useMutation({
+  const { mutate: payMutate, isPending } = useMutation({
     mutationFn: pay,
-    onSuccess: () => {
-      toast.success("Payment successful.");
+    onSuccess: (data) => {
       queryClient.invalidateQueries(["bookings"]); // Adjust the query key if needed
+      window.location.href = data.url;
     },
     onError: (error) => {
       console.log("Payment failed", error);
@@ -201,8 +200,9 @@ Booking.Actions = function BookingActions() {
         </svg>
       </button>
       <Delete onClick={() => deleteMutate(booking._id)} />
+
       <button
-        disabled={!booking.payCheck}
+        disabled={!booking.payCheck || isPending}
         onClick={() => payMutate(booking)}
         className="pay-btn"
       >
@@ -211,3 +211,4 @@ Booking.Actions = function BookingActions() {
     </div>
   );
 };
+export default Booking;
