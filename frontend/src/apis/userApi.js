@@ -26,11 +26,16 @@ export const signup = async (formData) => {
 
       body: formData,
     });
+    console.log(response.ok);
 
-    const user = await response.json();
-    return user;
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error);
+    }
+    return await response.json();
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -60,7 +65,7 @@ export const blockUser = async (idUser) => {
     const response = await fetch(`${BASE_URL}/blockUser/${idUser}`, {
       method: "DELETE",
     });
-   
+
     return await response.json();
   } catch (error) {
     console.error(error);
@@ -74,7 +79,6 @@ export const sendEmail = async (data) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    
   } catch (error) {
     console.error(error);
   }

@@ -21,7 +21,9 @@ function RentedCars() {
     );
   }
 
-  return <div>{cars && cars.map((car) => <div></div>)}</div>;
+  return (
+    <div>{cars && cars.map((car) => <div className="rented-cars"></div>)}</div>
+  );
 }
 
 export default RentedCars;

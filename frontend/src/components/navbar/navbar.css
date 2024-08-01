@@ -3,6 +3,7 @@
   background-color: #edf1f8;
   overflow-y: auto;
   scroll-behavior: smooth;
+  height: fit-content;
 }
 
 .navbar-container {
@@ -206,6 +207,7 @@
   align-items: center;
   cursor: pointer;
   border-radius: 5px;
+  gap: 5px;
   padding: 5px;
 }
 .account:hover {

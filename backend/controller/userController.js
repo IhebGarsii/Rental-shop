@@ -47,7 +47,7 @@ const signup = async (req, res) => {
     const userEmail = await userModel.findOne({ email: email });
 
     if (userEmail) {
-      return res.status(501).json("email is allready in use");
+      return res.status(409).json({ error: "email is allready in use" });
     }
 
     const salt = await bcrypt.genSalt(10);

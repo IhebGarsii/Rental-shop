@@ -4,15 +4,18 @@ import { signup } from "../../apis/userApi";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
+import Loader from "../../components/loading/Loader";
+import toast from "react-hot-toast";
 
 function SignUp() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const formData = new FormData();
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: signup,
     onSuccess: (data) => {
+      console.log("ddddddddd", data);
       localStorage.setItem("token", data.token);
       localStorage.setItem("image", data.user.image);
       localStorage.setItem("idUser", data.user._id);
@@ -21,7 +24,7 @@ function SignUp() {
     },
     onError: (error) => {
       console.error("Signup failed:", error);
-      toast.error(`Signup failed: ${error.message || "Unknown error"}`);
+      toast.error(`Signup failed: ${error || "Unknown error"}`);
     },
   });
   const onSubmit = (data) => {

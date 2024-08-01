@@ -8,7 +8,7 @@ function SideBar() {
         <Link to="addCar">Add a Car</Link>
         <Link to="">Rented Cars</Link>
         <Link to="bookingRequests">Pending Requests</Link>
-        <Link to="">Profile</Link>
+        <Link to="">News Letter</Link>
         <Link to="users">Users</Link>
         <Link to="dashboard">Dashboard</Link>
       </nav>

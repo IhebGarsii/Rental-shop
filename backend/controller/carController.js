@@ -168,7 +168,7 @@ const getRandomCars = async (req, res) => {
 };
 const getRentedCars = async (req, res) => {
   try {
-    const cars = await carModel.find({ rented: true });
+    const cars = await carModel.find({ payed: true });
     if (!cars || cars.length === 0) {
       return res.status(404).json({ message: "There are no rented cars" });
     }

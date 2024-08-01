@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllUser, blockUser } from "../../../apis/userApi";
+import { Link } from "react-router-dom";
 import "./users.css";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -27,6 +28,7 @@ function Users() {
     queryKey: ["user"],
     queryFn: getAllUser,
   });
+
   if (isLoading) {
     return (
       <div className="loading">
@@ -40,41 +42,43 @@ function Users() {
     <div className="users">
       {data &&
         data.map((user) => (
-        
-            <div key={user._id} className="user-container">
-              <div className="user-left-container">
-                <div className="user-left">
-                  <img
-                    className="user-img"
-                    src={`http://localhost:4000/uploads/users/${user.image}`}
-                    alt=""
-                  />
-                  {user.firstName} {user.lastName}
-                </div>
-                <h3>
-                  <span>Email:</span> {user.email}
-                </h3>
-                <h3>
-                  <span>Role:</span>
-                  {user.roles.map((role) => (
-                    <span> {role} </span>
-                  ))}
-                </h3>
-                <button
-                  onClick={() => handleBlock(user._id)}
-                  className="action-button refuse-button"
-                >
-                  Block
-                </button>
+          <div key={user._id} className="user-container">
+            <div className="user-left-container">
+              <div className="user-left">
+                <img
+                  className="user-img"
+                  src={`http://localhost:4000/uploads/users/${user.image}`}
+                  alt=""
+                />
+                {user.firstName} {user.lastName}
               </div>
-              <h3 id="rented-lable">rented Cars:</h3>
-              <div className="rented-car-list">
-                {user.idCars.map((car) => (
-                  <span> {car.model} </span>
+              <h3>
+                <span>Email:</span> {user.email}
+              </h3>
+              <h3>
+                <span>Role:</span>
+                {user.roles.map((role) => (
+                  <span> {role} </span>
                 ))}
-              </div>
+              </h3>
+              <button
+                onClick={() => handleBlock(user._id)}
+                className="action-button refuse-button"
+              >
+                Block
+              </button>
             </div>
-          
+            {user.idCars.length > 0 && (
+              <>
+                <h3 id="rented-lable">rented Cars: </h3>
+                <div className="rented-car-list">
+                  {user.idCars.map((car) => (
+                    <Link to={`/Car/${car._id}`}>  {car.model} </Link>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
         ))}
     </div>
   );

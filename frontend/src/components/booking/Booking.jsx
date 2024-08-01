@@ -41,7 +41,7 @@ function Booking({ children, booking }) {
 Booking.Full = function BookingFull() {
   const { booking, editingBookingId, setEditingBookingId } =
     useBookingContext();
-
+  console.log(booking);
   const handleCloseEdit = () => {
     setEditingBookingId(null);
   };
@@ -62,24 +62,36 @@ Booking.Full = function BookingFull() {
   return (
     <div className="userBooking-container">
       <div className="userBooking-left-middle">
-        <div className="userBooking-left">
-          <img
-            src={`http://localhost:4000/uploads/cars/${booking.idCar.images[0]}`}
-            alt=""
-          />
-        </div>
+        <img
+          src={`http://localhost:4000/uploads/cars/${booking.idCar.images[0]}`}
+          alt=""
+          className="booking-img"
+        />
+
         <div className="userBooking-middle">
           <div className="userBooking-title">
             <Link to={`/car/${booking.idCar._id}`}>
               <h2>{booking.idCar.model}</h2>
             </Link>
             <span>{booking.fullPrice}$</span>
-            <span className={className}>{booking.status}</span>
           </div>
-          <h3>{booking.startDate}</h3>
-          <h3>{booking.endDate}</h3>
-          <span>Pick Up Location: {booking.pickupLocation}</span>
-          <span>Drop Off Location: {booking.dropoffLocation}</span>
+          <h3>
+            <span className="user-booking-spans">Pick Up Date: </span>{" "}
+            {new Date(booking.startDate).toLocaleString()}
+          </h3>
+          <h3>
+            <span className="user-booking-spans">Drop Off Date: </span>
+            {new Date(booking.endDate).toLocaleString()}
+          </h3>
+          <span>
+            <span className="user-booking-spans">Pick Up Location:</span>{" "}
+            {booking.pickupLocation}
+          </span>
+          <span>
+            <span className="user-booking-spans">Drop Off Location: </span>
+            {booking.dropoffLocation}
+          </span>
+          <span className={className}>{booking.status}</span>
         </div>
       </div>
 

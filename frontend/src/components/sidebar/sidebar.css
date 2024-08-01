@@ -10,11 +10,9 @@
   flex-direction: column;
   gap: 30px;
   font-size: 1.5rem;
-
   height: 100%;
   background-color: rgb(46, 45, 45);
   align-items: center;
-
   width: 100%;
   border-right: 1px solid white;
 }
@@ -23,7 +21,7 @@
   color: rgb(0, 0, 0);
   font-family: "ROBOTO";
   border-radius: 10px;
-  width: 70%;
+  width: 100%;
   font-size: 1rem;
   height: 50px;
   display: flex;
@@ -39,19 +37,37 @@
 .sideBar-outlet {
   background-color: rgb(74, 74, 74);
   width: 100%;
-
-
 }
 
 @media screen and (max-width: 600px) {
   .sidebar {
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 1fr;
+  }
+  .sidebar-nav {
+    display: flex;
+    flex-direction: row;
+    padding: 20px 0px;
+    height: 70px;
+    gap: 10px;
+    width: 100%;
   }
   .sidebar-nav > a {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
+    font-weight: bolder;
     width: 100%;
-    height: 40px;
-
+    height: 30px;
     text-align: center;
+  }
+}
+
+@media screen and (max-width: 835px) {
+  .sidebar-nav > a {
+    font-size: 0.5rem;
+    width: 150%;
+    
+  }
+  .user-container{
+    display: flex;
+    flex-direction: column;
   }
 }

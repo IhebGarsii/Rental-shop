@@ -14,29 +14,6 @@
   border-collapse: collapse;
 }
 
-.booking-table th,
-.booking-table td {
-  padding: 12px 15px;
-  text-align: left;
-}
-.booking-table td {
-  color: black;
-}
-.booking-table thead th {
-  background-color: #4caf50;
-  color: white;
-}
-
-.booking-table tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-.booking-table tbody tr {
-  background-color: #e2e2e2;
-}
-.booking-table tbody tr:hover {
-  background-color: #d5d0d0;
-}
-
 .action-button {
   margin: 10px;
 
@@ -232,4 +209,96 @@
   transform: translate(3px, 3px);
   transition-duration: 0.3s;
   box-shadow: 2px 2px 0px rgb(140, 32, 212);
+}
+
+.userBooking-middle {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  height: fit-content;
+}
+
+.userBooking-container {
+  display: grid;
+  border-radius: 10px;
+  grid-template-columns: 2fr 1fr;
+  padding: 10px;
+  height: fit-content;
+  background-color: white;
+  width: fit-content;
+}
+.userBooking-left > img {
+  height: 100%;
+  width: 100%;
+}
+.userBooking-left {
+  height: 100%;
+  width: 40%;
+}
+.userBooking-right {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+
+  align-items: center;
+}
+.userBooking-title {
+  display: flex;
+  justify-content: flex-start;
+
+  gap: 10px;
+  align-items: center;
+}
+.user-booking-spans {
+  font-weight: normal;
+}
+.userBooking-right > img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+.userBooking-left-middle {
+  display: flex;
+  height: fit-content;
+  gap: 10px;
+  justify-content: flex-start;
+}
+.booking-img {
+  height: 200px;
+  width: 250px;
+}
+@media screen and (max-width: 1157px) {
+  .userBooking-left-middle {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .userBooking-container {
+    gap: 15px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .booking-img {
+    width: 40%;
+  }
+}
+@media screen and (max-width: 935px) {
+  .userBooking-container {
+    grid-template-columns: 1fr;
+  }
+  .userBooking-left-middle {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .booking-img {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .userBooking-middle {
+    font-size: 0.7rem;
+  }
+   .booking-img {
+    width: 100%;
+  }
 }

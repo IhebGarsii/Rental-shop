@@ -44,7 +44,7 @@ function Navbar() {
         <div className="navbar-header">
           <Link to="home" className="company-info">
             <img src={logo} alt="company logo" className="company-logo" />
-            Rent a Bitch
+            Car Rental
           </Link>
           <div className="hamburger-menu" onClick={toggleMenu}>
             <span>&#9776;</span>

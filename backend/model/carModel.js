@@ -120,6 +120,10 @@ const carModel = new Schema({
   consumption: {
     type: String,
   },
+  payed: {
+    type: Boolean,
+    default: false,
+  },
   CO2emissions: {
     type: String,
   },

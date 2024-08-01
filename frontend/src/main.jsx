@@ -28,6 +28,9 @@ import ForgotPassword from "./pages/forgotPassword/ForgotPassword.jsx";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ScrollToTop from "./components/scrollToTop/ScrollToTop.jsx";
+import Cancel from "./pages/afterPayment/Cancel.jsx";
+import Success from "./pages/afterPayment/Success.jsx";
 
 const queryClient = new QueryClient();
 
@@ -84,6 +87,18 @@ const router = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [{ path: "", element: <UpdateCar /> }],
       },
+      {
+        path: "",
+        element: <ScrollToTop />,
+      },
+      {
+        path: "Cancel",
+        element: <Cancel />,
+      },
+      {
+        path: "Succ",
+        element: <Success />,
+      },
     ],
   },
 ]);
@@ -91,7 +106,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <QueryClientProvider client={queryClient}>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}></RouterProvider>
+
       <Toaster />
     </Provider>
   </QueryClientProvider>

@@ -128,12 +128,21 @@
   flex-direction: column;
   gap: 10px;
 }
-
+.p-none {
+  display: none;
+}
 @media screen and (max-width: 1019px) {
   .top-how1 {
     width: 90%;
     flex-wrap: wrap;
     gap: 20px;
+  }
+  .p-responsive-none {
+    display: none;
+  }
+  .p-none {
+    display: block;
+    text-align: center;
   }
   .top-how {
     width: 100%;
@@ -179,5 +188,11 @@
     flex-direction: column;
     height: fit-content;
     width: 90%;
+  }
+  .top-how2-img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }
 }

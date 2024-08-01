@@ -8,7 +8,7 @@ import Loader from "../../components/loading/Loader";
 function ForgotPassword() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: passwordReset,
     onSuccess: (data) => {
       navigate("/login");
@@ -32,7 +32,7 @@ function ForgotPassword() {
             type="text"
             value={email}
           />
-        
+
           <button
             disabled={isPending}
             onClick={() => mutate(email)}

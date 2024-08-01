@@ -1,13 +1,12 @@
 const bookingModel = require("../model/bookingModel");
+const carModel = require("../model/carModel");
 const stripe = require("stripe")(process.env.STRIPE);
 
 const pay = async (req, res) => {
-  console.log(
-    "sssssssssssssssssssssssssssssssssssssssssssssss",
-    req.body.idCar.images[0]
-  );
   try {
-    const booking = bookingModel.findById(req.body.idBooking);
+    const booking = await bookingModel.findById(req.body._id);
+    console.log(req.body.idCar.images[0]);
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
@@ -18,12 +17,8 @@ const pay = async (req, res) => {
             currency: "usd",
             product_data: {
               name: req.body.idCar.model,
-              images: [
-                //change the url when deploying http://localhost:4000/uploads/cars/${req.body.idCar.images[0]}
-                `https://img.a.transfermarkt.technology/portrait/big/122374-1620936394.JPG?lm=1 `,
-              ],
             },
-            unit_amount: req.body.idCar.dailyRent * 100,
+            unit_amount: req.body.fullPrice * 100,
           },
           quantity: 1,
         },
@@ -31,6 +26,12 @@ const pay = async (req, res) => {
       success_url: `http://localhost:5173/Succ`,
       cancel_url: `http://localhost:5173/Cancel`,
     });
+    console.log(booking);
+
+    const car = await carModel.findById(booking.idCar);
+
+    car.payed = true;
+    await car.save();
     res.status(200).json({ url: session.url });
   } catch (error) {
     console.log(error);
