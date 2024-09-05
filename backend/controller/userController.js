@@ -18,8 +18,7 @@ const login = async (req, res) => {
       console.log("erer");
       return res.status(404).json("email not found");
     }
-    console.log("Password: ", password);
-    console.log("User Password Hash: ", user.password);
+ 
     const match = await bcrypt.compare(password, user.password);
     console.log("Password Match: ", match);
     const token = createToken(user._id);

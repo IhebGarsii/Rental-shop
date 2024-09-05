@@ -9,7 +9,6 @@ const bookingRouter = require("./router/bookingRouter");
 const notificationRouter = require("./router/notificationRouter");
 const newsRouter = require("./router/newsLetterRouter");
 const paymentRouter = require("./router/paymentRouter");
-const carModel = require("./model/carModel");
 const app = express();
 app.use(express.json({ limit: "50mb" }));
 app.use((req, res, next) => {
