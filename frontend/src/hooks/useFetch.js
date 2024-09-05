@@ -11,9 +11,9 @@ const useFetch = (url, method, initialData = {}) => {
           method,
           headers: {
             "Content-Type":
-              data instanceof FormData ? undefined : "application/json", // Set for JSON
+              data instanceof FormData ? undefined : "application/json", 
           },
-          body: data instanceof FormData ? data : JSON.stringify(data), // Send data based on type
+          body: data instanceof FormData ? data : JSON.stringify(data), 
         });
         if (!response.ok) {
           throw new Error(`Error fetching data: ${response.statusText}`);
@@ -27,10 +27,9 @@ const useFetch = (url, method, initialData = {}) => {
       }
     };
     if (url) {
-      // Only fetch if a URL is provided
       fetchData();
     }
-  }, [url, method, JSON.stringify(data)]); // Re-fetch on URL, method, or data changes
+  }, [url, method, JSON.stringify(data)]);
   const handlePost = async (newData) => {
     setData(newData);
   };
@@ -38,7 +37,7 @@ const useFetch = (url, method, initialData = {}) => {
     setData(newData);
   };
   const handleDelete = async () => {
-    setData({}); // Clear data on delete
+    setData({});
   };
   return { data, isLoading, isError, handlePost, handlePut, handleDelete };
 };
