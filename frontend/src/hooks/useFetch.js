@@ -41,4 +41,4 @@ const useFetch = (url, method, initialData = {}) => {
   };
   return { data, isLoading, isError, handlePost, handlePut, handleDelete };
 };
-export default useFetch;
+export default useFetch
